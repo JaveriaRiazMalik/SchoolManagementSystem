@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "AdminDashboard";
+}
+
+<div class="abc">
+    <div class="wrapper">
+        <aside class="main_sidebar">
+
+            <ul>
+                <li style="color: white"><h1 style="font-family: 'Raleway', sans-serif;">Admin</h1></li>
+                <li><i class="glyphicon glyphicon-user"></i><a href="/Account/Register">Add Students</a></li>
+                <li><i class="glyphicon glyphicon-user"></i><a href="/Account/RegisterT">Add Teachers</a></li>
+
+            </ul>
+        </aside>
+        <div class="mian">
+            <h1 style=" color: white;"> Prakash </h1>
+        </div>
+    </div>
+
+    <div class="abc">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </div>
+                        <div class="dash-box-body">
+
+                            <span class="dash-box-title">Students</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Packagelist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-2">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-download"></i>
+                        </div>
+                        <div class="dash-box-body">
+
+                            <span class="dash-box-title">Teachers</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/TourGuidelist/'">See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-3">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-heart"></i>
+                        </div>
+                        <div class="dash-box-body">
+
+                            <span class="dash-box-title">Classes</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Touristlist/'">See List</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
