@@ -28,12 +28,12 @@
                             <i class="glyphicon glyphicon-cloud"></i>
                         </div>
                         <div class="dash-box-body">
-
+                            <span class="dash-box-count">@ViewBag.student_count</span>
                             <span class="dash-box-title">Students</span>
                         </div>
 
                         <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/Packagelist'"> See List</button>
+                            <button onclick="window.location.href='/Admin/Studentlist'"> See List</button>
                         </div>
                     </div>
                 </div>
@@ -43,12 +43,12 @@
                             <i class="glyphicon glyphicon-download"></i>
                         </div>
                         <div class="dash-box-body">
-
+                            <span class="dash-box-count">@ViewBag.teacher_count</span>
                             <span class="dash-box-title">Teachers</span>
                         </div>
 
                         <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/TourGuidelist/'">See List</button>
+                            <button onclick="window.location.href='/Admin/Teacherlist'">See List</button>
                         </div>
                     </div>
                 </div>

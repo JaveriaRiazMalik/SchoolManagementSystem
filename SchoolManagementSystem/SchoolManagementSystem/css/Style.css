@@ -975,7 +975,7 @@ header .overlay {
 .back a {color: #444444; font-size: 13px;text-decoration: none;}
 
 /*All Packages*/
-#AllPackages{ background-image:url("../images/all packages.jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+#AllPackages{ background-image:url("../images/bookstable.jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
 
 .Packages
 {
@@ -993,9 +993,15 @@ bs-glyphicons .img {
     padding: 4px;
     line-height: 1.42857143;
     background-color: #fff;
-    border: 1px solid #ddd;} 
+    border: 1px solid #ddd;}
 
-    #Admin_Account{ background-image:url("../images/Admin.jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+#Admin_Account {
+    background-image: url("../images/bookstable.jpeg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    padding: 10px;
+}
 
 .AdminAccount
 {
