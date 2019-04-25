@@ -13,8 +13,8 @@ p{
 }
 
 .navbar-inverse {
-    background-color: #2c3e50;
-    border-color: #2c3e50;
+    background-color: #191818;
+    border-color: #191818;
 }
 
 .navbar-inverse .navbar-brand,
@@ -62,8 +62,8 @@ p{
 
 .btn-danger {
     color: #fff;
-    background-color: #c0392b;
-    border-color: #c0392b;
+    background-color: #2980b9;
+    border-color: #2980b9;
 }
 
 .btn-danger:hover {
@@ -73,8 +73,8 @@ p{
 
 .btn-success {
     color: #fff;
-    background-color: #27ae60;
-    border-color: #27ae60;
+    background-color: #2980b9;
+    border-color: #2980b9;
 }
 
 .btn-success:hover {
@@ -86,6 +86,9 @@ p{
     color: #fff;
     background-color: #2980b9;
     border-color: #2980b9;
+        margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .btn-primary:hover {
@@ -917,7 +920,7 @@ header .overlay {
 
 /*Image End*/
 /*Login page start*/
-#LoginForm{ background-image:url("../images/login (1).jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+#LoginForm{ background-image:url("../images/bookstable.jpeg"); background-repeat:no-repeat; background-position:left; background-size:cover; padding:10px;}
 
 .form-heading { color:#fff; font-size:23px;}
 .panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
@@ -1145,7 +1148,7 @@ body { margin-top:0px; }
 }
 
 /*Login page start*/
-#LoginForm{ background-image:url("../images/login (1).jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+#LoginForm{ background-image:url("../images/bookstable.jpeg"); background-repeat:no-repeat; background-position:left; background-size:cover; padding:10px;}
 
 .form-heading { color:#fff; font-size:23px;}
 .panel h2{ font-size: 33px; color: #fffefe; margin:0 0 8px 0;}
@@ -1159,11 +1162,11 @@ body { margin-top:0px; }
   line-height: 50px;
 }
 .main-div {
-  background: #0b0a0a24 none repeat  scroll 0 0;
-  border-radius: 2px;
-  margin: 10px auto 30px;
-  max-width: 38%;
-  padding: 50px 70px 70px 71px;
+    background: #470ef524 none repeat scroll 0 0;
+    border-radius: 2px;
+    margin: 10px auto 30px;
+    max-width: 38%;
+    padding: 50px 70px 70px 71px;
 }
 
 .login-form .form-group {
@@ -1310,7 +1313,7 @@ body { margin-top:0px; }
 /*Forgot Password page end*/
 
 /*Register page start*/
-#RegisterForm{ background-image:url("../images/login (1).jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
+#RegisterForm{ background-image:url("../images/bookstable.jpeg"); background-repeat:no-repeat; background-position:center; background-size:cover; padding:10px;}
 
 .form-heading { color:#fff; font-size:23px;}
 .panel h2{ font-size: 33px; color: #fffefe; margin:0 0 8px 0;}

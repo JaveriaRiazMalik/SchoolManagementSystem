@@ -13,10 +13,10 @@ namespace SchoolManagementSystem
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB31Entity : DbContext
+    public partial class DB31Entities : DbContext
     {
-        public DB31Entity()
-            : base("name=DB31Entity")
+        public DB31Entities()
+            : base("name=DB31Entities")
         {
         }
     
@@ -25,6 +25,11 @@ namespace SchoolManagementSystem
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<ClassAttendance> ClassAttendances { get; set; }
         public virtual DbSet<ClassHomework> ClassHomeworks { get; set; }

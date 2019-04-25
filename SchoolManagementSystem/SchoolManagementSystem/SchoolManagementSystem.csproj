@@ -199,6 +199,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
@@ -212,6 +224,9 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="databaseconnection.cs" />
     <Compile Include="DB31Entity.Context.cs">
       <AutoGen>True</AutoGen>
@@ -291,6 +306,7 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\dashboard.css" />
     <Content Include="css\Style.css" />
     <Content Include="DB31Entity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -317,10 +333,13 @@
     <Content Include="images\all packages.jpeg" />
     <Content Include="images\backg.jpeg" />
     <Content Include="images\Beach.jpg" />
+    <Content Include="images\bg-01.jpg" />
+    <Content Include="images\bookstable.jpeg" />
     <Content Include="images\DjgjSXyX0AIh3z5.jpg" />
     <Content Include="images\Edit Details.jpeg" />
     <Content Include="images\el_nido_hidden_beach.jpg" />
     <Content Include="images\Fort.jpg" />
+    <Content Include="images\header_logo.png" />
     <Content Include="images\Hillstation.jpg" />
     <Content Include="images\Historical.jpg" />
     <Content Include="images\images.jpg" />
@@ -386,7 +405,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -35,6 +35,7 @@ namespace SchoolManagementSystem
         public string Password { get; set; }
         public string RegistrationNo { get; set; }
         public string Contact { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report> Reports { get; set; }

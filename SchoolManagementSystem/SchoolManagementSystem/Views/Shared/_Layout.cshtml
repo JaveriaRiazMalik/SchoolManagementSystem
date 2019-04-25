@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="~/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="~/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="~/css/Style.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -11,44 +11,33 @@
 <body>
     <!-- Header Start -->
     <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="~/Home/Index/"><span class="Exp">School</span>Management<span class="text-danger"> & </span>Travel Guide</a>
-            </div>
-            <>
-            <ul class="nav navbar-nav navbar-right">
+                <a class="navbar-right" style="display:block"  href="~/Home/Index/"><img src="../images/header_logo.png" style="position:center"></a>
 
-                <li><a href="~/Home/Contact/"><i class="fa fa-comments" aria-hidden="true" style="margin-top: 15px"></i> Contact Us</a></li>
-                <li><a href="~/Review/ShowReview/"><i class="fa fa-shopping-bag" aria-hidden="true" style="margin-top: 15px"></i> Reviews </a></li>
-                <li><a href="~/Home/About/"><i class="fa fa-plug" aria-hidden="true" style="margin-top: 15px"></i> About </a></li>
+                <ul class="nav navbar-nav" style="float:left">
 
-                @{
-                    if (!User.Identity.IsAuthenticated)
-                    {
 
-                        <li><a href="~/Account/Login/" type="button" class="btn btn-danger btn-margin-right navbar-btn"><i class="fa fa-sign-in" aria-hidden="true"></i> Login </a></li>
-                        <li><a href="~/Account/Register/" type="button" class="btn btn-success btn-margin-right navbar-btn">Sign Up</a></li>
-                        <li><a href="~/Account/RegisterT/" type="button" class="btn btn-success btn-margin-right navbar-btn">Sign Up1</a></li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {    <li class="text-right">
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"  type="button" class="btn btn-primary btn-responsive">LogOff </a>
+                                }
+
+                            </li>
+                            <li><a href="~/Account/Index/" type="button" class="btn btn-success btn-margin-right navbar-btn">View Account</a></li>
+                        }
                     }
-                    else
-                    {
-                        <li class="text-right">
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <a href="javascript:document.getElementById('logoutForm').submit()" type="button" class="btn btn-primary btn-responsive">LogOff </a>
-                            }
+                    <li><a href="~/Home/Contact/"><i class="fa fa-comments" aria-hidden="true" style="margin-top: 15px"></i> Contact Us</a></li>
+                    <li><a href="~/Review/ShowReview/"><i class="fa fa-shopping-bag" aria-hidden="true" style="margin-top: 15px"></i> Reviews </a></li>
+                    <li><a href="~/Home/About/"><i class="fa fa-plug" aria-hidden="true" style="margin-top: 15px"></i> About </a></li>
 
-                        </li>
-                        <li><a href="~/Account/Index/" type="button" class="btn btn-success btn-margin-right navbar-btn">View Account</a></li>
-                    }
-                }
-
-            </ul>
+                </ul>
 
 
-            </div>
         </div>
+
     </nav>
     <div>
         @RenderBody()

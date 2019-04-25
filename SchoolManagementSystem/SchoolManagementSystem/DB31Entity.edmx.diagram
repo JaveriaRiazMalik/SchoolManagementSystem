@@ -4,50 +4,58 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f4bf1ba9a4624c688cbcd79efb8387ff" Name="Diagram1">
-        <EntityTypeShape EntityType="DB31Model.Class" Width="1.5" PointX="1.5" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.ClassAttendance" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.ClassHomework" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.FeeChallan" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Payroll" Width="1.5" PointX="3.75" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Report" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Request" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Section" Width="1.5" PointX="1.5" PointY="23.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Student" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.StudentAttendance" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.StudentChallan" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.StudentClass" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.StudentHomework" Width="1.5" PointX="6" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Subject" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.SubmitHomework" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Teacher" Width="1.5" PointX="1.5" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.TeacherAttendance" Width="1.5" PointX="3.75" PointY="28.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Timetable" Width="1.5" PointX="3.75" PointY="19.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="DB31Model.FK_Class_Section" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Class_Subject" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Class_Teacher" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_ClassHomework_Class" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_FeeChallan_Class" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentClass_Class" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Timetable_Class" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentAttendance_ClassAttendance" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentHomework_ClassHomework" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_SubmitHomework_ClassHomework" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentChallan_FeeChallan" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Payroll_Teacher" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Report_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Request_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Request_Teacher" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentClass_Section" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Timetable_Section" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentAttendance_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentChallan_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentClass_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_StudentHomework_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_SubmitHomework_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_Timetable_Subject" ManuallyRouted="false" />
-        <AssociationConnector Association="DB31Model.FK_TeacherAttendance_Teacher" ManuallyRouted="false" />
+      <Diagram DiagramId="c57720f943fe4fa7be2f3d1346bc2e23" Name="Diagram1">
+        <EntityTypeShape EntityType="DB31Entity.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.AspNetRole" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.AspNetUser" Width="1.5" PointX="8" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Class" Width="1.5" PointX="1.5" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.ClassAttendance" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.ClassHomework" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.FeeChallan" Width="1.5" PointX="3.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Payroll" Width="1.5" PointX="3.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Report" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Request" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Section" Width="1.5" PointX="1.5" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Student" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.StudentAttendance" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.StudentChallan" Width="1.5" PointX="6" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.StudentClass" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.StudentHomework" Width="1.5" PointX="6" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Subject" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.SubmitHomework" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Teacher" Width="1.5" PointX="1.5" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.TeacherAttendance" Width="1.5" PointX="3.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Timetable" Width="1.5" PointX="3.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Entity.Admin" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="DB31Entity.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Class_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Class_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Class_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_ClassHomework_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_FeeChallan_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentClass_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Timetable_Class" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentAttendance_ClassAttendance" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentHomework_ClassHomework" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_SubmitHomework_ClassHomework" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentChallan_FeeChallan" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Payroll_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Report_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Request_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Request_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentClass_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Timetable_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentAttendance_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentChallan_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentClass_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_StudentHomework_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_SubmitHomework_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_Timetable_Subject" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.FK_TeacherAttendance_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB31Entity.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -78,7 +78,7 @@ namespace SchoolManagementSystem.Controllers
             }
             if (var == model.Email && pass == model.Password)
             {
-                return RedirectToAction("dashboard", "Admin");
+                return RedirectToAction("Index", "Admin");
             }
 
             // This doesn't count login failures towards account lockout
@@ -165,8 +165,9 @@ namespace SchoolManagementSystem.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                       databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
+                       databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
+                    
                         string query = $"INSERT INTO Student(FirstName,LastName,Gender,Address,Guardian,Password,RegistrationNo,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Guardian}','{model.Password}','{model.RegistrationNo}','{model.Contact}','{model.Email}')";
                         int rows = databaseconnection.get_instance().Executequery(query);
                         con.Close();

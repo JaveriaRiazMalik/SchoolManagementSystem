@@ -14,8 +14,8 @@
         <div class="Register-form">
             <div class="main-div">
                 <div class="panel" style="background-color: transparent;">
-                    <h2>Sign Up</h2>
-                    <p>Sign Up to experience the best Tours across Pakistan</p>
+                    <h2>Add Student</h2>
+                    
                 </div>
 
                 @using (Html.BeginForm())
@@ -70,9 +70,19 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control", placeholder = "Gender" } })
-                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-validate" })
+
+                        <div>
+                            @{
+                                List<SelectListItem> Typedl = new List<SelectListItem>();
+                                Typedl.Add(new SelectListItem { Text = "Male", Value = "M", Selected = true });
+                                Typedl.Add(new SelectListItem { Text = "Female", Value = "F" });
+                            }
+
+                            @Html.DropDownList("Gender", Typedl, "Select Gender", new { @class = "form-control" });
+
+                        </div>
                     </div>
+
 
 
                     <div class="form-group">
@@ -80,7 +90,7 @@
                         @Html.ValidationMessageFor(model => model.Guardian, "", new { @class = "text-validate" })
                     </div>
 
-                   
+
 
                     <input type="submit" value="Register" class="btn btn-primary btn-responsive" onclick="return confirm('Are you sure you want to Register?');" />
                 </div>
