@@ -68,12 +68,12 @@
     <Property Name="TeacherID" Type="Int32" Nullable="false" />
     <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SectionID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Section" Relationship="Self.FK_Class_Section" FromRole="Class" ToRole="Section" />
-    <NavigationProperty Name="Subject" Relationship="Self.FK_Class_Subject" FromRole="Class" ToRole="Subject" />
-    <NavigationProperty Name="Teacher" Relationship="Self.FK_Class_Teacher" FromRole="Class" ToRole="Teacher" />
     <NavigationProperty Name="ClassHomeworks" Relationship="Self.FK_ClassHomework_Class" FromRole="Class" ToRole="ClassHomework" />
     <NavigationProperty Name="FeeChallans" Relationship="Self.FK_FeeChallan_Class" FromRole="Class" ToRole="FeeChallan" />
+    <NavigationProperty Name="Section" Relationship="Self.FK_Section_Class" FromRole="Class" ToRole="Section" />
     <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Class" FromRole="Class" ToRole="StudentClass" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_Subject_Class" FromRole="Class" ToRole="Subject" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_Teacher_Class" FromRole="Class" ToRole="Teacher" />
     <NavigationProperty Name="Timetables" Relationship="Self.FK_Timetable_Class" FromRole="Class" ToRole="Timetable" />
   </EntityType>
   <EntityType Name="ClassAttendance">
@@ -142,7 +142,7 @@
     </Key>
     <Property Name="SectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Classes" Relationship="Self.FK_Class_Section" FromRole="Section" ToRole="Class" />
+    <NavigationProperty Name="Classes" Relationship="Self.FK_Section_Class" FromRole="Section" ToRole="Class" />
     <NavigationProperty Name="StudentClasses" Relationship="Self.FK_StudentClass_Section" FromRole="Section" ToRole="StudentClass" />
     <NavigationProperty Name="Timetables" Relationship="Self.FK_Timetable_Section" FromRole="Section" ToRole="Timetable" />
   </EntityType>
@@ -220,7 +220,7 @@
     </Key>
     <Property Name="SubjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Classes" Relationship="Self.FK_Class_Subject" FromRole="Subject" ToRole="Class" />
+    <NavigationProperty Name="Classes" Relationship="Self.FK_Subject_Class" FromRole="Subject" ToRole="Class" />
     <NavigationProperty Name="Timetables" Relationship="Self.FK_Timetable_Subject" FromRole="Subject" ToRole="Timetable" />
   </EntityType>
   <EntityType Name="SubmitHomework">
@@ -234,16 +234,6 @@
     <NavigationProperty Name="ClassHomework" Relationship="Self.FK_SubmitHomework_ClassHomework" FromRole="SubmitHomework" ToRole="ClassHomework" />
     <NavigationProperty Name="Student" Relationship="Self.FK_SubmitHomework_Student" FromRole="SubmitHomework" ToRole="Student" />
   </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="Teacher">
     <Key>
       <PropertyRef Name="TeacherID" />
@@ -256,7 +246,7 @@
     <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Classes" Relationship="Self.FK_Class_Teacher" FromRole="Teacher" ToRole="Class" />
+    <NavigationProperty Name="Classes" Relationship="Self.FK_Teacher_Class" FromRole="Teacher" ToRole="Class" />
     <NavigationProperty Name="Payrolls" Relationship="Self.FK_Payroll_Teacher" FromRole="Teacher" ToRole="Payroll" />
     <NavigationProperty Name="Requests" Relationship="Self.FK_Request_Teacher" FromRole="Teacher" ToRole="Request" />
     <NavigationProperty Name="TeacherAttendances" Relationship="Self.FK_TeacherAttendance_Teacher" FromRole="Teacher" ToRole="TeacherAttendance" />
@@ -322,42 +312,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Class_Section">
-    <End Role="Section" Type="Self.Section" Multiplicity="1" />
-    <End Role="Class" Type="Self.Class" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Section">
-        <PropertyRef Name="SectionID" />
-      </Principal>
-      <Dependent Role="Class">
-        <PropertyRef Name="SectionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Class_Subject">
-    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-    <End Role="Class" Type="Self.Class" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="SubjectID" />
-      </Principal>
-      <Dependent Role="Class">
-        <PropertyRef Name="SubjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Class_Teacher">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-    <End Role="Class" Type="Self.Class" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Teacher">
-        <PropertyRef Name="TeacherID" />
-      </Principal>
-      <Dependent Role="Class">
-        <PropertyRef Name="TeacherID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ClassHomework_Class">
     <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="*" />
@@ -382,6 +336,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Section_Class">
+    <End Role="Section" Type="Self.Section" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentClass_Class">
     <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
@@ -391,6 +357,30 @@
       </Principal>
       <Dependent Role="StudentClass">
         <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subject_Class">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_Class">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="TeacherID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -614,7 +604,7 @@
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="DB31Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB31Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
@@ -635,7 +625,6 @@
     <EntitySet Name="StudentHomeworks" EntityType="Self.StudentHomework" />
     <EntitySet Name="Subjects" EntityType="Self.Subject" />
     <EntitySet Name="SubmitHomeworks" EntityType="Self.SubmitHomework" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
@@ -648,18 +637,6 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
     </AssociationSet>
-    <AssociationSet Name="FK_Class_Section" Association="Self.FK_Class_Section">
-      <End Role="Section" EntitySet="Sections" />
-      <End Role="Class" EntitySet="Classes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Class_Subject" Association="Self.FK_Class_Subject">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="Class" EntitySet="Classes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
-      <End Role="Teacher" EntitySet="Teachers" />
-      <End Role="Class" EntitySet="Classes" />
-    </AssociationSet>
     <AssociationSet Name="FK_ClassHomework_Class" Association="Self.FK_ClassHomework_Class">
       <End Role="Class" EntitySet="Classes" />
       <End Role="ClassHomework" EntitySet="ClassHomeworks" />
@@ -668,9 +645,21 @@
       <End Role="Class" EntitySet="Classes" />
       <End Role="FeeChallan" EntitySet="FeeChallans" />
     </AssociationSet>
+    <AssociationSet Name="FK_Section_Class" Association="Self.FK_Section_Class">
+      <End Role="Section" EntitySet="Sections" />
+      <End Role="Class" EntitySet="Classes" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentClass_Class" Association="Self.FK_StudentClass_Class">
       <End Role="Class" EntitySet="Classes" />
       <End Role="StudentClass" EntitySet="StudentClasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subject_Class" Association="Self.FK_Subject_Class">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="Class" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_Class" Association="Self.FK_Teacher_Class">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Class" EntitySet="Classes" />
     </AssociationSet>
     <AssociationSet Name="FK_Timetable_Class" Association="Self.FK_Timetable_Class">
       <End Role="Class" EntitySet="Classes" />

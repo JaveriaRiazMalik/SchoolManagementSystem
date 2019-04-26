@@ -6,14 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolManagementSystem.Models
 {
-    public class SectionViewModel
+    public class SubjectViewModel
     {
         [Required]
-        [Display(Name = "Section Name")]
+        [Display(Name = "Subject Name")]
         [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Name should be in Alphabets")]
-        public string SectionName { get; set; }
-
-
-
+        public string SubjectName { get; set; }
     }
 }

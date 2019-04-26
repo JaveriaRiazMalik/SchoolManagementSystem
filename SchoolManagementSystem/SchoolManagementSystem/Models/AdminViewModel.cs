@@ -9,5 +9,7 @@ namespace SchoolManagementSystem.Models
     {
         public List<Student> listofstudents = new List<Student>();
         public List<Teacher> listofteachers = new List<Teacher>();
+        public List<Subject> listofsubjects = new List<Subject>();
+        public List<Section> listofsections = new List<Section>();
     }
 }

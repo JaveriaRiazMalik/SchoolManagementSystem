@@ -11,12 +11,15 @@ namespace SchoolManagementSystem.Controllers
     
     public class AdminController : Controller
     {
-        DB31Entities1 db = new DB31Entities1();
+        DB31Entities db = new DB31Entities();
         // GET: Admin
         public ActionResult Index()
         {
             ViewBag.student_count = db.Students.ToList().Count;
             ViewBag.teacher_count = db.Teachers.ToList().Count;
+            ViewBag.subject_count = db.Subjects.ToList().Count;
+            ViewBag.section_count = db.Sections.ToList().Count;
+
             return View();
         }
 
@@ -40,6 +43,33 @@ namespace SchoolManagementSystem.Controllers
 
             }
             return View(user);
+        }
+
+        public ActionResult Subjectlist()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Subject t in db.Subjects)
+            {
+                user.listofsubjects.Add(t);
+
+            }
+            return View(user);
+        }
+
+        public ActionResult Sectionlist()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Section t in db.Sections)
+            {
+                user.listofsections.Add(t);
+
+            }
+            return View(user);
+        }
+
+        public ActionResult AddSections()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -71,6 +101,124 @@ namespace SchoolManagementSystem.Controllers
             }
 
         }
+
+
+        public ActionResult AddSubjects()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddSubjects(SubjectViewModel collection)
+        {
+
+            try
+            {
+
+                Subject p = new Subject();
+
+                p.SubjectName = collection.SubjectName;
+                if (p.SubjectName != null)
+                {
+                    db.Subjects.Add(p);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+        public ActionResult AddClasses()
+        {
+            List<int> teachername = new List<int>();
+            List<string> sectionname = new List<string>();
+            List<string> subjectname = new List<string>();
+
+            foreach (Teacher t in db.Teachers)
+            {
+                    teachername.Add(t.TeacherID);
+
+
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+                
+            }
+
+            ViewBag.teachername = teachername;
+           ViewBag.sectionname = sectionname;
+           ViewBag.subjectname = subjectname;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddClasses(ClassViewModel collection)
+        {
+
+            try
+            {
+
+                Class c = new Class();
+
+                c.ClassName = collection.ClassName;
+                c.TeacherID = collection.TeacherID;
+                foreach(Section s in db.Sections)
+                {
+                    if(s.SectionName == collection.SectionName)
+                    {
+                        c.SectionID = s.SectionID;
+                    }
+                }
+
+                foreach (Subject su in db.Subjects)
+                {
+                    if (su.SubjectName == collection.SubjectName)
+                    {
+                        c.SubjectID = su.SubjectID;
+                    }
+                }
+
+                if (c.ClassName != null)
+                {
+                    db.Classes.Add(c);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+
+
 
         public ActionResult DeleteT(string id)
         {

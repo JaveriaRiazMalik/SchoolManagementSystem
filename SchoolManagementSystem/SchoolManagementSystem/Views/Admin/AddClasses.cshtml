@@ -1,0 +1,100 @@
+﻿@model SchoolManagementSystem.Models.ClassViewModel
+
+@{
+    ViewBag.Title = "AddClasses";
+}
+
+<style>
+    .text-validate {
+        color: white;
+    }
+</style>
+
+<div id="RegisterForm">
+    <div class="container">
+        <h1 class="form-heading"></h1>
+        <div class="Register-form">
+            <div class="main-div">
+                <div class="panel" style="background-color: transparent;">
+                    <h2>Add Classes</h2>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+
+                            @Html.EditorFor(model => model.ClassName, new { htmlAttributes = new { @class = "form-control", placeholder = "Class Name" } })
+                            @Html.ValidationMessageFor(model => model.ClassName, "", new { @class = "text-validate" })
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="TeacherID" id="TeacherID" class="form-control">
+                                <option selected="" value="0">Select Teacher</option>
+                                @{
+                                    if (ViewBag.teachername != null)
+                                    {
+                                        foreach (int item in ViewBag.teachername)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="SectionName" id="SectionName" class="form-control">
+                                <option selected="" value="0">Select Section</option>
+                                @{
+                                    if (ViewBag.sectionname != null)
+                                    {
+                                        foreach (var itemS in ViewBag.sectionname)
+                                        {
+                                            <option value="@itemS">@itemS</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="Subject" id="SubjectName" class="form-control">
+                                <option selected="" value="0">Select Subject</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <input type="submit" value="Add" class="btn btn-primary btn-responsive" onclick="return confirm('Are you sure you wish to Add Class?');" />
+                        <a href="~/Admin/Index/" class="btn btn-primary btn-responsive">Back</a>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -29,17 +29,17 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-validate" })
 
                     <div class="form-group">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "*Email Address" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email Address" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-validate" })
                     </div>
 
                     <div class="form-group">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "*Password" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-validate" })
                     </div>
 
                     <div class="form-group">
-                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "*Confirm Password" } })
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirm Password" } })
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-validate" })
                     </div>
 
@@ -74,8 +74,8 @@
                         <div>
                             @{
                                 List<SelectListItem> Typedl = new List<SelectListItem>();
-                                Typedl.Add(new SelectListItem { Text = "Male", Value = "M", Selected = true });
-                                Typedl.Add(new SelectListItem { Text = "Female", Value = "F" });
+                                Typedl.Add(new SelectListItem { Text = "Male", Value = "Male", Selected = true });
+                                Typedl.Add(new SelectListItem { Text = "Female", Value = "Female" });
                             }
 
                             @Html.DropDownList("Gender", Typedl, "Select Gender", new { @class = "form-control" });
