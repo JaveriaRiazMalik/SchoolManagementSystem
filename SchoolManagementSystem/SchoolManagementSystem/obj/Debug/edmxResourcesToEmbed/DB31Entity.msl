@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DB31EntityStoreContainer" CdmEntityContainer="DB31Entities">
+  <EntityContainerMapping StorageEntityContainer="DB31ModelStoreContainer" CdmEntityContainer="DB31Entities1">
     <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="DB31Entity.C__MigrationHistory">
+      <EntityTypeMapping TypeName="DB31Model.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
           <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
           <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="DB31Entity.AspNetRole">
+      <EntityTypeMapping TypeName="DB31Model.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -20,7 +20,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="DB31Entity.AspNetUserClaim">
+      <EntityTypeMapping TypeName="DB31Model.AspNetUserClaim">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -30,7 +30,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="DB31Entity.AspNetUserLogin">
+      <EntityTypeMapping TypeName="DB31Model.AspNetUserLogin">
         <MappingFragment StoreEntitySet="AspNetUserLogins">
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
           <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -39,7 +39,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="DB31Entity.AspNetUser">
+      <EntityTypeMapping TypeName="DB31Model.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -57,7 +57,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Classes">
-      <EntityTypeMapping TypeName="DB31Entity.Class">
+      <EntityTypeMapping TypeName="DB31Model.Class">
         <MappingFragment StoreEntitySet="Class">
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
           <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
@@ -68,7 +68,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ClassAttendances">
-      <EntityTypeMapping TypeName="DB31Entity.ClassAttendance">
+      <EntityTypeMapping TypeName="DB31Model.ClassAttendance">
         <MappingFragment StoreEntitySet="ClassAttendance">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
@@ -76,7 +76,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ClassHomeworks">
-      <EntityTypeMapping TypeName="DB31Entity.ClassHomework">
+      <EntityTypeMapping TypeName="DB31Model.ClassHomework">
         <MappingFragment StoreEntitySet="ClassHomework">
           <ScalarProperty Name="HomeworkID" ColumnName="HomeworkID" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
@@ -85,7 +85,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FeeChallans">
-      <EntityTypeMapping TypeName="DB31Entity.FeeChallan">
+      <EntityTypeMapping TypeName="DB31Model.FeeChallan">
         <MappingFragment StoreEntitySet="FeeChallan">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
@@ -95,7 +95,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Payrolls">
-      <EntityTypeMapping TypeName="DB31Entity.Payroll">
+      <EntityTypeMapping TypeName="DB31Model.Payroll">
         <MappingFragment StoreEntitySet="Payroll">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
@@ -105,7 +105,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Reports">
-      <EntityTypeMapping TypeName="DB31Entity.Report">
+      <EntityTypeMapping TypeName="DB31Model.Report">
         <MappingFragment StoreEntitySet="Report">
           <ScalarProperty Name="ReportID" ColumnName="ReportID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -115,7 +115,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Requests">
-      <EntityTypeMapping TypeName="DB31Entity.Request">
+      <EntityTypeMapping TypeName="DB31Model.Request">
         <MappingFragment StoreEntitySet="Request">
           <ScalarProperty Name="RequestID" ColumnName="RequestID" />
           <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
@@ -124,7 +124,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Sections">
-      <EntityTypeMapping TypeName="DB31Entity.Section">
+      <EntityTypeMapping TypeName="DB31Model.Section">
         <MappingFragment StoreEntitySet="Section">
           <ScalarProperty Name="SectionID" ColumnName="SectionID" />
           <ScalarProperty Name="SectionName" ColumnName="SectionName" />
@@ -132,7 +132,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="DB31Entity.Student">
+      <EntityTypeMapping TypeName="DB31Model.Student">
         <MappingFragment StoreEntitySet="Student">
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -148,7 +148,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StudentAttendances">
-      <EntityTypeMapping TypeName="DB31Entity.StudentAttendance">
+      <EntityTypeMapping TypeName="DB31Model.StudentAttendance">
         <MappingFragment StoreEntitySet="StudentAttendance">
           <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -157,7 +157,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StudentChallans">
-      <EntityTypeMapping TypeName="DB31Entity.StudentChallan">
+      <EntityTypeMapping TypeName="DB31Model.StudentChallan">
         <MappingFragment StoreEntitySet="StudentChallan">
           <ScalarProperty Name="ChallanID" ColumnName="ChallanID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -167,7 +167,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StudentClasses">
-      <EntityTypeMapping TypeName="DB31Entity.StudentClass">
+      <EntityTypeMapping TypeName="DB31Model.StudentClass">
         <MappingFragment StoreEntitySet="StudentClass">
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
@@ -176,7 +176,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StudentHomeworks">
-      <EntityTypeMapping TypeName="DB31Entity.StudentHomework">
+      <EntityTypeMapping TypeName="DB31Model.StudentHomework">
         <MappingFragment StoreEntitySet="StudentHomework">
           <ScalarProperty Name="HomeworkID" ColumnName="HomeworkID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -186,7 +186,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Subjects">
-      <EntityTypeMapping TypeName="DB31Entity.Subject">
+      <EntityTypeMapping TypeName="DB31Model.Subject">
         <MappingFragment StoreEntitySet="Subject">
           <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
           <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
@@ -194,7 +194,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SubmitHomeworks">
-      <EntityTypeMapping TypeName="DB31Entity.SubmitHomework">
+      <EntityTypeMapping TypeName="DB31Model.SubmitHomework">
         <MappingFragment StoreEntitySet="SubmitHomework">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -203,8 +203,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DB31Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Teachers">
-      <EntityTypeMapping TypeName="DB31Entity.Teacher">
+      <EntityTypeMapping TypeName="DB31Model.Teacher">
         <MappingFragment StoreEntitySet="Teacher">
           <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -218,7 +229,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TeacherAttendances">
-      <EntityTypeMapping TypeName="DB31Entity.TeacherAttendance">
+      <EntityTypeMapping TypeName="DB31Model.TeacherAttendance">
         <MappingFragment StoreEntitySet="TeacherAttendance">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
@@ -228,7 +239,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Timetables">
-      <EntityTypeMapping TypeName="DB31Entity.Timetable">
+      <EntityTypeMapping TypeName="DB31Model.Timetable">
         <MappingFragment StoreEntitySet="Timetable">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
@@ -240,14 +251,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="DB31Entity.Admin">
+      <EntityTypeMapping TypeName="DB31Model.Admin">
         <MappingFragment StoreEntitySet="Admin">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="DB31Entity.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="DB31Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>

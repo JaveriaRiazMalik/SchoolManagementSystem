@@ -253,6 +253,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Payroll.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
@@ -286,6 +287,9 @@
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="SubmitHomework.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Teacher.cs">
@@ -446,6 +450,11 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Studentlist.cshtml" />
     <Content Include="Views\Admin\Teacherlist.cshtml" />
+    <Content Include="Views\Admin\AddSections.cshtml" />
+    <Content Include="Views\Admin\DeleteT.cshtml" />
+    <Content Include="Views\Admin\DeleteS.cshtml" />
+    <Content Include="Views\Admin\EditT.cshtml" />
+    <Content Include="Views\Admin\EditS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DB31Entity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="DB31Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="C__MigrationHistory">
     <Key>
       <PropertyRef Name="MigrationId" />
@@ -233,6 +233,16 @@
     <Property Name="HomeworkContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ClassHomework" Relationship="Self.FK_SubmitHomework_ClassHomework" FromRole="SubmitHomework" ToRole="ClassHomework" />
     <NavigationProperty Name="Student" Relationship="Self.FK_SubmitHomework_Student" FromRole="SubmitHomework" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -604,7 +614,7 @@
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="DB31Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DB31Entities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
@@ -625,6 +635,7 @@
     <EntitySet Name="StudentHomeworks" EntityType="Self.StudentHomework" />
     <EntitySet Name="Subjects" EntityType="Self.Subject" />
     <EntitySet Name="SubmitHomeworks" EntityType="Self.SubmitHomework" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />

@@ -165,7 +165,7 @@ namespace SchoolManagementSystem.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                       databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
+                       databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
                     
                         string query = $"INSERT INTO Student(FirstName,LastName,Gender,Address,Guardian,Password,RegistrationNo,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Guardian}','{model.Password}','{model.RegistrationNo}','{model.Contact}','{model.Email}')";
@@ -208,7 +208,7 @@ namespace SchoolManagementSystem.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                    
-                        databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+                        databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
                         string query = $"INSERT INTO Teacher(FirstName,LastName,Gender,Address,Password,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Password}','{model.Contact}','{model.Email}')";
                         int rows = databaseconnection.get_instance().Executequery(query);

@@ -13,10 +13,10 @@ namespace SchoolManagementSystem
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB31Entities : DbContext
+    public partial class DB31Entities1 : DbContext
     {
-        public DB31Entities()
-            : base("name=DB31Entities")
+        public DB31Entities1()
+            : base("name=DB31Entities1")
         {
         }
     
@@ -45,6 +45,7 @@ namespace SchoolManagementSystem
         public virtual DbSet<StudentHomework> StudentHomeworks { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SubmitHomework> SubmitHomeworks { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
