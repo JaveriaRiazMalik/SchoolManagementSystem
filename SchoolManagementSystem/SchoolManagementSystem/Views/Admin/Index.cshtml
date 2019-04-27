@@ -14,6 +14,9 @@
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddClasses">Add Classes</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSections">Add Sections</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSubjects">Add Subjects</a></li>
+                <li><i class="glyphicon glyphicon-piggy-bank"></i><a href="/Admin/AddPayroll">Manage Payroll</a></li>
+                <li><i class="glyphicon glyphicon-piggy-bank"></i><a href="/Admin/AddFeechallan">Manage FeeChallan</a></li>
+
 
             </ul>
         </aside>
@@ -61,68 +64,123 @@
                             <i class="glyphicon glyphicon-heart"></i>
                         </div>
                         <div class="dash-box-body">
-
+                            <span class="dash-box-count">@ViewBag.class_count</span>
                             <span class="dash-box-title">Classes</span>
                         </div>
 
                         <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/Touristlist/'">See List</button>
+                            <button onclick="window.location.href='/Admin/Classlist'">See List</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="dash-box dash-box-color-1">
-                            <div class="dash-box-icon">
-                                <i class="glyphicon glyphicon-download"></i>
-                            </div>
-                            <div class="dash-box-body">
-                                <span class="dash-box-count">@ViewBag.section_count</span>
-                                <span class="dash-box-title">Sections</span>
-                            </div>
-
-                            <div class="dash-box-action">
-                                <button onclick="window.location.href='/Admin/Sectionlist'"> See List</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="dash-box dash-box-color-1">
-                            <div class="dash-box-icon">
-                                <i class="glyphicon glyphicon-cloud"></i>
-                            </div>
-                            <div class="dash-box-body">
-                                <span class="dash-box-count">@ViewBag.subject_count</span>
-                                <span class="dash-box-title">Subjects</span>
-                            </div>
-
-                            <div class="dash-box-action">
-                                <button onclick="window.location.href='/Admin/Subjectlist'"> See List</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="dash-box dash-box-color-1">
-                            <div class="dash-box-icon">
-                                <i class="glyphicon glyphicon-cloud"></i>
-                            </div>
-                            <div class="dash-box-body">
-                                <span class="dash-box-count">@ViewBag.subject_count</span>
-                                <span class="dash-box-title">Subjects</span>
-                            </div>
-
-                            <div class="dash-box-action">
-                                <button onclick="window.location.href='/Admin/Subjectlist'"> See List</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.payroll_count</span>
+                            <span class="dash-box-title">Payrolls</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Payrolllist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-download"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.section_count</span>
+                            <span class="dash-box-title">Sections</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Sectionlist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.subject_count</span>
+                            <span class="dash-box-title">Subjects</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Subjectlist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.teacherattendance_count</span>
+                            <span class="dash-box-title">Payrolls</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Teacherattendancelist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-download"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.studentattendance_count</span>
+                            <span class="dash-box-title">Sections</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Studentattendancelist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.feechallan_count</span>
+                            <span class="dash-box-title">Subjects</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Feechallanlist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
 
     </div>

@@ -11,5 +11,8 @@ namespace SchoolManagementSystem.Models
         public List<Teacher> listofteachers = new List<Teacher>();
         public List<Subject> listofsubjects = new List<Subject>();
         public List<Section> listofsections = new List<Section>();
+        public List<Class> listofclasses = new List<Class>();
+        public List<Payroll> listofpayrolls = new List<Payroll>();
+        public List<FeeChallan> listoffeechallans = new List<FeeChallan>();
     }
 }

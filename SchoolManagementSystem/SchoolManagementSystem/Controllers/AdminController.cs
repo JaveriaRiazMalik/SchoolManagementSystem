@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using SchoolManagementSystem.Models;
+using SchoolManagementSystem.Views.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace SchoolManagementSystem.Controllers
             ViewBag.teacher_count = db.Teachers.ToList().Count;
             ViewBag.subject_count = db.Subjects.ToList().Count;
             ViewBag.section_count = db.Sections.ToList().Count;
+            ViewBag.class_count = db.Classes.ToList().Count;
+            ViewBag.payroll_count = db.Payrolls.ToList().Count;
+            ViewBag.feechallan_count = db.FeeChallans.ToList().Count;
 
             return View();
         }
@@ -62,6 +66,28 @@ namespace SchoolManagementSystem.Controllers
             foreach (Section t in db.Sections)
             {
                 user.listofsections.Add(t);
+
+            }
+            return View(user);
+        }
+
+        public ActionResult Classlist()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Class t in db.Classes)
+            {
+                user.listofclasses.Add(t);
+
+            }
+            return View(user);
+        }
+
+        public ActionResult Payrolllist()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Payroll t in db.Payrolls)
+            {
+                user.listofpayrolls.Add(t);
 
             }
             return View(user);
@@ -181,9 +207,9 @@ namespace SchoolManagementSystem.Controllers
 
                 c.ClassName = collection.ClassName;
                 c.TeacherID = collection.TeacherID;
-                foreach(Section s in db.Sections)
+                foreach (Section s in db.Sections)
                 {
-                    if(s.SectionName == collection.SectionName)
+                    if (s.SectionName == collection.SectionName)
                     {
                         c.SectionID = s.SectionID;
                     }
@@ -216,6 +242,100 @@ namespace SchoolManagementSystem.Controllers
             }
 
         }
+
+        public ActionResult AddPayroll()
+        {
+            List<int> name = new List<int>(); 
+
+            foreach (Teacher t in db.Teachers)
+            {
+                name.Add(t.TeacherID);
+
+
+            }
+
+            ViewBag.name = name;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPayroll(PayrollViewModel collection)
+        {
+
+            try
+            {
+
+                Payroll p = new Payroll();
+
+                p.TeacherID = collection.TeacherID;
+                p.Designation = collection.Designation;
+                p.Pay = collection.Pay;
+                if (p.TeacherID != 0 && p.Designation != null && p.Pay != 0)
+                {
+                    db.Payrolls.Add(p);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+        //public ActionResult AddFeechallan()
+        //{
+        //    List<int> name = new List<int>();
+
+        //    foreach (Te t in db.Teachers)
+        //    {
+        //        name.Add(t.TeacherID);
+
+
+        //    }
+
+        //    ViewBag.name = name;
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult Add(PayrollViewModel collection)
+        //{
+
+        //    try
+        //    {
+
+        //        Payroll p = new Payroll();
+
+        //        p.TeacherID = collection.TeacherID;
+        //        p.Designation = collection.Designation;
+        //        p.Pay = collection.Pay;
+        //        if (p.TeacherID != 0 && p.Designation != null && p.Pay != 0)
+        //        {
+        //            db.Payrolls.Add(p);
+
+        //            db.SaveChanges();
+
+        //            return RedirectToAction("Index", "Admin");
+        //        }
+        //        else
+        //        {
+        //            return View();
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+
+        //}
 
 
 

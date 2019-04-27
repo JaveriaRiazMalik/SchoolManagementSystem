@@ -18,13 +18,15 @@ namespace SchoolManagementSystem.Models
 
         [Required]
         [Display(Name = "Subject Name")]
-        [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Name should be in Alphabets")]
+       [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Name should be in Alphabets")]
         public string SubjectName { get; set; }
 
         [Required]
         [Display(Name = "Section Name")]
         [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Name should be in Alphabets")]
         public string SectionName { get; set; }
+
+
 
 
     }
