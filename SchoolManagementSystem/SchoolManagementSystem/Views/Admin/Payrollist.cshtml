@@ -1,7 +1,7 @@
 ﻿@model SchoolManagementSystem.Models.AdminViewModel
 
 @{
-    ViewBag.Title = "Payrolllist";
+    ViewBag.Title = "Payrollist";
 }
 
 <style>
@@ -41,26 +41,26 @@
                     <tbody>
                         @foreach (var item in Model.listofpayrolls)
                         {
-                        <tr>
+                            <tr>
 
-                            <th scope="row">
-                                @Html.DisplayFor(modelItem => item.TeacherID)
-                            </th>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Designation)
-                            </td>
+                                <th scope="row">
+                                    @Html.DisplayFor(modelItem => item.TeacherID)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Designation)
+                                </td>
 
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Pay)
-                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pay)
+                                </td>
 
-                            <td>
-                                @Html.ActionLink("Delete", "DeletePayroll", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "EditPayroll", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                            </td>
-                        </tr>
+                                <td>
+                                    @Html.ActionLink("Delete", "DeletePayroll", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditPayroll", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                </td>
+                            </tr>
                         }
 
                     </tbody>

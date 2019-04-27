@@ -60,6 +60,55 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+
+        public ActionResult DeleteSubject(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSubject(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Subjects.Where(x => x.SubjectID.ToString() == id).SingleOrDefault();
+                db.Subjects.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Subjectlist");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult EditSubject(string id)
+        {
+            SubjectViewModel collection = new SubjectViewModel();
+            var p = db.Subjects.Where(x => x.SubjectID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            collection.SubjectName = p.SubjectName;
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditSubject(SubjectViewModel collection, string id)
+        {
+            try
+            {
+                var p = db.Subjects.Where(x => x.SubjectID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                p.SubjectName = collection.SubjectName;
+                db.SaveChanges();
+
+                return RedirectToAction("Subjectlist", "Admin");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult Sectionlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -69,6 +118,34 @@ namespace SchoolManagementSystem.Controllers
 
             }
             return View(user);
+        }
+
+
+        public ActionResult EditSection(string id)
+        {
+            SectionViewModel collection = new SectionViewModel();
+            var p = db.Sections.Where(x => x.SectionID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+
+            collection.SectionName = p.SectionName;
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditSection(SectionViewModel collection, string id)
+        {
+            try
+            {
+                var p = db.Sections.Where(x => x.SectionID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                p.SectionName = collection.SectionName;
+                db.SaveChanges();
+
+                return RedirectToAction("Sectionlist", "Admin");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public ActionResult Classlist()
@@ -82,7 +159,7 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
-        public ActionResult Payrolllist()
+        public ActionResult Payrollist()
         {
             AdminViewModel user = new AdminViewModel();
             foreach (Payroll t in db.Payrolls)
@@ -92,41 +169,7 @@ namespace SchoolManagementSystem.Controllers
             }
             return View(user);
         }
-
-        public ActionResult AddSections()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AddSections(SectionViewModel collection)
-        {
-
-            try
-            {
-
-                Section p = new Section();
-
-                p.SectionName = collection.SectionName;
-                if (p.SectionName != null)
-                {
-                    db.Sections.Add(p);
-
-                    db.SaveChanges();
-
-                    return RedirectToAction("Index", "Admin");
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            catch
-            {
-                return View();
-            }
-
-        }
+        
 
 
         public ActionResult AddSubjects()
@@ -166,15 +209,13 @@ namespace SchoolManagementSystem.Controllers
 
         public ActionResult AddClasses()
         {
-            List<int> teachername = new List<int>();
+            List<string> teachername = new List<string>();
             List<string> sectionname = new List<string>();
             List<string> subjectname = new List<string>();
 
             foreach (Teacher t in db.Teachers)
             {
-                    teachername.Add(t.TeacherID);
-
-
+                teachername.Add(t.FirstName);
             }
             foreach (Section s in db.Sections)
             {
@@ -186,12 +227,12 @@ namespace SchoolManagementSystem.Controllers
             {
                 subjectname.Add(su.SubjectName);
 
-                
+
             }
 
             ViewBag.teachername = teachername;
-           ViewBag.sectionname = sectionname;
-           ViewBag.subjectname = subjectname;
+            ViewBag.sectionname = sectionname;
+            ViewBag.subjectname = subjectname;
 
             return View();
         }
@@ -202,11 +243,17 @@ namespace SchoolManagementSystem.Controllers
 
             try
             {
-
                 Class c = new Class();
 
                 c.ClassName = collection.ClassName;
-                c.TeacherID = collection.TeacherID;
+                foreach (Teacher sT in db.Teachers)
+                {
+                    if (sT.FirstName == collection.TeacherName)
+                    {
+                        c.TeacherID = sT.TeacherID;
+                    }
+                }
+
                 foreach (Section s in db.Sections)
                 {
                     if (s.SectionName == collection.SectionName)
@@ -233,7 +280,33 @@ namespace SchoolManagementSystem.Controllers
                 }
                 else
                 {
+                    List<string> teachername = new List<string>();
+                    List<string> sectionname = new List<string>();
+                    List<string> subjectname = new List<string>();
+
+                    foreach (Teacher t in db.Teachers)
+                    {
+                        teachername.Add(t.FirstName);
+                    }
+                    foreach (Section s in db.Sections)
+                    {
+                        sectionname.Add(s.SectionName);
+
+
+                    }
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+                    ViewBag.teachername = teachername;
+                    ViewBag.sectionname = sectionname;
+                    ViewBag.subjectname = subjectname;
+
                     return View();
+
                 }
             }
             catch
@@ -242,6 +315,112 @@ namespace SchoolManagementSystem.Controllers
             }
 
         }
+
+
+        public ActionResult DeleteClass(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteClass(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Classes.Where(x => x.ClassID.ToString() == id).SingleOrDefault();
+                db.Classes.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Classlist");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult EditClass(string id)
+        {
+            List<string> teachername = new List<string>();
+            List<string> sectionname = new List<string>();
+            List<string> subjectname = new List<string>();
+
+            foreach (Teacher t in db.Teachers)
+            {
+                teachername.Add(t.FirstName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+            ViewBag.teachername = teachername;
+            ViewBag.sectionname = sectionname;
+            ViewBag.subjectname = subjectname;
+
+            ClassViewModel collection = new ClassViewModel();
+            var p = db.Classes.Where(x => x.ClassID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            collection.ClassName = p.ClassName;
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditClass(ClassViewModel collection, string id)
+        {
+            try
+            {
+                var p = db.Classes.Where(x => x.ClassID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                p.ClassName = collection.ClassName;
+                foreach (Teacher sT in db.Teachers)
+                {
+                    if (sT.FirstName == collection.TeacherName)
+                    {
+                        p.TeacherID = sT.TeacherID;
+                    }
+                }
+
+                foreach (Section s in db.Sections)
+                {
+                    if (s.SectionName == collection.SectionName)
+                    {
+                        p.SectionID = s.SectionID;
+                    }
+                }
+
+                foreach (Subject su in db.Subjects)
+                {
+                    if (su.SubjectName == collection.SubjectName)
+                    {
+                        p.SubjectID = su.SubjectID;
+                    }
+                }
+
+                if (p.ClassName != null)
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Classlist", "Admin");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
         public ActionResult AddPayroll()
         {
@@ -289,6 +468,93 @@ namespace SchoolManagementSystem.Controllers
             }
 
         }
+
+
+        public ActionResult EditPayroll(string id)
+        {
+            List<int> name = new List<int>();
+
+            foreach (Teacher t in db.Teachers)
+            {
+                name.Add(t.TeacherID);
+
+
+            }
+
+            ViewBag.name = name;
+
+            PayrollViewModel collection = new PayrollViewModel();
+            var p = db.Payrolls.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            collection.Designation = p.Designation;
+            collection.Pay =Convert.ToInt32( p.Pay);
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditPayroll(PayrollViewModel collection, string id)
+        {
+            try
+            {
+                var p = db.Payrolls.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+
+                p.TeacherID = collection.TeacherID;
+                p.Designation = collection.Designation;
+                p.Pay = collection.Pay;
+                if (p.TeacherID != 0 && p.Designation != null && p.Pay != 0)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Payrollist", "Admin");
+                }
+                else
+                {
+                    List<int> name = new List<int>();
+
+                    foreach (Teacher t in db.Teachers)
+                    {
+                        name.Add(t.TeacherID);
+
+
+                    }
+
+                    ViewBag.name = name;
+
+                    return View();
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
+
+        public ActionResult DeletePayroll(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeletePayroll(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Payrolls.Where(x => x.Id.ToString() == id).SingleOrDefault();
+                
+                db.Payrolls.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Payrollist");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
         //public ActionResult AddFeechallan()
         //{

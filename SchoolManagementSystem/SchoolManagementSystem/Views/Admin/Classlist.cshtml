@@ -33,9 +33,9 @@
                         <tr>
 
                             <th scope="col"> @Html.DisplayNameFor(model => model.listofclasses[0].ClassName)</th>
-                            <th scope="col">  @Html.DisplayNameFor(model => model.listofclasses[0].TeacherID)</th>
-                            <th scope="col">  @Html.DisplayNameFor(model => model.listofclasses[0].SectionID)</th>
-                            <th scope="col">  @Html.DisplayNameFor(model => model.listofclasses[0].SubjectID)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofclasses[0].Teacher.FirstName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofclasses[0].Section.SectionName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofclasses[0].Subject.SubjectName)</th>
 
 
 
@@ -50,15 +50,15 @@
                                 @Html.DisplayFor(modelItem => item.ClassName)
                             </th>
                             <td>
-                                @Html.DisplayFor(modelItem => item.TeacherID)
+                                @Html.DisplayFor(modelItem => item.Teacher.FirstName)
                             </td>
 
                             <td>
-                                @Html.DisplayFor(modelItem => item.SectionID)
+                                @Html.DisplayFor(modelItem => item.Section.SectionName)
                             </td>
 
                             <td>
-                                @Html.DisplayFor(modelItem => item.SubjectID)
+                                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
                             </td>
 
                             <td>

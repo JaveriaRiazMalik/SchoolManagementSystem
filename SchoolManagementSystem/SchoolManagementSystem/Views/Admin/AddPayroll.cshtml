@@ -35,7 +35,7 @@
                             @{
                                 if (ViewBag.name != null)
                                 {
-                                    foreach (int item in ViewBag.name)
+                                    foreach (var item in ViewBag.name)
                                     {
                                         <option value="@item">@item</option>
                                     }

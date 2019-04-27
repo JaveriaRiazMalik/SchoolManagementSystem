@@ -13,8 +13,8 @@ namespace SchoolManagementSystem.Models
         public string ClassName { get; set; }
 
         [Required]
-        [Display(Name = "Teacher Id")]
-        public int TeacherID { get; set; }
+        [Display(Name = "Teacher Name")]
+        public string TeacherName { get; set; }
 
         [Required]
         [Display(Name = "Subject Name")]

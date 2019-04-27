@@ -9,10 +9,9 @@
 
             <ul>
                 <li style="color: white"><h1 style="font-family: 'Raleway', sans-serif;">Admin</h1></li>
-                <li><i class="glyphicon glyphicon-user"></i><a href="/Account/Register">Add Students</a></li>
+                <li><i class="glyphicon glyphicon-plus"></i><a href="/Account/Register">Add Students</a></li>
                 <li><i class="glyphicon glyphicon-user"></i><a href="/Account/RegisterT">Add Teachers</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddClasses">Add Classes</a></li>
-                <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSections">Add Sections</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSubjects">Add Subjects</a></li>
                 <li><i class="glyphicon glyphicon-piggy-bank"></i><a href="/Admin/AddPayroll">Manage Payroll</a></li>
                 <li><i class="glyphicon glyphicon-piggy-bank"></i><a href="/Admin/AddFeechallan">Manage FeeChallan</a></li>
@@ -31,7 +30,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-1">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.student_count</span>
@@ -46,7 +45,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-2">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-download"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.teacher_count</span>
@@ -61,7 +60,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-3">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-heart"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.class_count</span>
@@ -80,22 +79,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-1">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
-                        </div>
-                        <div class="dash-box-body">
-                            <span class="dash-box-count">@ViewBag.payroll_count</span>
-                            <span class="dash-box-title">Payrolls</span>
-                        </div>
-
-                        <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/Payrolllist'"> See List</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="dash-box dash-box-color-1">
-                        <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-download"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.section_count</span>
@@ -108,9 +92,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="dash-box dash-box-color-1">
+                    <div class="dash-box dash-box-color-2">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.subject_count</span>
@@ -118,7 +102,22 @@
                         </div>
 
                         <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/Subjectlist'"> See List</button>
+                            <button onclick="window.location.href='/Admin/Subjectlist'">See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-3">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.payroll_count</span>
+                            <span class="dash-box-title">Payroll</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/Payrollist'">See List</button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +131,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-1">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.teacherattendance_count</span>
@@ -147,7 +146,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-1">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-download"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.studentattendance_count</span>
@@ -162,7 +161,7 @@
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-1">
                         <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
+                            <i class="glyphicon glyphicon-th-list"></i>
                         </div>
                         <div class="dash-box-body">
                             <span class="dash-box-count">@ViewBag.feechallan_count</span>

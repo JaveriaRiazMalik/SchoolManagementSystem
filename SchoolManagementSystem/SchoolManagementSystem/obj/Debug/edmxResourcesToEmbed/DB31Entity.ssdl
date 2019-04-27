@@ -240,6 +240,42 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <Property Name="Day" Type="datetime" Nullable="false" />
     <Property Name="Duration" Type="datetime" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Class_Section">
+    <End Role="Section" Type="Self.Section" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Class_Subject">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Class_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ClassHomework_Class">
     <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="*" />
@@ -368,18 +404,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Section_Class">
-    <End Role="Section" Type="Self.Section" Multiplicity="1" />
-    <End Role="Class" Type="Self.Class" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Section">
-        <PropertyRef Name="SectionID" />
-      </Principal>
-      <Dependent Role="Class">
-        <PropertyRef Name="SectionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StudentAttendance_ClassAttendance">
     <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1" />
     <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
@@ -488,18 +512,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Subject_Class">
-    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-    <End Role="Class" Type="Self.Class" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="SubjectID" />
-      </Principal>
-      <Dependent Role="Class">
-        <PropertyRef Name="SubjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SubmitHomework_ClassHomework">
     <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1" />
     <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
@@ -521,18 +533,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       </Principal>
       <Dependent Role="SubmitHomework">
         <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Teacher_Class">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-    <End Role="Class" Type="Self.Class" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Teacher">
-        <PropertyRef Name="TeacherID" />
-      </Principal>
-      <Dependent Role="Class">
-        <PropertyRef Name="TeacherID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -615,6 +615,18 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     [Admin].[Password] AS [Password]
     FROM [dbo].[Admin] AS [Admin]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_Class_Section" Association="Self.FK_Class_Section">
+      <End Role="Section" EntitySet="Section" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Class_Subject" Association="Self.FK_Class_Subject">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
     <AssociationSet Name="FK_ClassHomework_Class" Association="Self.FK_ClassHomework_Class">
       <End Role="Class" EntitySet="Class" />
       <End Role="ClassHomework" EntitySet="ClassHomework" />
@@ -655,10 +667,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="Request" EntitySet="Request" />
     </AssociationSet>
-    <AssociationSet Name="FK_Section_Class" Association="Self.FK_Section_Class">
-      <End Role="Section" EntitySet="Section" />
-      <End Role="Class" EntitySet="Class" />
-    </AssociationSet>
     <AssociationSet Name="FK_StudentAttendance_ClassAttendance" Association="Self.FK_StudentAttendance_ClassAttendance">
       <End Role="ClassAttendance" EntitySet="ClassAttendance" />
       <End Role="StudentAttendance" EntitySet="StudentAttendance" />
@@ -695,10 +703,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       <End Role="Student" EntitySet="Student" />
       <End Role="StudentHomework" EntitySet="StudentHomework" />
     </AssociationSet>
-    <AssociationSet Name="FK_Subject_Class" Association="Self.FK_Subject_Class">
-      <End Role="Subject" EntitySet="Subject" />
-      <End Role="Class" EntitySet="Class" />
-    </AssociationSet>
     <AssociationSet Name="FK_SubmitHomework_ClassHomework" Association="Self.FK_SubmitHomework_ClassHomework">
       <End Role="ClassHomework" EntitySet="ClassHomework" />
       <End Role="SubmitHomework" EntitySet="SubmitHomework" />
@@ -706,10 +710,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <AssociationSet Name="FK_SubmitHomework_Student" Association="Self.FK_SubmitHomework_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="SubmitHomework" EntitySet="SubmitHomework" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Teacher_Class" Association="Self.FK_Teacher_Class">
-      <End Role="Teacher" EntitySet="Teacher" />
-      <End Role="Class" EntitySet="Class" />
     </AssociationSet>
     <AssociationSet Name="FK_TeacherAttendance_Teacher" Association="Self.FK_TeacherAttendance_Teacher">
       <End Role="Teacher" EntitySet="Teacher" />
