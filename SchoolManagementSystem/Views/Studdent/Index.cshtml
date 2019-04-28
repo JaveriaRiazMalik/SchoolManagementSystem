@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Student Dashboard";
+}
+@if (Request.IsAuthenticated)
+{
+    <div class="abc">
+        <div class="wrapper">
+            <aside class="main_sidebar">
+
+                <ul>
+                    <li style="color: white"><h1 style="font-family: 'Raleway', sans-serif;"><i class="glyphicon glyphicon-user"></i>Student</h1></li>
+                    <li >@Html.ActionLink("" + User.Identity.GetUserName() + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                    <li><i class="glyphicon glyphicon-menu-hamburger"></i><a href="/Studdent/StudentDetails">Details</a></li>
+                    <li><i class="glyphicon glyphicon-phone-alt"></i><a href="/Account/RegisterT">Submit Request</a></li>
+                    <li><i class="glyphicon glyphicon-export"></i><a href="/Admin/AddClasses">Submit Assignment</a></li>
+
+                </ul>
+            </aside>
+            <div class="mian">
+                <h1 style=" color: white;"> Prakash </h1>
+            </div>
+        </div>
+
+        <div class="abc">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="dash-box dash-box-color-1">
+                            <div class="dash-box-icon">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </div>
+                            <div class="dash-box-body">
+                                <span class="dash-box-title">Acedemic Details</span>
+                            </div>
+
+                            <div class="dash-box-action">
+                                <button onclick="window.location.href='/Admin/Studentlist'"> See List</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dash-box dash-box-color-2">
+                            <div class="dash-box-icon">
+                                <i class="glyphicon glyphicon-time"></i>
+                            </div>
+                            <div class="dash-box-body">
+                                <span class="dash-box-title">Time Tabke</span>
+                            </div>
+
+                            <div class="dash-box-action">
+                                <button onclick="window.location.href='/Admin/Teacherlist'">See List</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dash-box dash-box-color-3">
+                            <div class="dash-box-icon">
+                                <i class="glyphicon glyphicon-credit-card"></i>
+                            </div>
+                            <div class="dash-box-body">
+                                \<span class="dash-box-title">Fee Information</span>
+                            </div>
+
+                            <div class="dash-box-action">
+                                <button onclick="window.location.href='/Admin/Classlist'">See List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="dash-box dash-box-color-1">
+                            <div class="dash-box-icon">
+                                <i class="glyphicon glyphicon-education"></i>
+                            </div>
+                            <div class="dash-box-body">
+                                <span class="dash-box-title">Exam Info</span>
+                            </div>
+
+                            <div class="dash-box-action">
+                                <button onclick="window.location.href='/Admin/Sectionlist'"> See List</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dash-box dash-box-color-2">
+                            <div class="dash-box-icon">
+                                <i class="glyphicon glyphicon-sunglasses"></i>
+                            </div>
+                            <div class="dash-box-body">
+                                <span class="dash-box-title">View Assignment</span>
+                            </div>
+
+                            <div class="dash-box-action">
+                                <button onclick="window.location.href='/Admin/Subjectlist'">See List</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        
+
+        </div>
+
+    </div>
+}

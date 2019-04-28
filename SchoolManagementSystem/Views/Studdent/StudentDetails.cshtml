@@ -1,0 +1,73 @@
+﻿@model SchoolManagementSystem.Models.UserAccountViewModel
+
+@{
+    ViewBag.Title = "StudentDetails";
+}
+
+<div id="Admin_Account">
+    <div class="container">
+        <h1 class="AdminAccount"></h1>
+        <div class="AdminAccount-form">
+
+            <h2 style="font-size: 30px; color: white" ;>My Details</h2>
+
+            <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+            <div class="table-responsive">
+                <table class="table table-Simple">
+                    <thead class="Column1">
+                        <tr>
+
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofusers[0].FirstName)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].LastName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofusers[0].RegistrationNo)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].Gender)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].Guardian)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].Address)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].Contact)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].Password)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofusers[0].Email)</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.listofusers)
+                        {
+                        <tr>
+
+                            <th scope="row">
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RegistrationNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Guardian)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Contact)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,65 @@
+﻿@model SchoolManagementSystem.Models.FeechallanViewModel
+
+@{
+    ViewBag.Title = "AddFeechallan";
+}
+
+<style>
+    .text-validate {
+        color: white;
+    }
+</style>
+
+<div id="RegisterForm">
+    <div class="container">
+        <h1 class="form-heading"></h1>
+        <div class="Register-form">
+            <div class="main-div">
+                <div class="panel" style="background-color: transparent;">
+                    <h2>Add FeeChallans</h2>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+
+                            <select name="ClassName" id="ClassName" class="form-control">
+                                <option selected="" value="0">Select Class</option>
+                                @{
+                                    if (ViewBag.name != null)
+                                    {
+                                        foreach (var item in ViewBag.name)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control", placeholder = "Fee In Rs", @Value = ViewBag.correlativo, @min = "0", @max = "9999" } })
+                            @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-validate" })
+                        </div>
+
+                        <input type="submit" value="Add" class="btn btn-primary btn-responsive" onclick="return confirm('Are you sure you wish to Add Feechallan?');" />
+                        <a href="~/Admin/Index/" class="btn btn-primary btn-responsive">Back</a>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
