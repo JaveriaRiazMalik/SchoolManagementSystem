@@ -18,8 +18,9 @@ namespace SchoolManagementSystem
         public Section()
         {
             this.Classes = new HashSet<Class>();
-            this.StudentClasses = new HashSet<StudentClass>();
+            this.Datesheets = new HashSet<Datesheet>();
             this.Timetables = new HashSet<Timetable>();
+            this.StudentClasses = new HashSet<StudentClass>();
         }
     
         public int SectionID { get; set; }
@@ -28,8 +29,10 @@ namespace SchoolManagementSystem
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Classes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentClass> StudentClasses { get; set; }
+        public virtual ICollection<Datesheet> Datesheets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timetable> Timetables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentClass> StudentClasses { get; set; }
     }
 }

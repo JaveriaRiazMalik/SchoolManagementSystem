@@ -225,10 +225,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StuddentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="databaseconnection.cs" />
+    <Compile Include="Datesheet.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB31Entity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +257,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\ClassViewModel.cs" />
+    <Compile Include="Models\DatesheetViewModel.cs" />
     <Compile Include="Models\FeechallanViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -260,6 +265,7 @@
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Models\StudentClassViewModel.cs" />
     <Compile Include="Models\SubjectViewModel.cs" />
+    <Compile Include="Models\TimetableViewModel.cs" />
     <Compile Include="Models\UserAccountViewModel.cs" />
     <Compile Include="Payroll.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
@@ -477,6 +483,23 @@
     <Content Include="Views\Admin\AddFeechallan.cshtml" />
     <Content Include="Views\Admin\Feechallanlist.cshtml" />
     <Content Include="Views\Admin\AssignClass.cshtml" />
+    <Content Include="Views\Admin\takeattendance.cshtml" />
+    <Content Include="Views\Admin\MarkAttendance1.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\TakeAttendance.cshtml" />
+    <Content Include="Views\Admin\GenerateDatesheet.cshtml" />
+    <Content Include="Views\Admin\Datesheet.cshtml" />
+    <Content Include="Views\Admin\GenerateTimetable.cshtml" />
+    <Content Include="Views\Admin\Timetable.cshtml" />
+    <Content Include="Views\Admin\EditFeechallan.cshtml" />
+    <Content Include="Views\Admin\EditTimetable.cshtml" />
+    <Content Include="Views\Admin\EditDatesheet.cshtml" />
+    <Content Include="Views\Studdent\StudentFeeChallan.cshtml" />
+    <Content Include="Views\Studdent\StudentTimetable.cshtml" />
+    <Content Include="Views\Teacher\TeacherDetails.cshtml" />
+    <Content Include="Views\Teacher\TeacherPayroll.cshtml" />
+    <Content Include="Views\Teacher\TeacherTimetable.cshtml" />
+    <Content Include="Views\Admin\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

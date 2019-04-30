@@ -17,7 +17,7 @@ namespace SchoolManagementSystem
         public int Id { get; set; }
         public int TeacherID { get; set; }
         public System.DateTime AttendanceDate { get; set; }
-        public System.DateTime AttendanceStatus { get; set; }
+        public string AttendanceStatus { get; set; }
     
         public virtual Teacher Teacher { get; set; }
     }

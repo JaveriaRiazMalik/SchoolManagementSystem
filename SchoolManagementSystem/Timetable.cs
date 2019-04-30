@@ -17,12 +17,17 @@ namespace SchoolManagementSystem
         public int Id { get; set; }
         public int ClassID { get; set; }
         public int SectionID { get; set; }
-        public int SubjectID { get; set; }
-        public System.DateTime Day { get; set; }
-        public System.DateTime Duration { get; set; }
+        public string Lec1 { get; set; }
+        public string Lec2 { get; set; }
+        public string Lec3 { get; set; }
+        public string Lec4 { get; set; }
+        public string Lec5 { get; set; }
+        public string Lec6 { get; set; }
+        public string Lec7 { get; set; }
+        public string Lec8 { get; set; }
+        public string Day { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Section Section { get; set; }
-        public virtual Subject Subject { get; set; }
     }
 }

@@ -17,10 +17,11 @@ namespace SchoolManagementSystem
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Class()
         {
+            this.Timetables = new HashSet<Timetable>();
             this.ClassHomeworks = new HashSet<ClassHomework>();
             this.FeeChallans = new HashSet<FeeChallan>();
             this.StudentClasses = new HashSet<StudentClass>();
-            this.Timetables = new HashSet<Timetable>();
+            this.Datesheets = new HashSet<Datesheet>();
         }
     
         public int ClassID { get; set; }
@@ -29,6 +30,8 @@ namespace SchoolManagementSystem
         public string ClassName { get; set; }
         public int SectionID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Timetable> Timetables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassHomework> ClassHomeworks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -39,6 +42,6 @@ namespace SchoolManagementSystem
         public virtual Subject Subject { get; set; }
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timetable> Timetables { get; set; }
+        public virtual ICollection<Datesheet> Datesheets { get; set; }
     }
 }

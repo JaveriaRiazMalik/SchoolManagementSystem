@@ -14,16 +14,9 @@ namespace SchoolManagementSystem
     
     public partial class ClassAttendance
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ClassAttendance()
-        {
-            this.StudentAttendances = new HashSet<StudentAttendance>();
-        }
-    
         public int Id { get; set; }
         public System.DateTime AttendanceDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
+        public virtual StudentAttendance StudentAttendance { get; set; }
     }
 }

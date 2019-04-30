@@ -17,6 +17,7 @@ namespace SchoolManagementSystem
         public int StudentID { get; set; }
         public int ClassID { get; set; }
         public int SectionID { get; set; }
+        public int Id { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Section Section { get; set; }

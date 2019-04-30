@@ -24,7 +24,7 @@
 
             <h2 class="Column2">Admin</h2>
             <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
-            <a href="~/Admin/index/" type="button" class="btn btn-primary btn-responsive"> Back</a>
+            <a href="~/Admin/Index2/" type="button" class="btn btn-primary btn-responsive"> Back</a>
             <p class="listText">List of Payrolls</p>
 
             <div class="table-responsive">
@@ -32,7 +32,7 @@
                     <thead class="Column1">
                         <tr>
 
-                            <th scope="col"> @Html.DisplayNameFor(model => model.listofpayrolls[0].TeacherID)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofpayrolls[0].Teacher.FirstName)</th>
                             <th scope="col">  @Html.DisplayNameFor(model => model.listofpayrolls[0].Designation)</th>
                             <th scope="col">  @Html.DisplayNameFor(model => model.listofpayrolls[0].Pay)</th>
 

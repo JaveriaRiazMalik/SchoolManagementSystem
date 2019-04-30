@@ -96,6 +96,17 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="AssignedDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="Datesheet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="SectionID" Type="int" Nullable="false" />
+    <Property Name="SubjectID" Type="int" Nullable="false" />
+    <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Duration" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="FeeChallan">
     <Key>
       <PropertyRef Name="Id" />
@@ -120,8 +131,9 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     </Key>
     <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StudentID" Type="int" Nullable="false" />
-    <Property Name="PercentageInClass" Type="int" Nullable="false" />
-    <Property Name="TeacherComments" Type="nvarchar" MaxLength="50" />
+    <Property Name="SubjectID" Type="int" Nullable="false" />
+    <Property Name="TotalMarks" Type="int" />
+    <Property Name="ObtainedMarks" Type="int" />
   </EntityType>
   <EntityType Name="Request">
     <Key>
@@ -156,11 +168,10 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
   <EntityType Name="StudentAttendance">
     <Key>
       <PropertyRef Name="AttendanceID" />
-      <PropertyRef Name="StudentID" />
     </Key>
     <Property Name="AttendanceID" Type="int" Nullable="false" />
     <Property Name="StudentID" Type="int" Nullable="false" />
-    <Property Name="AttendanceStatus" Type="int" Nullable="false" />
+    <Property Name="AttendanceStatus" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="StudentChallan">
     <Key>
@@ -173,11 +184,12 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
   </EntityType>
   <EntityType Name="StudentClass">
     <Key>
-      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="StudentID" Type="int" Nullable="false" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="SectionID" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="StudentHomework">
     <Key>
@@ -225,7 +237,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TeacherID" Type="int" Nullable="false" />
     <Property Name="AttendanceDate" Type="datetime" Nullable="false" />
-    <Property Name="AttendanceStatus" Type="datetime" Nullable="false" />
+    <Property Name="AttendanceStatus" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Timetable">
     <Key>
@@ -234,10 +246,28 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClassID" Type="int" Nullable="false" />
     <Property Name="SectionID" Type="int" Nullable="false" />
-    <Property Name="SubjectID" Type="int" Nullable="false" />
-    <Property Name="Day" Type="datetime" Nullable="false" />
-    <Property Name="Duration" Type="datetime" Nullable="false" />
+    <Property Name="Lec1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec3" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec4" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec5" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec6" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec7" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lec8" Type="nvarchar" MaxLength="50" />
+    <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Class_Timetable">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Timetable">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ClassHomework_Class">
     <End Role="Class" Type="Self.Class" Multiplicity="1" />
     <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="*" />
@@ -342,6 +372,18 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Report_Subject">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Report" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Request_Student">
     <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
     <End Role="Request" Type="Self.Request" Multiplicity="*" />
@@ -378,9 +420,21 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Section_Timetable">
+    <End Role="Section" Type="Self.Section" Multiplicity="1" />
+    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Section">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="Timetable">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StudentAttendance_ClassAttendance">
     <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1" />
-    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="ClassAttendance">
         <PropertyRef Name="Id" />
@@ -452,7 +506,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
   </Association>
   <Association Name="FK_StudentClass_Student">
     <End Role="Student" Type="Self.Student" Multiplicity="1" />
-    <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="0..1" />
+    <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
         <PropertyRef Name="StudentID" />
@@ -548,36 +602,36 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
   </Association>
   <Association Name="FK_Timetable_Class">
     <End Role="Class" Type="Self.Class" Multiplicity="1" />
-    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <End Role="Datesheet" Type="Self.Datesheet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
         <PropertyRef Name="ClassID" />
       </Principal>
-      <Dependent Role="Timetable">
+      <Dependent Role="Datesheet">
         <PropertyRef Name="ClassID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Timetable_Section">
     <End Role="Section" Type="Self.Section" Multiplicity="1" />
-    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <End Role="Datesheet" Type="Self.Datesheet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Section">
         <PropertyRef Name="SectionID" />
       </Principal>
-      <Dependent Role="Timetable">
+      <Dependent Role="Datesheet">
         <PropertyRef Name="SectionID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Timetable_Subject">
     <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-    <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+    <End Role="Datesheet" Type="Self.Datesheet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subject">
         <PropertyRef Name="SubjectID" />
       </Principal>
-      <Dependent Role="Timetable">
+      <Dependent Role="Datesheet">
         <PropertyRef Name="SubjectID" />
       </Dependent>
     </ReferentialConstraint>
@@ -592,6 +646,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassAttendance" EntityType="Self.ClassAttendance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassHomework" EntityType="Self.ClassHomework" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Datesheet" EntityType="Self.Datesheet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FeeChallan" EntityType="Self.FeeChallan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Payroll" EntityType="Self.Payroll" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
@@ -613,6 +668,10 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     [Admin].[Password] AS [Password]
     FROM [dbo].[Admin] AS [Admin]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_Class_Timetable" Association="Self.FK_Class_Timetable">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Timetable" EntitySet="Timetable" />
+    </AssociationSet>
     <AssociationSet Name="FK_ClassHomework_Class" Association="Self.FK_ClassHomework_Class">
       <End Role="Class" EntitySet="Class" />
       <End Role="ClassHomework" EntitySet="ClassHomework" />
@@ -645,6 +704,10 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
       <End Role="Student" EntitySet="Student" />
       <End Role="Report" EntitySet="Report" />
     </AssociationSet>
+    <AssociationSet Name="FK_Report_Subject" Association="Self.FK_Report_Subject">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
     <AssociationSet Name="FK_Request_Student" Association="Self.FK_Request_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="Request" EntitySet="Request" />
@@ -656,6 +719,10 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     <AssociationSet Name="FK_Section_Class" Association="Self.FK_Section_Class">
       <End Role="Section" EntitySet="Section" />
       <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Section_Timetable" Association="Self.FK_Section_Timetable">
+      <End Role="Section" EntitySet="Section" />
+      <End Role="Timetable" EntitySet="Timetable" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentAttendance_ClassAttendance" Association="Self.FK_StudentAttendance_ClassAttendance">
       <End Role="ClassAttendance" EntitySet="ClassAttendance" />
@@ -715,15 +782,15 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
     </AssociationSet>
     <AssociationSet Name="FK_Timetable_Class" Association="Self.FK_Timetable_Class">
       <End Role="Class" EntitySet="Class" />
-      <End Role="Timetable" EntitySet="Timetable" />
+      <End Role="Datesheet" EntitySet="Datesheet" />
     </AssociationSet>
     <AssociationSet Name="FK_Timetable_Section" Association="Self.FK_Timetable_Section">
       <End Role="Section" EntitySet="Section" />
-      <End Role="Timetable" EntitySet="Timetable" />
+      <End Role="Datesheet" EntitySet="Datesheet" />
     </AssociationSet>
     <AssociationSet Name="FK_Timetable_Subject" Association="Self.FK_Timetable_Subject">
       <End Role="Subject" EntitySet="Subject" />
-      <End Role="Timetable" EntitySet="Timetable" />
+      <End Role="Datesheet" EntitySet="Datesheet" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -33,6 +33,7 @@ namespace SchoolManagementSystem
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<ClassAttendance> ClassAttendances { get; set; }
         public virtual DbSet<ClassHomework> ClassHomeworks { get; set; }
+        public virtual DbSet<Datesheet> Datesheets { get; set; }
         public virtual DbSet<FeeChallan> FeeChallans { get; set; }
         public virtual DbSet<Payroll> Payrolls { get; set; }
         public virtual DbSet<Report> Reports { get; set; }

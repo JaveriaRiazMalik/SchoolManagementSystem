@@ -27,6 +27,14 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+        public ActionResult Index2()
+        {
+            ViewBag.payroll_count = db.Payrolls.ToList().Count;
+            ViewBag.feechallan_count = db.FeeChallans.ToList().Count;
+
+            return View();
+        }
+
         public ActionResult Studentlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -575,7 +583,7 @@ namespace SchoolManagementSystem.Controllers
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index2", "Admin");
                 }
                 else
                 {
@@ -642,6 +650,354 @@ namespace SchoolManagementSystem.Controllers
                     return View();
 
                 }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult EditFeechallan(string id)
+        {
+            List<string> name = new List<string>();
+
+
+            foreach (Class t in db.Classes)
+            {
+                name.Add(t.ClassName);
+
+
+            }
+
+
+            ViewBag.name = name;
+
+            FeechallanViewModel collection = new FeechallanViewModel();
+            var p = db.FeeChallans.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            collection.IssueDate = p.IssueDate;
+            collection.ClassName = p.Class.ClassName;
+            collection.Fee = Convert.ToInt32(p.Fee);
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditFeechallan(FeechallanViewModel collection, string id)
+        {
+            try
+            {
+                var p = db.FeeChallans.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+
+                p.Class.ClassName = collection.ClassName;
+                p.IssueDate = DateTime.Now;
+                p.Fee = collection.Fee;
+                if (p.ClassID != 0 && p.IssueDate != null && p.Fee != 0)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Feechallanlist", "Admin");
+                }
+                else
+                {
+                    List<string> name = new List<string>();
+
+
+                    foreach (Class t in db.Classes)
+                    {
+                        name.Add(t.ClassName);
+
+
+                    }
+
+                    ViewBag.name = name;
+
+                    return View();
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        public ActionResult EditTimetable(string id)
+        {
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            List<string> subjectname = new List<string>();
+
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+            ViewBag.subjectname = subjectname;
+
+            TimetableViewModel collection = new TimetableViewModel();
+            var p = db.Timetables.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            collection.Day = p.Day;
+            collection.Lec1 = p.Lec1;
+            collection.Lec2 = p.Lec2;
+            collection.Lec3 = p.Lec3;
+            collection.Lec4 = p.Lec4;
+            collection.Lec5 = p.Lec5;
+            collection.Lec6 = p.Lec6;
+            collection.Lec7 = p.Lec7;
+            collection.Lec8 = p.Lec8;
+            collection.ClassName = p.Class.ClassName;
+            collection.SectionName = p.Section.SectionName;
+
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditTimetable(TimetableViewModel collection, string id)
+        {
+            try
+            {
+                var d = db.Timetables.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+
+                d.Day = collection.Day;
+                d.Lec1 = collection.Lec1;
+                d.Lec2 = collection.Lec2;
+                d.Lec3 = collection.Lec3;
+                d.Lec4 = collection.Lec4;
+                d.Lec5 = "Break";
+                d.Lec6 = collection.Lec6;
+                d.Lec7 = collection.Lec7;
+                d.Lec8 = collection.Lec8;
+
+                d.Class.ClassName = collection.ClassName;
+                d.Section.SectionName = collection.SectionName;
+
+                if (d.ClassID != 0 && d.SectionID != 0)
+                {
+                    db.Timetables.Add(d);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Timetable", "Admin");
+                }
+                else
+                {
+                    List<string> classname = new List<string>();
+                    List<string> sectionname = new List<string>();
+                    List<string> subjectname = new List<string>();
+
+                    foreach (Class t in db.Classes)
+                    {
+                        classname.Add(t.ClassName);
+                    }
+                    foreach (Section s in db.Sections)
+                    {
+                        sectionname.Add(s.SectionName);
+
+
+                    }
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+                    ViewBag.classname = classname;
+                    ViewBag.sectionname = sectionname;
+                    ViewBag.subjectname = subjectname;
+
+
+                    return View();
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult EditDatesheet(string id)
+        {
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            List<string> subjectname = new List<string>();
+
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+            ViewBag.subjectname = subjectname;
+
+            DatesheetViewModel collection = new DatesheetViewModel();
+            var p = db.Datesheets.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            collection.Day = p.Day;
+            collection.Duration = p.Duration;
+            collection.ClassName = p.Class.ClassName;
+            collection.SectionName = p.Section.SectionName;
+            collection.SubjectName = p.Subject.SubjectName;
+
+            return View(collection);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditDatesheet(DatesheetViewModel collection, string id)
+        {
+            try
+            {
+                var d = db.Datesheets.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+
+                d.Day = collection.Day;
+                d.Duration = collection.Duration;
+
+                d.Class.ClassName = collection.ClassName;
+                d.Section.SectionName = collection.SectionName;
+                d.Subject.SubjectName = collection.SubjectName;
+
+                if (d.ClassID != 0 && d.SectionID != 0)
+                {
+                    db.Datesheets.Add(d);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Datesheet", "Admin");
+                }
+                else
+                {
+                    List<string> classname = new List<string>();
+                    List<string> sectionname = new List<string>();
+                    List<string> subjectname = new List<string>();
+                    foreach (Class t in db.Classes)
+                    {
+                        classname.Add(t.ClassName);
+                    }
+                    foreach (Section s in db.Sections)
+                    {
+                        sectionname.Add(s.SectionName);
+
+
+                    }
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+                    ViewBag.classname = classname;
+                    ViewBag.sectionname = sectionname;
+                    ViewBag.subjectname = subjectname;
+
+                    return View();
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+        public ActionResult DeleteFeechallan(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteFeechallan(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.FeeChallans.Where(x => x.Id.ToString() == id).SingleOrDefault();
+
+                db.FeeChallans.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Feechallanlist");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteTimetable(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteTimetable(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Timetables.Where(x => x.Id.ToString() == id).SingleOrDefault();
+
+                db.Timetables.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Timetable");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteDatesheet(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteDatesheet(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Datesheets.Where(x => x.Id.ToString() == id).SingleOrDefault();
+
+                db.Datesheets.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("Datesheet");
             }
             catch
             {
@@ -717,7 +1073,7 @@ namespace SchoolManagementSystem.Controllers
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index2", "Admin");
                 }
                 else
                 {
@@ -868,7 +1224,473 @@ namespace SchoolManagementSystem.Controllers
             }
 
 
+
+        public ActionResult takeattendance()
+        {
+            bool flag= false;
+            foreach (TeacherAttendance i in db.TeacherAttendances)
+            {
+                if (i.AttendanceDate == DateTime.Now.Date)
+                {
+                    flag = true;
+                }
+            }
+            if(flag == false)
+            {
+                AdminViewModel user = new AdminViewModel();
+                foreach (Teacher t in db.Teachers)
+                {
+                    user.listofteachers.Add(t);
+
+                }
+                return View(user);
+            }
+            else
+            {
+                return RedirectToAction("Index2", "Admin");
+            }
+        }
+
+        public ActionResult MarkAttendance1(string id)
+        {
+            bool j = true;
+            foreach(TeacherAttendance i in db.TeacherAttendances)
+            {
+                if(i.TeacherID ==Convert.ToInt32( id) && i.AttendanceDate==DateTime.Now)
+                {
+                    j = false;
+                     }
+            }
+            if (j==false)
+            {
+                ModelState.AddModelError("", "unable to save changes");
+
+            }
+            else
+            {
+                TeacherAttendance u = new TeacherAttendance();
+                u.TeacherID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Absent";
+                u.AttendanceDate = DateTime.Now.Date;
+                db.TeacherAttendances.Add(u);
+                db.SaveChanges();
+            }
+            return RedirectToAction("takeattendance", "Admin");
+
+            }
+
+        public ActionResult MarkAttendance2(string id)
+        {
+
+            bool j = true;
+            foreach (TeacherAttendance i in db.TeacherAttendances )
+            {
+                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate == DateTime.Now)
+                {
+                    j = false;
+                }
+            }
+            if (j == false)
+            {
+                ModelState.AddModelError("", "unable to save changes");
+                
+            }
+            else
+            {
+                TeacherAttendance u = new TeacherAttendance();
+                u.TeacherID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Present";
+                u.AttendanceDate = DateTime.Now.Date;
+                db.TeacherAttendances.Add(u);
+                db.SaveChanges();
+            }
+                return RedirectToAction("takeattendance", "Admin");
+            
+        }
+        
+        public ActionResult MarkAttendance4(string id)
+        {
+
+            bool j = true;
+            foreach (TeacherAttendance i in db.TeacherAttendances )
+            {
+                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate == DateTime.Now)
+                {
+                    j = false;
+                }
+            }
+            if (j == false)
+            {
+                ModelState.AddModelError("", "unable to save changes");
+
+            }
+            else
+            {
+                TeacherAttendance u = new TeacherAttendance();
+                u.TeacherID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Late";
+                u.AttendanceDate = DateTime.Now.Date;
+                db.TeacherAttendances.Add(u);
+                db.SaveChanges();
+            }
+            return RedirectToAction("takeattendance", "Admin");
+        }
+
+        public ActionResult GenerateDatesheet()
+        {
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            List<string> subjectname = new List<string>();
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+            ViewBag.subjectname = subjectname;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GenerateDatesheet(DatesheetViewModel collection)
+        {
+
+            try
+            {
+                Datesheet d = new Datesheet();
+
+                d.Day = collection.Day;
+                d.Duration = collection.Duration;
+                foreach (Class c in db.Classes)
+                {
+                    if (c.ClassName == collection.ClassName)
+                    {
+                        d.ClassID = c.ClassID;
+                    }
+                }
+
+                foreach (Section s in db.Sections)
+                {
+                    if (s.SectionName == collection.SectionName)
+                    {
+                        d.SectionID = s.SectionID;
+                    }
+                }
+
+                foreach (Subject su in db.Subjects)
+                {
+                    if (su.SubjectName == collection.SubjectName)
+                    {
+                        d.SubjectID = su.SubjectID;
+                    }
+                }
+
+                if (d.ClassID != 0 && d.SectionID != 0)
+                {
+                    db.Datesheets.Add(d);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index2", "Admin");
+                }
+                else
+                {
+                    List<string> classname = new List<string>();
+                    List<string> sectionname = new List<string>();
+                    List<string> subjectname = new List<string>();
+                    foreach (Class t in db.Classes)
+                    {
+                        classname.Add(t.ClassName);
+                    }
+                    foreach (Section s in db.Sections)
+                    {
+                        sectionname.Add(s.SectionName);
+
+
+                    }
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+                    ViewBag.classname = classname;
+                    ViewBag.sectionname = sectionname;
+                    ViewBag.subjectname = subjectname;
+
+                    return View();
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+        public ActionResult Datesheet()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Datesheet t in db.Datesheets)
+            {
+                user.listofdatesheet.Add(t);
+
+
+            }
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Datesheet(AdminViewModel collection)
+        {
+
+            AdminViewModel user = new AdminViewModel();
+
+            foreach (Datesheet t in db.Datesheets)
+            {
+                if (t.Class.ClassName == collection.ClassName && t.Section.SectionName == collection.SectionName)
+                {
+                    user.listofdatesheet.Add(t);
+                }
+
+            }
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+
+
+            return View(user);
+
+        }
+
+        public ActionResult GenerateTimetable()
+        {
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            List<string> subjectname = new List<string>();
+
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+            ViewBag.subjectname = subjectname;
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GenerateTimetable(TimetableViewModel collection)
+        {
+
+            try
+            {
+                Timetable d = new Timetable();
+
+                d.Day = collection.Day;
+                d.Lec1 = collection.Lec1;
+                d.Lec2 = collection.Lec2;
+                d.Lec3 = collection.Lec3;
+                d.Lec4 = collection.Lec4;
+                d.Lec5 = "Break";
+                d.Lec6 = collection.Lec6;
+                d.Lec7 = collection.Lec7;
+                d.Lec8 = collection.Lec8;
+
+                foreach (Class c in db.Classes)
+                {
+                    if (c.ClassName == collection.ClassName)
+                    {
+                        d.ClassID = c.ClassID;
+                    }
+                }
+
+                foreach (Section s in db.Sections)
+                {
+                    if (s.SectionName == collection.SectionName)
+                    {
+                        d.SectionID = s.SectionID;
+                    }
+                }
+
+
+
+                if (d.ClassID != 0 && d.SectionID != 0)
+                {
+                    db.Timetables.Add(d);
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index2", "Admin");
+                }
+                else
+                {
+                    List<string> classname = new List<string>();
+                    List<string> sectionname = new List<string>();
+                    List<string> subjectname = new List<string>();
+
+                    foreach (Class t in db.Classes)
+                    {
+                        classname.Add(t.ClassName);
+                    }
+                    foreach (Section s in db.Sections)
+                    {
+                        sectionname.Add(s.SectionName);
+
+
+                    }
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+                    ViewBag.classname = classname;
+                    ViewBag.sectionname = sectionname;
+                    ViewBag.subjectname = subjectname;
+
+
+                    return View();
+
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+        public ActionResult Timetable()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Timetable t in db.Timetables)
+            {
+                user.listoftimetable.Add(t);
+
+
+            }
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Timetable(AdminViewModel collection)
+        {
+
+            AdminViewModel user = new AdminViewModel();
+
+            foreach (Timetable t in db.Timetables)
+            {
+                if (t.Class.ClassName == collection.ClassName && t.Section.SectionName == collection.SectionName)
+                {
+                    user.listoftimetable.Add(t);
+                }
+
+            }
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+
+
+            return View(user);
+
+        }
     }
 
 
 }
+
+

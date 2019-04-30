@@ -16,10 +16,11 @@ namespace SchoolManagementSystem.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        DB31Entities db = new DB31Entities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        private string var = "admin@gmail.com";
+        private string var = "admin123@gmail.com";
         private string pass = "admin-123";
 
         public AccountController()
@@ -87,7 +88,7 @@ namespace SchoolManagementSystem.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index","Studdent");
+                    return openaccount(model, returnUrl); ;
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -112,6 +113,25 @@ namespace SchoolManagementSystem.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
+        public ActionResult openaccount(LoginViewModel model, string returnUrl)
+        {
+            bool flag = true;
+            foreach (Student s in db.Students)
+            {
+                if (s.Email == model.Email)
+                {
+                    flag = false;
+                }
+            }
+            if (flag == true)
+            {
+                return RedirectToAction("Index", "Teacher");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Studdent");
+            }
+        }
         //
         // POST: /Account/VerifyCode
         [HttpPost]

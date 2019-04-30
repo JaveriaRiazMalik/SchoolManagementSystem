@@ -64,6 +64,12 @@ namespace SchoolManagementSystem.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [EmailAddress]
+        public int Id { get; set; }
+
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

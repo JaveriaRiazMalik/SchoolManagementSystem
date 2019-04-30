@@ -16,7 +16,7 @@ namespace SchoolManagementSystem
     {
         public int AttendanceID { get; set; }
         public int StudentID { get; set; }
-        public int AttendanceStatus { get; set; }
+        public string AttendanceStatus { get; set; }
     
         public virtual ClassAttendance ClassAttendance { get; set; }
         public virtual Student Student { get; set; }

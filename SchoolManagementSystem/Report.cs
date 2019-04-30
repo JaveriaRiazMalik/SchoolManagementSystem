@@ -16,9 +16,11 @@ namespace SchoolManagementSystem
     {
         public int ReportID { get; set; }
         public int StudentID { get; set; }
-        public int PercentageInClass { get; set; }
-        public string TeacherComments { get; set; }
+        public int SubjectID { get; set; }
+        public Nullable<int> TotalMarks { get; set; }
+        public Nullable<int> ObtainedMarks { get; set; }
     
         public virtual Student Student { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }

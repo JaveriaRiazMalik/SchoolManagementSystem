@@ -18,7 +18,8 @@ namespace SchoolManagementSystem
         public Subject()
         {
             this.Classes = new HashSet<Class>();
-            this.Timetables = new HashSet<Timetable>();
+            this.Datesheets = new HashSet<Datesheet>();
+            this.Reports = new HashSet<Report>();
         }
     
         public int SubjectID { get; set; }
@@ -27,6 +28,8 @@ namespace SchoolManagementSystem
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Classes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timetable> Timetables { get; set; }
+        public virtual ICollection<Datesheet> Datesheets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Report> Reports { get; set; }
     }
 }

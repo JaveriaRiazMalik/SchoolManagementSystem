@@ -84,6 +84,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Datesheets">
+      <EntityTypeMapping TypeName="DB31Model.Datesheet">
+        <MappingFragment StoreEntitySet="Datesheet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="FeeChallans">
       <EntityTypeMapping TypeName="DB31Model.FeeChallan">
         <MappingFragment StoreEntitySet="FeeChallan">
@@ -109,8 +121,9 @@
         <MappingFragment StoreEntitySet="Report">
           <ScalarProperty Name="ReportID" ColumnName="ReportID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-          <ScalarProperty Name="PercentageInClass" ColumnName="PercentageInClass" />
-          <ScalarProperty Name="TeacherComments" ColumnName="TeacherComments" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+          <ScalarProperty Name="ObtainedMarks" ColumnName="ObtainedMarks" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -172,6 +185,7 @@
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
           <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -233,9 +247,15 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
           <ScalarProperty Name="SectionID" ColumnName="SectionID" />
-          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="Lec1" ColumnName="Lec1" />
+          <ScalarProperty Name="Lec2" ColumnName="Lec2" />
+          <ScalarProperty Name="Lec3" ColumnName="Lec3" />
+          <ScalarProperty Name="Lec4" ColumnName="Lec4" />
+          <ScalarProperty Name="Lec5" ColumnName="Lec5" />
+          <ScalarProperty Name="Lec6" ColumnName="Lec6" />
+          <ScalarProperty Name="Lec7" ColumnName="Lec7" />
+          <ScalarProperty Name="Lec8" ColumnName="Lec8" />
           <ScalarProperty Name="Day" ColumnName="Day" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -14,8 +14,6 @@
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddClasses">Add Classes</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSections">Add Sections</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSubjects">Add Subjects</a></li>
-                <li><i class="glyphicon glyphicon-piggy-bank"></i><a href="/Admin/AddPayroll">Manage Payroll</a></li>
-                <li><i class="glyphicon glyphicon-piggy-bank"></i><a href="/Admin/AddFeechallan">Manage FeeChallan</a></li>
                 <li><i class="glyphicon glyphicon-briefcase"></i><a href="/Admin/AssignClass">Assign Class</a></li>
 
 
@@ -74,25 +72,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="dash-box dash-box-color-1">
-                        <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
-                        </div>
-                        <div class="dash-box-body">
-                            <span class="dash-box-count">@ViewBag.payroll_count</span>
-                            <span class="dash-box-title">Payrolls</span>
-                        </div>
 
-                        <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/Payrollist'"> See List</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-4">
                     <div class="dash-box dash-box-color-1">
                         <div class="dash-box-icon">
@@ -124,30 +104,24 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="dash-box dash-box-color-1">
-                        <div class="dash-box-icon">
-                            <i class="glyphicon glyphicon-cloud"></i>
-                        </div>
-                        <div class="dash-box-body">
-                            <span class="dash-box-count">@ViewBag.feechallan_count</span>
-                            <span class="dash-box-title">Feechallans</span>
-                        </div>
-
-                        <div class="dash-box-action">
-                            <button onclick="window.location.href='/Admin/Feechallanlist'"> See List</button>
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
-
-
         </div>
+   
+    
 
 
 
-    </div>
+
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="/Admin/Index">1</a></li>
+        <li class="page-item"><a class="page-link" href="/Admin/Index2">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+       
+    </ul>
+
+
+</div>
 
 </div>

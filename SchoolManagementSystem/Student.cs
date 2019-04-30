@@ -21,6 +21,7 @@ namespace SchoolManagementSystem
             this.Requests = new HashSet<Request>();
             this.StudentAttendances = new HashSet<StudentAttendance>();
             this.StudentChallans = new HashSet<StudentChallan>();
+            this.StudentClasses = new HashSet<StudentClass>();
             this.StudentHomeworks = new HashSet<StudentHomework>();
             this.SubmitHomeworks = new HashSet<SubmitHomework>();
         }
@@ -44,7 +45,8 @@ namespace SchoolManagementSystem
         public virtual ICollection<StudentAttendance> StudentAttendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentChallan> StudentChallans { get; set; }
-        public virtual StudentClass StudentClass { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentClass> StudentClasses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentHomework> StudentHomeworks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
