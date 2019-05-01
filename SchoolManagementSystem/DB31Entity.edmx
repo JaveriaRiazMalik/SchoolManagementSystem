@@ -15,15 +15,13 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="Password" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -120,6 +118,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
           <Property Name="IssueDate" Type="datetime" Nullable="false" />
           <Property Name="ClassID" Type="int" Nullable="false" />
           <Property Name="Fee" Type="int" />
+          <Property Name="DueDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Payroll">
           <Key>
@@ -643,6 +642,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
         </Association>
         <EntityContainer Name="DB31ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -667,12 +667,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherAttendance" EntityType="Self.TeacherAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Admin" EntityType="Self.Admin" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Admin].[Id] AS [Id], 
-    [Admin].[Password] AS [Password]
-    FROM [dbo].[Admin] AS [Admin]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Class_Timetable" Association="Self.FK_Class_Timetable">
             <End Role="Class" EntitySet="Class" />
             <End Role="Timetable" EntitySet="Timetable" />
@@ -813,6 +807,14 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -921,6 +923,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
           <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ClassID" Type="Int32" Nullable="false" />
           <Property Name="Fee" Type="Int32" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Class" Relationship="Self.FK_FeeChallan_Class" FromRole="FeeChallan" ToRole="Class" />
           <NavigationProperty Name="StudentChallans" Relationship="Self.FK_StudentChallan_FeeChallan" FromRole="FeeChallan" ToRole="StudentChallan" />
         </EntityType>
@@ -1100,14 +1103,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
           <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
           <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
-        </EntityType>
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Password" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -1467,6 +1462,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
         </Association>
         <EntityContainer Name="DB31Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -1490,7 +1486,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
           <EntitySet Name="Timetables" EntityType="Self.Timetable" />
-          <EntitySet Name="Admins" EntityType="Self.Admin" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1628,6 +1623,15 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="DB31Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="DB31Model.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
@@ -1720,6 +1724,7 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
                 <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1873,14 +1878,6 @@ warning 6002: The table/view 'DB31.dbo.Admin' does not have a primary key define
                 <ScalarProperty Name="Lec7" ColumnName="Lec7" />
                 <ScalarProperty Name="Lec8" ColumnName="Lec8" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="DB31Model.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

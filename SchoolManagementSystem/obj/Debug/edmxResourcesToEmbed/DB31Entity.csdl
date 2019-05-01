@@ -10,6 +10,14 @@
     <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
     <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
   <EntityType Name="AspNetRole">
     <Key>
       <PropertyRef Name="Id" />
@@ -118,6 +126,7 @@
     <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ClassID" Type="Int32" Nullable="false" />
     <Property Name="Fee" Type="Int32" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Class" Relationship="Self.FK_FeeChallan_Class" FromRole="FeeChallan" ToRole="Class" />
     <NavigationProperty Name="StudentChallans" Relationship="Self.FK_StudentChallan_FeeChallan" FromRole="FeeChallan" ToRole="StudentChallan" />
   </EntityType>
@@ -297,14 +306,6 @@
     <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
     <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
-  </EntityType>
-  <EntityType Name="Admin">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="Password" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -664,6 +665,7 @@
   </Association>
   <EntityContainer Name="DB31Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -687,7 +689,6 @@
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
-    <EntitySet Name="Admins" EntityType="Self.Admin" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

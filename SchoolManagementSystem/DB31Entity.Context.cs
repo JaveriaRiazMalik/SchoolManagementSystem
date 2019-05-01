@@ -26,6 +26,7 @@ namespace SchoolManagementSystem
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
@@ -49,6 +50,5 @@ namespace SchoolManagementSystem
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
-        public virtual DbSet<Admin> Admins { get; set; }
     }
 }

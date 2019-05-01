@@ -1,0 +1,117 @@
+﻿@model SchoolManagementSystem.Models.DatesheetViewModel
+
+@{
+    ViewBag.Title = "EditDatesheet";
+}
+
+
+<style>
+    .text-validate {
+        color: white;
+    }
+</style>
+
+<div id="RegisterForm">
+    <div class="container">
+        <h1 class="form-heading"></h1>
+        <div class="Register-form">
+            <div class="main-div">
+                <div class="panel" style="background-color: transparent;">
+                    <h2>Edit Datesheet</h2>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+
+                        <select name="ClassName" id="ClassName" class="form-control">
+                            <option selected="" value="0">Select Class</option>
+                            @{
+                                if (ViewBag.classname != null)
+                                {
+                                    foreach (string item in ViewBag.classname)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
+                                }
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <select name="SectionName" id="SectionName" class="form-control">
+                            <option selected="" value="0">Select Section</option>
+                            @{
+                                if (ViewBag.sectionname != null)
+                                {
+                                    foreach (var itemS in ViewBag.sectionname)
+                                    {
+                                        <option value="@itemS">@itemS</option>
+                                    }
+                                }
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <select name="SubjectName" id="SubjectName" class="form-control">
+                            <option selected="" value="0">Select Subject</option>
+                            @{
+                                if (ViewBag.subjectname != null)
+                                {
+                                    foreach (var itemSu in ViewBag.subjectname)
+                                    {
+                                        <option value="@itemSu">@itemSu</option>
+                                    }
+                                }
+                            }
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div>
+                            @{
+                                List<SelectListItem> Daydl = new List<SelectListItem>();
+                                Daydl.Add(new SelectListItem { Text = "Monday", Value = "Monday", Selected = true });
+                                Daydl.Add(new SelectListItem { Text = "Tuesday", Value = "Tuesday" });
+                                Daydl.Add(new SelectListItem { Text = "Wednesday", Value = "Wednesday" });
+                                Daydl.Add(new SelectListItem { Text = "Thursday", Value = "Thursday" });
+                                Daydl.Add(new SelectListItem { Text = "Friday", Value = "Friday" });
+                            }
+
+                            @Html.DropDownList("Day", Daydl, "Select Day", new { @class = "form-control" });
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input name="Duration" class="form-control input-lg" type="datetime" placeholder="4/30/2019 12:00:00 AM format" />
+                        @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-validate" })
+                    </div>
+
+
+
+
+                    <input type="submit" value="Edit" class="btn btn-primary btn-responsive" onclick="return confirm('Are you sure you wish to Edit Datesheet?');" />
+                    <a href="~/Admin/Index2/" class="btn btn-primary btn-responsive">Back</a>
+                </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

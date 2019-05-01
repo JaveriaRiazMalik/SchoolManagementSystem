@@ -1,0 +1,35 @@
+﻿@model SchoolManagementSystem.TeacherAttendance
+
+@{
+    ViewBag.Title = "MarkAttendance1";
+}
+
+<style>
+    .text-validate {
+        color: white;
+    }
+</style>
+
+<html>
+<body>
+    <div id="AllPackages">
+        <div class="text-validate">
+            <h1 class="Packages">Attendance Status</h1>
+        </div>
+
+
+        <h2 class="Packages">Today's Attendance has been taken already</h2>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color" , style="text-align:center">
+
+                    <a href="~/Admin/Index" type="button" class="btn btn-primary btn-responsive"> Back</a>
+
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -115,6 +115,7 @@ namespace SchoolManagementSystem.Controllers
 
         public ActionResult openaccount(LoginViewModel model, string returnUrl)
         {
+            int i = 0;
             bool flag = true;
             foreach (Student s in db.Students)
             {
@@ -123,13 +124,25 @@ namespace SchoolManagementSystem.Controllers
                     flag = false;
                 }
             }
-            if (flag == true)
+            foreach(Admin a in db.Admins)
+            {
+                if(a.Email == model.Email)
+                {
+                    i = 1;
+                }
+            }
+            if (flag == true && i!=1)
             {
                 return RedirectToAction("Index", "Teacher");
             }
-            else
+            else if(flag != true && i!=1)
             {
                 return RedirectToAction("Index", "Studdent");
+            }
+            else
+            {
+
+                return RedirectToAction("Index", "Admin");
             }
         }
         //

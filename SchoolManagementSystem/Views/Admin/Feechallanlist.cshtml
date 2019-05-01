@@ -34,6 +34,7 @@
 
                             <th scope="col"> @Html.DisplayNameFor(model => model.listoffeechallans[0].ClassID)</th>
                             <th scope="col">  @Html.DisplayNameFor(model => model.listoffeechallans[0].IssueDate)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listoffeechallans[0].DueDate)</th>
                             <th scope="col">  @Html.DisplayNameFor(model => model.listoffeechallans[0].Fee)</th>
 
                         </tr>
@@ -41,26 +42,29 @@
                     <tbody>
                         @foreach (var item in Model.listoffeechallans)
                         {
-                            <tr>
+                        <tr>
 
-                                <th scope="row">
-                                    @Html.DisplayFor(modelItem => item.ClassID)
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IssueDate)
-                                </td>
+                            <th scope="row">
+                                @Html.DisplayFor(modelItem => item.ClassID)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IssueDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DueDate)
+                            </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Fee)
-                                </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fee)
+                            </td>
 
-                                <td>
-                                    @Html.ActionLink("Delete", "DeleteFeechallan", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "EditFeechallan", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                                </td>
-                            </tr>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteFeechallan", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditFeechallan", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                            </td>
+                        </tr>
                         }
 
                     </tbody>

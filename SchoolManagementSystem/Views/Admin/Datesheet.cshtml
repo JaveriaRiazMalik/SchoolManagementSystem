@@ -1,0 +1,144 @@
+﻿@model SchoolManagementSystem.Models.AdminViewModel
+
+
+<style>
+    #Admin_Account {
+        background-image: url("../images/bookstable.jpeg");
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: cover;
+        padding: 10px;
+    }
+</style>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div id="Admin_Account">
+            <div class="container">
+                <h1 class="AdminAccount"></h1>
+                <div class="AdminAccount-form">
+
+
+
+
+                    <h2 class="Column2">Admin</h2>
+                    <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                    <a href="~/Admin/Index2/" type="button" class="btn btn-primary btn-responsive"> Back</a>
+                    <p class="listText">Datesheet</p>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+
+                        <div class="form-group">
+
+                            <select name="ClassName" id="ClassName" class="form-control">
+                                <option selected="" value="0">Select Class</option>
+                                @{
+                                    if (ViewBag.classname != null)
+                                    {
+                                        foreach (var item in ViewBag.classname)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-3">
+
+                        <div class="form-group">
+
+                            <select name="SectionName" id="SectionName" class="form-control">
+                                <option selected="" value="0">Select Section</option>
+                                @{
+                                    if (ViewBag.sectionname != null)
+                                    {
+                                        foreach (var item in ViewBag.sectionname)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="submit" value="Generate" class="btn btn-primary btn-responsive" />
+                    </div>
+
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-Simple">
+                        <thead class="Column1">
+                            <tr>
+
+                                <th scope="col"> @Html.DisplayNameFor(model => model.listofdatesheet[0].Day)</th>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.listofdatesheet[0].Duration.Date)</th>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.listofdatesheet[0].Duration.TimeOfDay)</th>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.listofdatesheet[0].Class.ClassName)</th>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.listofdatesheet[0].Section.SectionName)</th>
+                                <th scope="col">  @Html.DisplayNameFor(model => model.listofdatesheet[0].Subject.SubjectName)</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.listofdatesheet)
+                            {
+                            <tr>
+
+                                <th scope="row">
+                                    @Html.DisplayFor(modelItem => item.Day)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Duration.Date)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Duration.TimeOfDay)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Class.ClassName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Section.SectionName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "DeleteDatesheet", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditDatesheet", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                </td>
+
+
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</body>

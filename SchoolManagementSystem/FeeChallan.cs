@@ -24,6 +24,7 @@ namespace SchoolManagementSystem
         public System.DateTime IssueDate { get; set; }
         public int ClassID { get; set; }
         public Nullable<int> Fee { get; set; }
+        public Nullable<System.DateTime> DueDate { get; set; }
     
         public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,0 +1,157 @@
+﻿@model SchoolManagementSystem.Models.UserAccountViewModel
+
+@{
+    ViewBag.Title = "TakeAttendance";
+}
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div id="AllPackages">
+            <div class="container">
+                <h1 class="Packages">Packages</h1>
+                <p class="listText">Take Attendance</p>
+                <div class="row">
+                    <div class="col-xs-2">
+
+
+                        <div class="form-group">
+
+                            <select name="ClassName" id="ClassName" class="form-control">
+                                <option selected="" value="0">Select Class</option>
+                                @{
+                                    if (ViewBag.ClassName != null)
+                                    {
+                                        foreach (string item in ViewBag.ClassName)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-xs-2">
+
+                        <div class="form-group">
+
+                            <select name="SectionName" id="SectionName" class="form-control">
+                                <option selected="" value="0">Select Section</option>
+                                @{
+                                    if (ViewBag.Sectionname != null)
+                                    {
+                                        foreach (var itemS in ViewBag.Sectionname)
+                                        {
+                                            <option value="@itemS">@itemS</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-xs-2">
+
+                        <div class="form-group">
+
+                            <select name="SubjectName" id="SubjectName" class="form-control">
+                                <option selected="" value="0">Select Subject</option>
+                                @{
+                                    if (ViewBag.Subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.Subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="submit" value="Show Students" class="btn btn-primary btn-responsive" />
+                    </div>
+
+
+
+                </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.listofusers[0].Id)
+                                    </th>
+
+
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.listofusers[0].FirstName)
+                                    </th>
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.listofusers[0].LastName)
+                                    </th>
+
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.listofusers[0].Gender)
+                                    </th>
+
+                                    <th scope="col">
+                                        @Html.DisplayNameFor(model => model.listofusers[0].RegistrationNo)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.listofusers)
+                                {
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Gender)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RegistrationNo)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Absent", "MarkAttendance1", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Present", "MarkAttendance2", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Leave", "MarkAttendance4", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
+
+
+                                </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+
+
+
+
+
+            </div>
+        </div>
+    }
+</body>

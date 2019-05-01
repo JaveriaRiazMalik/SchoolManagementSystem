@@ -4,17 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="51f83b05aaab41fd944f217169f5605a" Name="Diagram1">
-        <EntityTypeShape EntityType="DB31Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+      <Diagram DiagramId="9542bd1f740d415289308ec2f5fe626e" Name="Diagram1">
+        <EntityTypeShape EntityType="DB31Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.Admin" Width="1.5" PointX="12.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.AspNetRole" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.AspNetUserClaim" Width="1.5" PointX="14.25" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.AspNetUserLogin" Width="1.5" PointX="14.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.AspNetUser" Width="1.5" PointX="12" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.AspNetUserClaim" Width="1.5" PointX="14.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.AspNetUserLogin" Width="1.5" PointX="14.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.AspNetUser" Width="1.5" PointX="12" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Class" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.ClassAttendance" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.ClassHomework" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.ClassHomework" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Datesheet" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.FeeChallan" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.FeeChallan" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Payroll" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Report" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Request" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
@@ -23,13 +24,12 @@
         <EntityTypeShape EntityType="DB31Model.StudentAttendance" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.StudentChallan" Width="1.5" PointX="7.5" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.StudentClass" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.StudentHomework" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.StudentHomework" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Subject" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.SubmitHomework" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB31Model.SubmitHomework" Width="1.5" PointX="7.5" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Teacher" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.TeacherAttendance" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Timetable" Width="1.5" PointX="10.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.Admin" Width="1.5" PointX="12.75" PointY="8.125" IsExpanded="true" />
         <AssociationConnector Association="DB31Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DB31Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DB31Model.FK_Class_Timetable" ManuallyRouted="false" />

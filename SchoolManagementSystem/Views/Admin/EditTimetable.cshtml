@@ -1,0 +1,221 @@
+﻿@model SchoolManagementSystem.Models.TimetableViewModel
+
+
+<style>
+    .text-validate {
+        color: white;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    <div id="RegisterForm">
+        <div class="container">
+            <h1 class="form-heading"></h1>
+            <div class="Register-form">
+                <div class="main-div">
+                    <div class="panel" style="background-color: transparent;">
+                        <h2>Edit Timetable</h2>
+                    </div>
+
+
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+
+                            <select name="ClassName" id="ClassName" class="form-control">
+                                <option selected="" value="0">Select Class</option>
+                                @{
+                                    if (ViewBag.classname != null)
+                                    {
+                                        foreach (string item in ViewBag.classname)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="SectionName" id="SectionName" class="form-control">
+                                <option selected="" value="0">Select Section</option>
+                                @{
+                                    if (ViewBag.sectionname != null)
+                                    {
+                                        foreach (var itemS in ViewBag.sectionname)
+                                        {
+                                            <option value="@itemS">@itemS</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+
+                            @{
+                                List<SelectListItem> Daydl = new List<SelectListItem>();
+                                Daydl.Add(new SelectListItem { Text = "Monday", Value = "Monday", Selected = true });
+                                Daydl.Add(new SelectListItem { Text = "Tuesday", Value = "Tuesday" });
+                                Daydl.Add(new SelectListItem { Text = "Wednesday", Value = "Wednesday" });
+                                Daydl.Add(new SelectListItem { Text = "Thursday", Value = "Thursday" });
+                                Daydl.Add(new SelectListItem { Text = "Friday", Value = "Friday" });
+                            }
+
+                            @Html.DropDownList("Day", Daydl, "Select Day", new { @class = "form-control" });
+
+
+                        </div>
+                        <div class="form-group">
+
+                            <select name="Lec1" id="Lec1" class="form-control">
+                                <option selected="" value="0">Select Lec1</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <select name="Lec2" id="Lec2" class="form-control">
+                                <option selected="" value="0">Select Lec2</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="Lec3" id="Lec3" class="form-control">
+                                <option selected="" value="0">Select Lec3</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="Lec4" id="Lec4" class="form-control">
+                                <option selected="" value="0">Select Lec4</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <select name="Lec6" id="Lec6" class="form-control">
+                                <option selected="" value="0">Select Lec6</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <select name="Lec7" id="Lec7" class="form-control">
+                                <option selected="" value="0">Select Lec7</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+
+                            <select name="Lec8" id="Lec8" class="form-control">
+                                <option selected="" value="0">Select Lec8</option>
+                                @{
+                                    if (ViewBag.subjectname != null)
+                                    {
+                                        foreach (var itemSu in ViewBag.subjectname)
+                                        {
+                                            <option value="@itemSu">@itemSu</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+
+                        <input type="submit" value="Edit" class="btn btn-primary btn-responsive" onclick="return confirm('Are you sure you wish Edit Timetable?');" />
+                        <a href="~/Admin/Index2/" class="btn btn-primary btn-responsive">Back</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+}

@@ -23,5 +23,9 @@ namespace SchoolManagementSystem.Models
         [Display(Name = "IssueDate")]
         public DateTime IssueDate { get; set; }
 
+        [Required]
+        [Display(Name = "DueDate")]
+        public DateTime DueDate { get; set; }
+
     }
 }
