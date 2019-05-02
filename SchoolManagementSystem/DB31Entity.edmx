@@ -260,6 +260,30 @@
           <Property Name="Lec8" Type="nvarchar" MaxLength="50" />
           <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwListOfStudents">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="RegistrationNo" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Guardian" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Guardian" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Class_Timetable">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
           <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
@@ -667,6 +691,20 @@
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherAttendance" EntityType="Self.TeacherAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwListOfStudents" EntityType="Self.vwListOfStudents" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwListOfStudents].[StudentID] AS [StudentID], 
+    [vwListOfStudents].[RegistrationNo] AS [RegistrationNo], 
+    [vwListOfStudents].[FirstName] AS [FirstName], 
+    [vwListOfStudents].[LastName] AS [LastName], 
+    [vwListOfStudents].[Address] AS [Address], 
+    [vwListOfStudents].[Contact] AS [Contact], 
+    [vwListOfStudents].[Email] AS [Email], 
+    [vwListOfStudents].[Gender] AS [Gender], 
+    [vwListOfStudents].[Guardian] AS [Guardian], 
+    [vwListOfStudents].[Password] AS [Password]
+    FROM [dbo].[vwListOfStudents] AS [vwListOfStudents]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Class_Timetable" Association="Self.FK_Class_Timetable">
             <End Role="Class" EntitySet="Class" />
             <End Role="Timetable" EntitySet="Timetable" />
@@ -1104,6 +1142,28 @@
           <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
           <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
         </EntityType>
+        <EntityType Name="vwListOfStudent">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="RegistrationNo" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="Address" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Guardian" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Guardian" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1486,6 +1546,7 @@
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
           <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+          <EntitySet Name="vwListOfStudents" EntityType="Self.vwListOfStudent" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1878,6 +1939,22 @@
                 <ScalarProperty Name="Lec7" ColumnName="Lec7" />
                 <ScalarProperty Name="Lec8" ColumnName="Lec8" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwListOfStudents">
+            <EntityTypeMapping TypeName="DB31Model.vwListOfStudent">
+              <MappingFragment StoreEntitySet="vwListOfStudents">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Guardian" ColumnName="Guardian" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

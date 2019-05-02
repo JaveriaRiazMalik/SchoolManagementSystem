@@ -1,0 +1,71 @@
+﻿@model SchoolManagementSystem.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "TeacherAttendancelist";
+}
+<style>
+    #Admin_Account {
+        background-image: url("../images/bookstable.jpeg");
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: cover;
+        padding: 10px;
+    }
+</style>
+
+<div id="Admin_Account">
+    <div class="container">
+        <h1 class="AdminAccount"></h1>
+        <div class="AdminAccount-form">
+
+
+
+
+            <h2 class="Column2">Admin</h2>
+            <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+            <a href="~/Admin/index/" type="button" class="btn btn-primary btn-responsive"> Back</a>
+            <p class="listText">Attendance list of Teachers</p>
+
+            <div class="table-responsive">
+                <table class="table table-Simple">
+                    <thead class="Column1">
+                        <tr>
+
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofTattendance[0].Teacher.FirstName)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofTattendance[0].Teacher.LastName)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofTattendance[0].Teacher.Gender)</th>
+                            <th scope="col">  @Html.DisplayNameFor(model => model.listofTattendance[0].AttendanceDate)</th>
+                            <th scope="col"> @Html.DisplayNameFor(model => model.listofTattendance[0].AttendanceStatus)</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.listofTattendance)
+                        {
+                            <tr>
+
+                                <th scope="row">
+                                    @Html.DisplayFor(modelItem => item.Teacher.FirstName)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Teacher.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Teacher.Gender)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AttendanceDate.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AttendanceStatus)
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>

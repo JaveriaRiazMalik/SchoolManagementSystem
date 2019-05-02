@@ -307,6 +307,28 @@
     <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
     <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
   </EntityType>
+  <EntityType Name="vwListOfStudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="RegistrationNo" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Guardian" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Guardian" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -689,6 +711,7 @@
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+    <EntitySet Name="vwListOfStudents" EntityType="Self.vwListOfStudent" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

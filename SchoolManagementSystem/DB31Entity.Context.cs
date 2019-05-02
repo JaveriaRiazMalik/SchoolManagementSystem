@@ -50,5 +50,6 @@ namespace SchoolManagementSystem
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
+        public virtual DbSet<vwListOfStudent> vwListOfStudents { get; set; }
     }
 }

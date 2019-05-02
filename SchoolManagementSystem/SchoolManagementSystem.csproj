@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -296,6 +299,12 @@
     <Compile Include="StudentHomework.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Studentlist.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Studentlist.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Subject.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
@@ -309,6 +318,9 @@
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Timetable.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwListOfStudent.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -483,7 +495,6 @@
     <Content Include="Views\Admin\AddFeechallan.cshtml" />
     <Content Include="Views\Admin\Feechallanlist.cshtml" />
     <Content Include="Views\Admin\AssignClass.cshtml" />
-    <Content Include="Views\Admin\takeattendance.cshtml" />
     <Content Include="Views\Admin\MarkAttendance1.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Teacher\TakeAttendance.cshtml" />
@@ -503,6 +514,12 @@
     <Content Include="Views\Admin\DeleteFeechallan.cshtml" />
     <Content Include="Views\Admin\DeleteTimetable.cshtml" />
     <Content Include="Views\Admin\DeleteDatesheet.cshtml" />
+    <Content Include="Views\Admin\makeAttendanceList.cshtml" />
+    <Content Include="Views\Teacher\ReloadAttendancePage.cshtml" />
+    <Content Include="Views\Teacher\DatesheetList.cshtml" />
+    <Content Include="Views\Studdent\DatesheetList.cshtml" />
+    <Content Include="Views\Admin\TeacherAttendancelist.cshtml" />
+    <Content Include="Views\Admin\StudentlistPdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -523,6 +540,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Studentlist.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Studentlist.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

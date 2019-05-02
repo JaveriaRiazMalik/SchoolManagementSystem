@@ -20,9 +20,6 @@ namespace SchoolManagementSystem.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        private string var = "admin123@gmail.com";
-        private string pass = "admin-123";
-
         public AccountController()
         {
         }
@@ -77,10 +74,6 @@ namespace SchoolManagementSystem.Controllers
             {
                 return View(model);
             }
-            if (var == model.Email && pass == model.Password)
-            {
-                return RedirectToAction("Index", "Admin");
-            }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -124,9 +117,46 @@ namespace SchoolManagementSystem.Controllers
                     flag = false;
                 }
             }
+            foreach (Admin a in db.Admins)
+            {
+                if (a.Email == model.Email)
+                {
+                    i = 1;
+                }
+            }
+            if (flag == true && i != 1)
+            {
+                return RedirectToAction("Index", "Teacher");
+            }
+            else if (flag != true && i != 1)
+            {
+                return RedirectToAction("Index", "Studdent");
+            }
+            else
+            {
+
+                return RedirectToAction("Index", "Admin");
+            }
+        }
+
+        public ActionResult openaccount1()
+        {
+            string id = User.Identity.GetUserId();
+            var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            string email = p.Email;
+            
+            int i = 0;
+            bool flag = true;
+            foreach (Student s in db.Students)
+            {
+                if (s.Email == p.Email)
+                {
+                    flag = false;
+                }
+            }
             foreach(Admin a in db.Admins)
             {
-                if(a.Email == model.Email)
+                if(a.Email == p.Email)
                 {
                     i = 1;
                 }
@@ -198,7 +228,7 @@ namespace SchoolManagementSystem.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                       databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
+                       databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
                     
                         string query = $"INSERT INTO Student(FirstName,LastName,Gender,Address,Guardian,Password,RegistrationNo,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Guardian}','{model.Password}','{model.RegistrationNo}','{model.Contact}','{model.Email}')";
@@ -241,7 +271,7 @@ namespace SchoolManagementSystem.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                    
-                        databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
+                        databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
                         string query = $"INSERT INTO Teacher(FirstName,LastName,Gender,Address,Password,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Password}','{model.Contact}','{model.Email}')";
                         int rows = databaseconnection.get_instance().Executequery(query);

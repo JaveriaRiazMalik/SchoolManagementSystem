@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace SchoolManagementSystem.Controllers
 {
@@ -396,14 +398,54 @@ namespace SchoolManagementSystem.Controllers
                          c.ClassID = cl.ClassID;
                     }
                 }
-
+                bool flag = false;
                 if (c.ClassID != 0 && c.StudentID != 0 && c.SectionID != 0)
                 {
-                    db.StudentClasses.Add(c);
+                    foreach (StudentClass s in db.StudentClasses)
+                    {
+                        if (s.StudentID == c.StudentID)
+                        {
+                            flag = true;
+                        }
+                    }
+                    if(flag==false)
+                    {
 
-                    db.SaveChanges();
+                        db.StudentClasses.Add(c);
 
-                    return RedirectToAction("Index", "Admin");
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else
+                    {
+                        List<string> studentname = new List<string>();
+                        List<string> sectionname = new List<string>();
+                        List<string> classname = new List<string>();
+
+                        foreach (Student t in db.Students)
+                        {
+                            studentname.Add(t.RegistrationNo);
+                        }
+                        foreach (Section s in db.Sections)
+                        {
+                            sectionname.Add(s.SectionName);
+
+
+                        }
+                        foreach (Class su in db.Classes)
+                        {
+                            classname.Add(su.ClassName);
+
+
+                        }
+
+                        ViewBag.studentname = studentname;
+                        ViewBag.sectionname = sectionname;
+                        ViewBag.classname = classname;
+
+                        return View();
+                    }
+                    
                 }
                 else
                 {
@@ -1224,10 +1266,9 @@ namespace SchoolManagementSystem.Controllers
             }
 
 
-
         public ActionResult takeattendance()
         {
-            bool flag= false;
+            bool flag = false;
             foreach (TeacherAttendance i in db.TeacherAttendances)
             {
                 if (i.AttendanceDate == DateTime.Now.Date)
@@ -1235,15 +1276,9 @@ namespace SchoolManagementSystem.Controllers
                     flag = true;
                 }
             }
-            if(flag == false)
+            if (flag == false)
             {
-                AdminViewModel user = new AdminViewModel();
-                foreach (Teacher t in db.Teachers)
-                {
-                    user.listofteachers.Add(t);
-
-                }
-                return View(user);
+                return makeAttendanceList();
             }
             else
             {
@@ -1251,17 +1286,28 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        public ActionResult makeAttendanceList()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (Teacher t in db.Teachers)
+            {
+                user.listofteachers.Add(t);
+
+            }
+            return View(user);
+        }
+
         public ActionResult MarkAttendance1(string id)
         {
             bool j = true;
-            foreach(TeacherAttendance i in db.TeacherAttendances)
+            foreach (TeacherAttendance i in db.TeacherAttendances)
             {
-                if(i.TeacherID ==Convert.ToInt32( id) && i.AttendanceDate==DateTime.Now)
+                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate.Date == DateTime.Now.Date)
                 {
                     j = false;
-                     }
+                }
             }
-            if (j==false)
+            if (j == false)
             {
                 ModelState.AddModelError("", "unable to save changes");
 
@@ -1275,17 +1321,17 @@ namespace SchoolManagementSystem.Controllers
                 db.TeacherAttendances.Add(u);
                 db.SaveChanges();
             }
-            return RedirectToAction("takeattendance", "Admin");
+            return RedirectToAction("makeAttendanceList", "Admin");
 
-            }
+        }
 
         public ActionResult MarkAttendance2(string id)
         {
 
             bool j = true;
-            foreach (TeacherAttendance i in db.TeacherAttendances )
+            foreach (TeacherAttendance i in db.TeacherAttendances)
             {
-                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate == DateTime.Now)
+                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate.Date == DateTime.Now.Date)
                 {
                     j = false;
                 }
@@ -1293,7 +1339,7 @@ namespace SchoolManagementSystem.Controllers
             if (j == false)
             {
                 ModelState.AddModelError("", "unable to save changes");
-                
+
             }
             else
             {
@@ -1304,17 +1350,46 @@ namespace SchoolManagementSystem.Controllers
                 db.TeacherAttendances.Add(u);
                 db.SaveChanges();
             }
-                return RedirectToAction("takeattendance", "Admin");
-            
+            return RedirectToAction("makeAttendanceList", "Admin");
+
         }
-        
+
+
+        public ActionResult MarkAttendance3(string id)
+        {
+            bool j = true;
+            foreach (TeacherAttendance i in db.TeacherAttendances)
+            {
+                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate.Date == DateTime.Now.Date)
+                {
+                    j = false;
+                }
+            }
+            if (j == false)
+            {
+                ModelState.AddModelError("", "unable to save changes");
+
+            }
+            else
+            {
+                TeacherAttendance u = new TeacherAttendance();
+                u.TeacherID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Leave";
+                u.AttendanceDate = DateTime.Now.Date;
+                db.TeacherAttendances.Add(u);
+                db.SaveChanges();
+            }
+            return RedirectToAction("makeAttendanceList", "Admin");
+
+        }
+
         public ActionResult MarkAttendance4(string id)
         {
 
             bool j = true;
-            foreach (TeacherAttendance i in db.TeacherAttendances )
+            foreach (TeacherAttendance i in db.TeacherAttendances)
             {
-                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate == DateTime.Now)
+                if (i.TeacherID == Convert.ToInt32(id) && i.AttendanceDate.Date == DateTime.Now.Date)
                 {
                     j = false;
                 }
@@ -1333,9 +1408,8 @@ namespace SchoolManagementSystem.Controllers
                 db.TeacherAttendances.Add(u);
                 db.SaveChanges();
             }
-            return RedirectToAction("takeattendance", "Admin");
+            return RedirectToAction("makeAttendanceList", "Admin");
         }
-
         public ActionResult GenerateDatesheet()
         {
             List<string> classname = new List<string>();
@@ -1687,6 +1761,44 @@ namespace SchoolManagementSystem.Controllers
 
             return View(user);
 
+        }
+
+        public ActionResult TeacherAttendancelist()
+        {
+            AdminViewModel user = new AdminViewModel();
+            foreach (TeacherAttendance s in db.TeacherAttendances)
+            {
+                user.listofTattendance.Add(s);
+
+            }
+            return View(user);
+        }
+
+        public ActionResult StudentlistPdf()
+        {
+            var customerList = db.Students.ToList();
+            return View(customerList);
+        }
+
+        public ActionResult ExportCustomers()
+        {
+            List<Student> allCustomer = new List<Student>();
+            allCustomer = db.Students.ToList();
+
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReports"), "Studentlist.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CustomerList.pdf");
         }
     }
 

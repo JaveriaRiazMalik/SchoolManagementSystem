@@ -11,20 +11,21 @@ namespace SchoolManagementSystem.Controllers
     public class TeacherController : Controller
     {
         DB31Entities db = new DB31Entities();
+
+        public string attendanceInfo;
+        public string attendanceInfo1;
+
         // GET: Teacher
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult TakeAttendance()
+        public void comboreload()
         {
-            UserAccountViewModel userL = new UserAccountViewModel();
 
             List<string> Sectionname = new List<string>();
             List<string> ClassName = new List<string>();
-            List<string> Subjectname = new List<string>();
-
+            
             string id = User.Identity.GetUserId();
             var p = db.AspNetUsers.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
             string email = p.Email;
@@ -34,28 +35,33 @@ namespace SchoolManagementSystem.Controllers
             {
                 if (t.TeacherID == p1.TeacherID)
                 {
-                    Subjectname.Add(t.Subject.SubjectName);
                     Sectionname.Add(t.Section.SectionName);
                     ClassName.Add(t.ClassName);
                 }
             }
 
             ViewBag.ClassName = ClassName;
-            ViewBag.Subjectname = Subjectname;
-            ViewBag.Sectionname = Sectionname;
+            ViewBag.Sectionname = Sectionname.Distinct();
 
+        }
+        
+        public ActionResult TakeAttendance()
+        {
+            comboreload();            
+            UserAccountViewModel userL = new UserAccountViewModel();
             return View(userL);
         }
-
         [HttpPost]
         public ActionResult TakeAttendance(ClassViewModel collection)
         {
-
+            
             string id = User.Identity.GetUserId();
             var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
             string email = p.Email;
             var p1 = db.Teachers.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
 
+            attendanceInfo = collection.ClassName;
+            attendanceInfo1 = collection.SectionName;
             UserAccountViewModel userL = new UserAccountViewModel();
             var list = db.StudentClasses.ToList();
             
@@ -72,30 +78,71 @@ namespace SchoolManagementSystem.Controllers
                     userL.listofusers.Add(v);
                 }
             }
+            comboreload();
+            return View(userL);
+            
+        }
 
+        public ActionResult ReloadAttendancePage(string a,string b)
+        {
 
-            List<string> Sectionname = new List<string>();
-            List<string> Teachername = new List<string>();
-            List<string> Subjectname = new List<string>();
+            string id = User.Identity.GetUserId();
+            var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            string email = p.Email;
+            var p1 = db.Teachers.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
 
-            foreach (Class t in db.Classes)
+            UserAccountViewModel userL = new UserAccountViewModel();
+            var list = db.StudentClasses.ToList();
+
+            foreach (var i in list)
             {
-                if (t.TeacherID == p1.TeacherID)
+                if (i.Class.ClassName == a && i.Section.SectionName == b)
                 {
-                    Subjectname.Add(t.Subject.SubjectName);
-                    Sectionname.Add(t.Section.SectionName);
-                    Teachername.Add(t.ClassName);
+                    RegisterViewModel v = new RegisterViewModel();
+                    v.Id = i.Student.StudentID;
+                    v.FirstName = i.Student.FirstName;
+                    v.LastName = i.Student.LastName;
+                    v.Gender = i.Student.Gender;
+                    v.RegistrationNo = i.Student.RegistrationNo;
+                    userL.listofusers.Add(v);
                 }
             }
-
-            ViewBag.Teachername = Teachername;
-            ViewBag.Subjectname = Subjectname;
-            ViewBag.Sectionname = Sectionname;
-
+            comboreload();
             return View(userL);
 
-
         }
+
+        public ActionResult MarkAttendance4(string id)
+        {
+
+            bool j = true;
+            foreach (StudentAttendance i in db.StudentAttendances)
+            {
+                if (i.StudentID == Convert.ToInt32(id) && i.ClassAttendance.AttendanceDate.Date == DateTime.Now.Date)
+                {
+                    j = false;
+                }
+            }
+            if (j == false)
+            {
+                ModelState.AddModelError("", "unable to save changes");
+
+            }
+            else
+            {
+                StudentAttendance u = new StudentAttendance();
+                ClassAttendance v = new ClassAttendance();
+                u.StudentID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Leave";
+                v.AttendanceDate = DateTime.Now.Date;
+                db.StudentAttendances.Add(u);
+                db.ClassAttendances.Add(v);
+                db.SaveChanges();
+            }
+            return ReloadAttendancePage(attendanceInfo,attendanceInfo1);
+        }
+
+
 
         public ActionResult TeacherDetails()
         {
@@ -237,7 +284,56 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        public ActionResult DatesheetList()
+        {
+
+            AdminViewModel user = new AdminViewModel();
+            
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            ViewBag.classname = classname;
+            
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult DatesheetList(AdminViewModel collection)
+        {
+
+            AdminViewModel user = new AdminViewModel();
+            foreach (Datesheet t in db.Datesheets)
+            {
+                if (t.Class.ClassName == collection.ClassName)
+                {
+                    user.listofdatesheet.Add(t);
+                }
+
+            }
+
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
 
 
+            }
+
+            ViewBag.classname = classname;
+            ViewBag.sectionname = sectionname;
+
+
+            return View(user);
+
+        }
     }
 }

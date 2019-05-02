@@ -15,13 +15,14 @@
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSections">Add Sections</a></li>
                 <li><i class="glyphicon glyphicon-book"></i><a href="/Admin/AddSubjects">Add Subjects</a></li>
                 <li><i class="glyphicon glyphicon-briefcase"></i><a href="/Admin/AssignClass">Assign Class</a></li>
+                <li><i class="glyphicon glyphicon-briefcase"></i><a href="/Admin/StudentlistPdf">Download PDF StudentList</a></li>
 
 
             </ul>
         </aside>
         <div class="mian">
             <h1 style=" color: white;"> Prakash </h1>
-        </div>
+        </div> 
     </div>
 
     <div class="abc">
@@ -100,6 +101,21 @@
 
                         <div class="dash-box-action">
                             <button onclick="window.location.href='/Admin/Subjectlist'"> See List</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dash-box dash-box-color-1">
+                        <div class="dash-box-icon">
+                            <i class="glyphicon glyphicon-cloud"></i>
+                        </div>
+                        <div class="dash-box-body">
+                            <span class="dash-box-count">@ViewBag.subject_count</span>
+                            <span class="dash-box-title">View Teacher's Attendance</span>
+                        </div>
+
+                        <div class="dash-box-action">
+                            <button onclick="window.location.href='/Admin/TeacherAttendancelist'"> See List</button>
                         </div>
                     </div>
                 </div>

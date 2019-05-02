@@ -202,6 +202,33 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        
+        public ActionResult DatesheetList()
+        {
+            try
+            {
+                string id = User.Identity.GetUserId();
+                var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                string email = p.Email;
+                var p1 = db.Students.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                var p2 = db.StudentClasses.Where(x2 => x2.StudentID == p1.StudentID).SingleOrDefault();
+                AdminViewModel user = new AdminViewModel();
+                foreach (Datesheet t in db.Datesheets)
+                {
+                    if (t.ClassID == p2.ClassID && t.SectionID == p2.SectionID)
+                    {
+                        user.listofdatesheet.Add(t);
+                    }
+
+                }
+
+                return View(user);
+            }
+            catch
+            {
+                return RedirectToAction("Index","Studdent");
+            }
+        }
 
     }
 }
