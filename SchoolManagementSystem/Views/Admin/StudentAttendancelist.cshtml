@@ -1,0 +1,109 @@
+﻿@model SchoolManagementSystem.Models.AdminViewModel
+@{
+    ViewBag.Title = "StudentAttendanceList";
+}
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div id="AllPackages">
+            <div class="container">
+                <h1 class="Packages">Packages</h1>
+                <p class="listText">Take Attendance</p>
+                <div class="row">
+                    <div class="col-xs-2">
+
+
+                        <div class="form-group">
+
+                            <select name="ClassName" id="ClassName" class="form-control">
+                                <option selected="" value="0">Select Class</option>
+                                @{
+                                    if (ViewBag.ClassName != null)
+                                    {
+                                        foreach (string item in ViewBag.ClassName)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-xs-2">
+
+                        <div class="form-group">
+
+                            <select name="SectionName" id="SectionName" class="form-control">
+                                <option selected="" value="0">Select Section</option>
+                                @{
+                                    if (ViewBag.Sectionname != null)
+                                    {
+                                        foreach (var itemS in ViewBag.Sectionname)
+                                        {
+                                            <option value="@itemS">@itemS</option>
+                                        }
+                                    }
+                                }
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-3">
+                        <input type="submit" value="Generate" class="btn btn-primary btn-responsive" />
+                    </div>
+                </div>
+                    <div class="table-responsive">
+                        <table class="table table-Simple">
+                            <thead class="Column1">
+                                <tr>
+
+                                    <th scope="col"> @Html.DisplayNameFor(model => model.listofSattendance[0].Student.FirstName)</th>
+                                    <th scope="col">  @Html.DisplayNameFor(model => model.listofSattendance[0].Student.LastName)</th>
+                                    <th scope="col"> @Html.DisplayNameFor(model => model.listofSattendance[0].Student.RegistrationNo)</th>
+                                    <th scope="col"> @Html.DisplayNameFor(model => model.listofSattendance[0].Student.Contact)</th>
+                                    <th scope="col"> @Html.DisplayNameFor(model => model.listofSattendance[0].ClassAttendance.AttendanceDate)</th>
+                                    <th scope="col"> @Html.DisplayNameFor(model => model.listofSattendance[0].AttendanceStatus)</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.listofSattendance)
+                                {
+                                    <tr>
+
+                                        <th scope="row">
+                                            @Html.DisplayFor(modelItem => item.Student.FirstName)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.RegistrationNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student.Contact)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassAttendance.AttendanceDate.Date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AttendanceStatus)
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+            </div>
+        </div>
+                                    }
+
+</body>

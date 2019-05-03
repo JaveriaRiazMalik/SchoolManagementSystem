@@ -1282,6 +1282,7 @@ namespace SchoolManagementSystem.Controllers
             }
             else
             {
+                TempData["msg"] = "<script>alert('You have already taken Teacher Attendance for today.');</script>";
                 return RedirectToAction("Index2", "Admin");
             }
         }
@@ -1292,7 +1293,6 @@ namespace SchoolManagementSystem.Controllers
             foreach (Teacher t in db.Teachers)
             {
                 user.listofteachers.Add(t);
-
             }
             return View(user);
         }
@@ -1774,6 +1774,66 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+
+        public ActionResult StudentAttendancelist()
+        {
+            AdminViewModel user = new AdminViewModel();
+            
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            ViewBag.classname = classname.Distinct();
+            ViewBag.sectionname = sectionname.Distinct();
+
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult StudentAttendancelist(AdminViewModel collection)
+        {
+          
+            AdminViewModel user = new AdminViewModel();
+ 
+            foreach (StudentClass i in db.StudentClasses)
+            {
+                if (i.Class.ClassName == collection.ClassName && i.Section.SectionName == collection.SectionName)
+                {
+                    foreach (StudentAttendance t in db.StudentAttendances)
+                    {
+                        if (i.StudentID == t.StudentID)
+                        {
+                            user.listofSattendance.Add(t);
+                        }
+
+                    }
+                }
+            }
+            List<string> classname = new List<string>();
+            List<string> sectionname = new List<string>();
+            foreach (Class t in db.Classes)
+            {
+                classname.Add(t.ClassName);
+            }
+            foreach (Section s in db.Sections)
+            {
+                sectionname.Add(s.SectionName);
+
+
+            }
+            ViewBag.classname = classname.Distinct();
+            ViewBag.sectionname = sectionname.Distinct();
+
+            return View(user);
+        }
+
         public ActionResult StudentlistPdf()
         {
             var customerList = db.Students.ToList();
@@ -1787,7 +1847,7 @@ namespace SchoolManagementSystem.Controllers
 
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/CrystalReports"), "Studentlist.rpt"));
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Studentlist.rpt"));
 
             rd.SetDataSource(allCustomer);
 

@@ -299,7 +299,7 @@
     <Compile Include="StudentHomework.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Studentlist.cs">
+    <Compile Include="Reports\Studentlist.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Studentlist.rpt</DependentUpon>
@@ -520,6 +520,7 @@
     <Content Include="Views\Studdent\DatesheetList.cshtml" />
     <Content Include="Views\Admin\TeacherAttendancelist.cshtml" />
     <Content Include="Views\Admin\StudentlistPdf.cshtml" />
+    <Content Include="Views\Admin\StudentAttendancelist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -543,7 +544,7 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Studentlist.rpt">
+    <EmbeddedResource Include="Reports\Studentlist.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Studentlist.cs</LastGenOutput>
     </EmbeddedResource>

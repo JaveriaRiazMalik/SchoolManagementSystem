@@ -53,26 +53,6 @@
                         </div>
 
                     </div>
-                    <div class="col-xs-2">
-
-                        <div class="form-group">
-
-                            <select name="SubjectName" id="SubjectName" class="form-control">
-                                <option selected="" value="0">Select Subject</option>
-                                @{
-                                    if (ViewBag.Subjectname != null)
-                                    {
-                                        foreach (var itemSu in ViewBag.Subjectname)
-                                        {
-                                            <option value="@itemSu">@itemSu</option>
-                                        }
-                                    }
-                                }
-                            </select>
-
-                        </div>
-
-                    </div>
                     <div class="col-xs-3">
                         <input type="submit" value="Show Students" class="btn btn-primary btn-responsive" />
                     </div>

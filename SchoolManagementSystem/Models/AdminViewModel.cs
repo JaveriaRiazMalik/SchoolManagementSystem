@@ -17,6 +17,7 @@ namespace SchoolManagementSystem.Models
         public List<Datesheet> listofdatesheet = new List<Datesheet>();
         public List<Timetable> listoftimetable = new List<Timetable>();
         public List<TeacherAttendance> listofTattendance = new List<TeacherAttendance>();
+        public List<StudentAttendance> listofSattendance = new List<StudentAttendance>();
 
         public string ClassName { get; set; }
         public string SectionName { get; set; }

@@ -11,10 +11,7 @@ namespace SchoolManagementSystem.Controllers
     public class TeacherController : Controller
     {
         DB31Entities db = new DB31Entities();
-
-        public string attendanceInfo;
-        public string attendanceInfo1;
-
+        AdminViewModel y = new AdminViewModel();
         // GET: Teacher
         public ActionResult Index()
         {
@@ -44,7 +41,26 @@ namespace SchoolManagementSystem.Controllers
             ViewBag.Sectionname = Sectionname.Distinct();
 
         }
-        
+        public ActionResult checkAttendanceDate()
+        {
+            bool flag = false;
+            foreach (ClassAttendance i in db.ClassAttendances)
+            {
+                if (i.AttendanceDate == DateTime.Now.Date)
+                {
+                    flag = true;
+                }
+            }
+            if (flag == false)
+            {
+                return TakeAttendance();
+            }
+            else
+            {
+                TempData["msg"] = "<script>alert('You have already taken Student Attendance for today.');</script>";
+                return RedirectToAction("Index", "Teacher");
+            }
+        }
         public ActionResult TakeAttendance()
         {
             comboreload();            
@@ -60,8 +76,8 @@ namespace SchoolManagementSystem.Controllers
             string email = p.Email;
             var p1 = db.Teachers.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
 
-            attendanceInfo = collection.ClassName;
-            attendanceInfo1 = collection.SectionName;
+            y.ClassName = collection.ClassName;
+            y.SectionName = collection.SectionName;
             UserAccountViewModel userL = new UserAccountViewModel();
             var list = db.StudentClasses.ToList();
             
@@ -83,36 +99,8 @@ namespace SchoolManagementSystem.Controllers
             
         }
 
-        public ActionResult ReloadAttendancePage(string a,string b)
-        {
 
-            string id = User.Identity.GetUserId();
-            var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
-            string email = p.Email;
-            var p1 = db.Teachers.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
-
-            UserAccountViewModel userL = new UserAccountViewModel();
-            var list = db.StudentClasses.ToList();
-
-            foreach (var i in list)
-            {
-                if (i.Class.ClassName == a && i.Section.SectionName == b)
-                {
-                    RegisterViewModel v = new RegisterViewModel();
-                    v.Id = i.Student.StudentID;
-                    v.FirstName = i.Student.FirstName;
-                    v.LastName = i.Student.LastName;
-                    v.Gender = i.Student.Gender;
-                    v.RegistrationNo = i.Student.RegistrationNo;
-                    userL.listofusers.Add(v);
-                }
-            }
-            comboreload();
-            return View(userL);
-
-        }
-
-        public ActionResult MarkAttendance4(string id)
+        public ActionResult MarkAttendance2(string id)
         {
 
             bool j = true;
@@ -133,13 +121,74 @@ namespace SchoolManagementSystem.Controllers
                 StudentAttendance u = new StudentAttendance();
                 ClassAttendance v = new ClassAttendance();
                 u.StudentID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Present";
+                v.AttendanceDate = DateTime.Now.Date;
+                db.StudentAttendances.Add(u);
+                db.ClassAttendances.Add(v);
+                db.SaveChanges();
+            }
+            return RedirectToAction("TakeAttendance", "Teacher");
+        }
+
+        public ActionResult MarkAttendance1(string id)
+        {
+
+            bool j = true;
+            foreach (StudentAttendance i in db.StudentAttendances)
+            {
+                if (i.StudentID == Convert.ToInt32(id) && i.ClassAttendance.AttendanceDate.Date == DateTime.Now.Date)
+                {
+                    j = false;
+                }
+            }
+            if (j == false)
+            {
+                ModelState.AddModelError("", "unable to save changes");
+
+            }
+            else
+            {
+                StudentAttendance u = new StudentAttendance();
+                ClassAttendance v = new ClassAttendance();
+                u.StudentID = Convert.ToInt32(id);
+                u.AttendanceStatus = "Absent";
+                v.AttendanceDate = DateTime.Now.Date;
+                db.StudentAttendances.Add(u);
+                db.ClassAttendances.Add(v);
+                db.SaveChanges();
+            }
+            return RedirectToAction("TakeAttendance", "Teacher");
+        }
+
+        public ActionResult MarkAttendance4(string id)
+        {
+
+            bool j = true;
+            foreach (StudentAttendance i in db.StudentAttendances)
+            {
+                if (i.StudentID == Convert.ToInt32(id) && i.ClassAttendance.AttendanceDate.Date == DateTime.Now.Date)
+                {
+                    j = false;
+                }
+            }
+            if (j == false)
+            {
+
+                TempData["msg"] = "<script>alert('You have already taken Student Attendance for today.');</script>";
+
+            }
+            else
+            {
+                StudentAttendance u = new StudentAttendance();
+                ClassAttendance v = new ClassAttendance();
+                u.StudentID = Convert.ToInt32(id);
                 u.AttendanceStatus = "Leave";
                 v.AttendanceDate = DateTime.Now.Date;
                 db.StudentAttendances.Add(u);
                 db.ClassAttendances.Add(v);
                 db.SaveChanges();
             }
-            return ReloadAttendancePage(attendanceInfo,attendanceInfo1);
+            return RedirectToAction("TakeAttendance", "Teacher");
         }
 
 
