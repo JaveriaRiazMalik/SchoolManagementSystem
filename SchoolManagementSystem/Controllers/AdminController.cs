@@ -1102,7 +1102,7 @@ namespace SchoolManagementSystem.Controllers
 
                 if (d.ClassID != 0 && d.SectionID != 0)
                 {
-                   // db.Timetables.Add(d);
+                   
 
                     db.SaveChanges();
 
@@ -1217,7 +1217,7 @@ namespace SchoolManagementSystem.Controllers
 
                 if (d.ClassID != 0 && d.SectionID != 0)
                 {
-                    //db.Datesheets.Add(d);
+                   
 
                     db.SaveChanges();
 

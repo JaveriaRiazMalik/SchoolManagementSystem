@@ -335,14 +335,14 @@
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.cs">
-      <DependentUpon>DB31Entity.tt</DependentUpon>
-    </Compile>
     <Compile Include="CrystalReports.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReports.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Request.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>

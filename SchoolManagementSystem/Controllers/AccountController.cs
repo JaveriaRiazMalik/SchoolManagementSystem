@@ -227,7 +227,7 @@ namespace SchoolManagementSystem.Controllers
                 {
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                       databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
+                       databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
                         
                         //inserting student in db.Student
@@ -270,7 +270,7 @@ namespace SchoolManagementSystem.Controllers
                 {
                    // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                    
-                        databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
+                        databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
 
                         //inserting student in db.Teacher

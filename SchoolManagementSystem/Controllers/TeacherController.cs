@@ -630,10 +630,12 @@ namespace SchoolManagementSystem.Controllers
 
                var p1 = db.Subjects.Where(x => x.SubjectName == collection.SubjectName).SingleOrDefault();
                 c.SubjectID = p1.SubjectID;
+
                 c.StudentID = c.StudentID;
+
                 if (c.StudentID != 0 && c.ObtainedMarks != 0 && c.TotalMarks != 0 && c.ObtainedMarks < c.TotalMarks)
                 {
-                    db.Reports.Add(c);
+                    
 
                     db.SaveChanges();
                     return RedirectToAction("ViewStudentList", "Teacher");
