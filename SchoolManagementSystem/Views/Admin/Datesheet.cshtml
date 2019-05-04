@@ -99,43 +99,47 @@
                         <tbody>
                             @foreach (var item in Model.listofdatesheet)
                             {
-                            <tr>
+                                <tr>
 
-                                <th scope="row">
-                                    @Html.DisplayFor(modelItem => item.Day)
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Duration.Date)
-                                </td>
+                                    <th scope="row">
+                                        @Html.DisplayFor(modelItem => item.Day)
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Duration.Date)
+                                    </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Duration.TimeOfDay)
-                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Duration.TimeOfDay)
+                                    </td>
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Class.ClassName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Section.SectionName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Subject.SubjectName)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Delete", "DeleteDatesheet", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "EditDatesheet", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                                </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Section.SectionName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Delete", "DeleteDatesheet", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "EditDatesheet", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
 
 
-                            </tr>
+                                </tr>
                             }
 
                         </tbody>
                     </table>
 
                 </div>
+                <div>
+                    <a href="~/Admin/ExportDatesheet/" type="button" class="btn btn-primary btn-responsive">Get Pdf</a>
+                </div>
+
             </div>
 
         </div>

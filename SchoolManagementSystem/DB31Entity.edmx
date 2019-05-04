@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB31Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB31Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -260,6 +260,79 @@
           <Property Name="Lec8" Type="nvarchar" MaxLength="50" />
           <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB31.dbo.vwclasswiseresult' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwclasswiseresult">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="RegistrationNo" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="SectionID" />
+            <PropertyRef Name="SectionName" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalMark" Type="int" />
+          <Property Name="ObtainedMark" Type="int" />
+          <Property Name="Percentage" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB31.dbo.vwFeeChallans' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwFeeChallans">
+          <Key>
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="IssueDate" />
+          </Key>
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fee" Type="int" />
+          <Property Name="IssueDate" Type="datetime" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DB31.dbo.vwlistofstudents' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="vwlistofstudents">
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="Guardian" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB31.dbo.vwlistofstudentsineachclass' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwlistofstudentsineachclass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="ClassName" />
+          </Key>
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="No_Of_Students" Type="int" />
+          <Property Name="No_of_Sections" Type="int" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DB31.dbo.vwListOfTeachers' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="vwListOfTeachers">
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
         <Association Name="FK_Class_Timetable">
           <End Role="Class" Type="Self.Class" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -707,6 +780,38 @@
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherAttendance" EntityType="Self.TeacherAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwclasswiseresult" EntityType="Self.vwclasswiseresult" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwclasswiseresult].[StudentID] AS [StudentID], 
+    [vwclasswiseresult].[FirstName] AS [FirstName], 
+    [vwclasswiseresult].[LastName] AS [LastName], 
+    [vwclasswiseresult].[RegistrationNo] AS [RegistrationNo], 
+    [vwclasswiseresult].[Gender] AS [Gender], 
+    [vwclasswiseresult].[ClassID] AS [ClassID], 
+    [vwclasswiseresult].[ClassName] AS [ClassName], 
+    [vwclasswiseresult].[SectionID] AS [SectionID], 
+    [vwclasswiseresult].[SectionName] AS [SectionName], 
+    [vwclasswiseresult].[TotalMark] AS [TotalMark], 
+    [vwclasswiseresult].[ObtainedMark] AS [ObtainedMark], 
+    [vwclasswiseresult].[Percentage] AS [Percentage]
+    FROM [dbo].[vwclasswiseresult] AS [vwclasswiseresult]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwFeeChallans" EntityType="Self.vwFeeChallans" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwFeeChallans].[ClassName] AS [ClassName], 
+    [vwFeeChallans].[Fee] AS [Fee], 
+    [vwFeeChallans].[IssueDate] AS [IssueDate], 
+    [vwFeeChallans].[DueDate] AS [DueDate]
+    FROM [dbo].[vwFeeChallans] AS [vwFeeChallans]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwlistofstudentsineachclass" EntityType="Self.vwlistofstudentsineachclass" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwlistofstudentsineachclass].[ClassID] AS [ClassID], 
+    [vwlistofstudentsineachclass].[No_Of_Students] AS [No_Of_Students], 
+    [vwlistofstudentsineachclass].[No_of_Sections] AS [No_of_Sections], 
+    [vwlistofstudentsineachclass].[ClassName] AS [ClassName]
+    FROM [dbo].[vwlistofstudentsineachclass] AS [vwlistofstudentsineachclass]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Class_Timetable" Association="Self.FK_Class_Timetable">
             <End Role="Class" EntitySet="Class" />
             <End Role="Timetable" EntitySet="Timetable" />
@@ -832,8 +937,7 @@
             <End Role="Datesheet" EntitySet="Datesheet" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB31Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1143,6 +1247,50 @@
           <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
           <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="vwclasswiseresult">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="RegistrationNo" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="SectionID" />
+            <PropertyRef Name="SectionName" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalMark" Type="Int32" />
+          <Property Name="ObtainedMark" Type="Int32" />
+          <Property Name="Percentage" Type="Double" />
+        </EntityType>
+        <EntityType Name="vwFeeChallan">
+          <Key>
+            <PropertyRef Name="ClassName" />
+            <PropertyRef Name="IssueDate" />
+          </Key>
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fee" Type="Int32" />
+          <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vwlistofstudentsineachclass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="ClassName" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="No_Of_Students" Type="Int32" />
+          <Property Name="No_of_Sections" Type="Int32" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -1566,6 +1714,9 @@
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
           <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+          <EntitySet Name="vwclasswiseresults" EntityType="Self.vwclasswiseresult" />
+          <EntitySet Name="vwFeeChallans" EntityType="Self.vwFeeChallan" />
+          <EntitySet Name="vwlistofstudentsineachclasses" EntityType="Self.vwlistofstudentsineachclass" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1958,6 +2109,44 @@
                 <ScalarProperty Name="Lec7" ColumnName="Lec7" />
                 <ScalarProperty Name="Lec8" ColumnName="Lec8" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwclasswiseresults">
+            <EntityTypeMapping TypeName="DB31Model.vwclasswiseresult">
+              <MappingFragment StoreEntitySet="vwclasswiseresult">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="TotalMark" ColumnName="TotalMark" />
+                <ScalarProperty Name="ObtainedMark" ColumnName="ObtainedMark" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwFeeChallans">
+            <EntityTypeMapping TypeName="DB31Model.vwFeeChallan">
+              <MappingFragment StoreEntitySet="vwFeeChallans">
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwlistofstudentsineachclasses">
+            <EntityTypeMapping TypeName="DB31Model.vwlistofstudentsineachclass">
+              <MappingFragment StoreEntitySet="vwlistofstudentsineachclass">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="No_Of_Students" ColumnName="No_Of_Students" />
+                <ScalarProperty Name="No_of_Sections" ColumnName="No_of_Sections" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

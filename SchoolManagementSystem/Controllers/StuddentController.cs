@@ -17,6 +17,7 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+       
         public ActionResult StudentDetails()
         {
             RegisterViewModel loggedinuser = new RegisterViewModel();
@@ -232,8 +233,8 @@ namespace SchoolManagementSystem.Controllers
 
         public ActionResult StudentResult()
         {
-           // try
-           // {
+           try
+           {
                 bool flag = false;
                 string id = User.Identity.GetUserId();
                 var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
@@ -261,11 +262,11 @@ namespace SchoolManagementSystem.Controllers
                     return RedirectToAction("Index", "Studdent");
 
                 }
-          //  }
-         //   catch
-         //   {
-         //       return RedirectToAction("Index", "Studdent");
-         //   }
+            }
+           catch
+           {
+               return RedirectToAction("Index", "Studdent");
+           }
         }
 
     }

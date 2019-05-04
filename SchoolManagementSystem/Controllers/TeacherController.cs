@@ -2,6 +2,7 @@
 using SchoolManagementSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +19,52 @@ namespace SchoolManagementSystem.Controllers
         {
             return View();
         }
+
+
+        public ActionResult ExportPayroll()
+        {
+            List<Payroll> allCustomer = new List<Payroll>();
+            allCustomer = db.Payrolls.ToList();
+
+
+            CrystalReport7 rd = new CrystalReport7();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport7"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "PAyroll.pdf");
+        }
+
+        public ActionResult ExportTimetable()
+        {
+            List<Timetable> allCustomer = new List<Timetable>();
+            allCustomer = db.Timetables.ToList();
+
+
+            CrystalReport8 rd = new CrystalReport8();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport8"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Timetable.pdf");
+        }
+
         public void comboreload()
         {
 
@@ -583,19 +630,7 @@ namespace SchoolManagementSystem.Controllers
 
                var p1 = db.Subjects.Where(x => x.SubjectName == collection.SubjectName).SingleOrDefault();
                 c.SubjectID = p1.SubjectID;
-
-                foreach (Report r in db.Reports)
-                {
-                    if(r.ReportID.ToString() == id)
-                    {
-                        c.StudentID = r.SubjectID;
-
-                    }
-                }
-
-              
-
-
+                c.StudentID = c.StudentID;
                 if (c.StudentID != 0 && c.ObtainedMarks != 0 && c.TotalMarks != 0 && c.ObtainedMarks < c.TotalMarks)
                 {
                     db.Reports.Add(c);

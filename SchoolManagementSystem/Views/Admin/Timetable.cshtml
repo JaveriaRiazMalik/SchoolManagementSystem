@@ -103,54 +103,56 @@
                         <tbody>
                             @foreach (var item in Model.listoftimetable)
                             {
-                            <tr>
+                                <tr>
 
-                                <th scope="row">
-                                    @Html.DisplayFor(modelItem => item.Day)
-                                </th>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Class.ClassName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Section.SectionName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec1)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec2)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec3)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec4)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec5)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec6)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec7)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Lec8)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Delete", "DeleteTimetable", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "EditTimetable", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
-                                </td>
+                                    <th scope="row">
+                                        @Html.DisplayFor(modelItem => item.Day)
+                                    </th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Section.SectionName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec4)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec5)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec6)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec7)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Lec8)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Delete", "DeleteTimetable", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "EditTimetable", "Admin", new { id = item.Id }, new { @class = "btn btn-primary btn-responsive" })
+                                    </td>
 
-                            </tr>
+                                </tr>
                             }
 
                         </tbody>
                     </table>
-
+                    <div>
+                        <a href="~/Admin/ExportTimetable/" type="button" class="btn btn-primary btn-responsive">Get Pdf</a>
+                    </div>
                 </div>
             </div>
 

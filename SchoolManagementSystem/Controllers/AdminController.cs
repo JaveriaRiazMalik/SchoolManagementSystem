@@ -7,47 +7,134 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 using System.IO;
 
 namespace SchoolManagementSystem.Controllers
 {
-    
+
     public class AdminController : Controller
     {
+        //Entity model
         DB31Entities db = new DB31Entities();
+
         // GET: Admin
+        /// <summary>
+        /// View of admin index page
+        /// </summary>
+        /// <returns>index view</returns>
         public ActionResult Index()
         {
-            ViewBag.student_count = db.Students.ToList().Count;
-            ViewBag.teacher_count = db.Teachers.ToList().Count;
-            ViewBag.subject_count = db.Subjects.ToList().Count;
-            ViewBag.section_count = db.Sections.ToList().Count;
-            ViewBag.class_count = db.Classes.ToList().Count;
-            ViewBag.payroll_count = db.Payrolls.ToList().Count;
-            ViewBag.feechallan_count = db.FeeChallans.ToList().Count;
+            ViewBag.student_count = db.Students.ToList().Count; //Student count
+            ViewBag.teacher_count = db.Teachers.ToList().Count; //teacher count
+            ViewBag.subject_count = db.Subjects.ToList().Count; //subject count
+            ViewBag.section_count = db.Sections.ToList().Count; //section count
+            ViewBag.class_count = db.Classes.ToList().Count;  //class count
+            ViewBag.payroll_count = db.Payrolls.ToList().Count;  //payroll count
+            ViewBag.feechallan_count = db.FeeChallans.ToList().Count; //feechallan count
 
             return View();
         }
 
+        /// <summary>
+        /// View of second page of admin index
+        /// </summary>
+        /// <returns>second page of admin index</returns>
         public ActionResult Index2()
         {
-            ViewBag.payroll_count = db.Payrolls.ToList().Count;
-            ViewBag.feechallan_count = db.FeeChallans.ToList().Count;
+
 
             return View();
         }
 
+
+        /// <summary>
+        /// Shows list of all students
+        /// </summary>
+        /// <returns>student list</returns>
         public ActionResult Studentlist()
         {
             AdminViewModel user = new AdminViewModel();
             foreach (Student s in db.Students)
             {
                 user.listofstudents.Add(s);
-                
+
             }
             return View(user);
         }
 
+        public ActionResult ExportStudents()
+        {
+            List<Student> allCustomer = new List<Student>();
+            allCustomer = db.Students.ToList();
+
+
+            CrystalReports rd = new CrystalReports();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReports"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Studentlist.pdf");
+        }
+
+        public ActionResult FeeChallans()
+        {
+            List<vwFeeChallan> allCustomer = new List<vwFeeChallan>();
+            allCustomer = db.vwFeeChallans.ToList();
+
+
+            CrystalReport1 rd = new CrystalReport1();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport1"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Studentlist.pdf");
+
+        }
+
+
+        public ActionResult TeacherAttendencePdf()
+        {
+            List<TeacherAttendance> allCustomer = new List<TeacherAttendance>();
+            allCustomer = db.TeacherAttendances.ToList();
+
+
+            CrystalReport3 rd = new CrystalReport3();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport3"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "TeacherAttendanceList.pdf");
+
+        }
+        /// <summary>
+        /// Shows list of teachers
+        /// </summary>
+        /// <returns>teacher list</returns>
         public ActionResult Teacherlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -59,6 +146,33 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        public ActionResult ExportTeachers()
+        {
+            List<Teacher> allCustomer = new List<Teacher>();
+            allCustomer = db.Teachers.ToList();
+
+
+            CrystalReport2 rd = new CrystalReport2();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport2"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Teacherlist.pdf");
+        }
+
+
+        /// <summary>
+        /// Shows list of subjects
+        /// </summary>
+        /// <returns>subject list</returns>
         public ActionResult Subjectlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -70,6 +184,11 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+
+        /// <summary>
+        /// Shows list of feechallans
+        /// </summary>
+        /// <returns>feechallan list</returns>
         public ActionResult Feechallanlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -81,11 +200,24 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        ///Get
+        /// <summary>
+        /// Deletes subject
+        /// </summary>
+        /// <param name="id">subject id</param>
+        /// <returns>delete view</returns>
         public ActionResult DeleteSubject(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Deletes subject
+        /// </summary>
+        /// <param name="id">subject id</param>
+        /// <param name="collection">FormCollection object</param>
+        /// <returns>view of subject list</returns>
         [HttpPost]
         public ActionResult DeleteSubject(string id, FormCollection collection)
         {
@@ -103,6 +235,12 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Edits subject
+        /// </summary>
+        /// <param name="id">subject id</param>
+        /// <returns>view os subject list</returns>
         public ActionResult EditSubject(string id)
         {
             SubjectViewModel collection = new SubjectViewModel();
@@ -112,6 +250,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edits subject
+        /// </summary>
+        /// <param name="collection">SubjectViewModel object</param>
+        /// <param name="id">subject id</param>
+        /// <returns>view os subject</returns>
         [HttpPost]
         public ActionResult EditSubject(SubjectViewModel collection, string id)
         {
@@ -129,6 +274,11 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+
+        /// <summary>
+        /// list of section
+        /// </summary>
+        /// <returns>view os section list</returns>
         public ActionResult Sectionlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -140,7 +290,12 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
-
+        ///Get
+        /// <summary>
+        /// Edits section
+        /// </summary>
+        /// <param name="id">section id</param>
+        /// <returns>view of section list</returns>
         public ActionResult EditSection(string id)
         {
             SectionViewModel collection = new SectionViewModel();
@@ -151,6 +306,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edits section
+        /// </summary>
+        /// <param name="collection">SectionViewModel object</param>
+        /// <param name="id">section id</param>
+        /// <returns>view of section list</returns>
         [HttpPost]
         public ActionResult EditSection(SectionViewModel collection, string id)
         {
@@ -168,6 +330,10 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        /// <summary>
+        /// list of class
+        /// </summary>
+        /// <returns>view of class list</returns>
         public ActionResult Classlist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -179,6 +345,10 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// list of payroll
+        /// </summary>
+        /// <returns>view of payroll list</returns>
         public ActionResult Payrollist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -189,14 +359,22 @@ namespace SchoolManagementSystem.Controllers
             }
             return View(user);
         }
-        
 
-
+        ///Get
+        /// <summary>
+        /// Adds subject
+        /// </summary>
+        /// <returns>view of admin index</returns>
         public ActionResult AddSubjects()
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Adds subject
+        /// </summary>
+        /// <returns>view of admin index</returns>
         [HttpPost]
         public ActionResult AddSubjects(SubjectViewModel collection)
         {
@@ -227,11 +405,16 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Get
+        /// <summary>
+        /// Adds Class
+        /// </summary>
+        /// <returns>view of admin index</returns>
         public ActionResult AddClasses()
         {
-            List<string> teachername = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> subjectname = new List<string>();
+            List<string> teachername = new List<string>(); //list of teacher names from the database to be displayed in combo box
+            List<string> sectionname = new List<string>(); //list of section names from the database to be displayed in combo box
+            List<string> subjectname = new List<string>(); //list of subject names from the database to be displayed in combo box
 
             foreach (Teacher t in db.Teachers)
             {
@@ -257,6 +440,12 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Adds class
+        /// </summary>
+        /// <param name="collection">ClassViewModel object</param>
+        /// <returns>view of admin index</returns>
         [HttpPost]
         public ActionResult AddClasses(ClassViewModel collection)
         {
@@ -300,9 +489,9 @@ namespace SchoolManagementSystem.Controllers
                 }
                 else
                 {
-                    List<string> teachername = new List<string>();
-                    List<string> sectionname = new List<string>();
-                    List<string> subjectname = new List<string>();
+                    List<string> teachername = new List<string>(); //list of teacher names from the database to be displayed in combo box
+                    List<string> sectionname = new List<string>(); //list of section names from the database to be displayed in combo box
+                    List<string> subjectname = new List<string>(); //list of subject names from the database to be displayed in combo box
 
                     foreach (Teacher t in db.Teachers)
                     {
@@ -336,11 +525,16 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Get
+        /// <summary>
+        /// Assign a class to a student
+        /// </summary>
+        /// <returns>view of admin index</returns>
         public ActionResult AssignClass()
         {
-            List<string> studentname = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> classname = new List<string>();
+            List<string> studentname = new List<string>(); //list of student names from the database to be displayed in combo box
+            List<string> sectionname = new List<string>(); //list of section names from the database to be displayed in combo box
+            List<string> classname = new List<string>(); //list of class names from the database to be displayed in combo box
 
             foreach (Student t in db.Students)
             {
@@ -366,6 +560,12 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// assigns a class to a student
+        /// </summary>
+        /// <param name="collection">StudentViewModel</param>
+        /// <returns>view of admin index</returns>
         [HttpPost]
         public ActionResult AssignClass(StudentClassViewModel collection)
         {
@@ -374,8 +574,8 @@ namespace SchoolManagementSystem.Controllers
             {
                 StudentClass c = new StudentClass();
 
-               
-                foreach ( Student s in db.Students)
+
+                foreach (Student s in db.Students)
                 {
                     if (s.RegistrationNo == collection.RegistrationNo)
                     {
@@ -395,7 +595,7 @@ namespace SchoolManagementSystem.Controllers
                 {
                     if (cl.ClassName == collection.ClassName)
                     {
-                         c.ClassID = cl.ClassID;
+                        c.ClassID = cl.ClassID;
                     }
                 }
                 bool flag = false;
@@ -408,10 +608,10 @@ namespace SchoolManagementSystem.Controllers
                             flag = true;
                         }
                     }
-                    if(flag==false)
+                    if (flag == false)
                     {
 
-                        db.StudentClasses.Add(c);
+                        db.StudentClasses.Add(c); //adding into the database
 
                         db.SaveChanges();
                         return RedirectToAction("Index", "Admin");
@@ -439,19 +639,19 @@ namespace SchoolManagementSystem.Controllers
 
                         }
 
-                        ViewBag.studentname = studentname.Distinct();
-                        ViewBag.sectionname = sectionname.Distinct();
-                        ViewBag.classname = classname.Distinct();
+                        ViewBag.studentname = studentname.Distinct(); //list of teacher names from the database to be displayed in combo box
+                        ViewBag.sectionname = sectionname.Distinct(); //list of section names from the database to be displayed in combo box
+                        ViewBag.classname = classname.Distinct();     //list of teaher names from the database to be displayed in combo box
 
                         return View();
                     }
-                    
+
                 }
                 else
                 {
-                    List<string> studentname = new List<string>();
-                    List<string> sectionname = new List<string>();
-                    List<string> classname = new List<string>();
+                    List<string> studentname = new List<string>(); //list of teacher names from the database to be displayed in combo box
+                    List<string> sectionname = new List<string>(); //list of teaher names from the database to be displayed in combo box
+                    List<string> classname = new List<string>(); //list of teaher names from the database to be displayed in combo box
 
                     foreach (Student t in db.Students)
                     {
@@ -485,13 +685,23 @@ namespace SchoolManagementSystem.Controllers
         }
 
 
-
-
+        ///Get
+        /// <summary>
+        /// Deletes class
+        /// </summary>
+        /// <param name="id">id of class</param>
+        /// <returns>view of class list</returns>
         public ActionResult DeleteClass(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Deletes class
+        /// </summary>
+        /// <param name="id">id of class</param>
+        /// <returns>view of class list</returns>
         [HttpPost]
         public ActionResult DeleteClass(string id, FormCollection collection)
         {
@@ -509,11 +719,17 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Edits class
+        /// </summary>
+        /// <param name="id">class id</param>
+        /// <returns>view of class list</returns>
         public ActionResult EditClass(string id)
         {
-            List<string> teachername = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> subjectname = new List<string>();
+            List<string> teachername = new List<string>(); //list of teacher names from the database to be displayed in combo box
+            List<string> sectionname = new List<string>();  //list of section names from the database to be displayed in combo box
+            List<string> subjectname = new List<string>();  //list of subject names from the database to be displayed in combo box
 
             foreach (Teacher t in db.Teachers)
             {
@@ -543,6 +759,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edits class
+        /// </summary>
+        /// <param name="collection">ClassViewModel object</param>
+        /// <param name="id">class id</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult EditClass(ClassViewModel collection, string id)
         {
@@ -591,10 +814,14 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
-
+        ///Get
+        /// <summary>
+        /// Adds teacher's payroll
+        /// </summary>
+        /// <returns>view of add payroll</returns>
         public ActionResult AddPayroll()
         {
-            List<int> name = new List<int>(); 
+            List<int> name = new List<int>(); //list of names of teachers
 
             foreach (Teacher t in db.Teachers)
             {
@@ -606,7 +833,12 @@ namespace SchoolManagementSystem.Controllers
             ViewBag.name = name;
             return View();
         }
-
+        ///Post
+        /// <summary>
+        /// Adds payroll of teachers
+        /// </summary>
+        /// <param name="collection">PayrollViewModel object</param>
+        /// <returns>view of teacher index</returns>
         [HttpPost]
         public ActionResult AddPayroll(PayrollViewModel collection)
         {
@@ -639,10 +871,15 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
-
+        ///Get
+        /// <summary>
+        /// edits teacher's payroll
+        /// </summary>
+        /// <param name="id">payroll id</param>
+        /// <returns>view of edit payroll</returns>
         public ActionResult EditPayroll(string id)
         {
-            List<int> name = new List<int>();
+            List<int> name = new List<int>(); //list of teacher names
 
             foreach (Teacher t in db.Teachers)
             {
@@ -656,11 +893,18 @@ namespace SchoolManagementSystem.Controllers
             PayrollViewModel collection = new PayrollViewModel();
             var p = db.Payrolls.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
             collection.Designation = p.Designation;
-            collection.Pay =Convert.ToInt32( p.Pay);
+            collection.Pay = Convert.ToInt32(p.Pay);
             return View(collection);
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edits teacher's payroll
+        /// </summary>
+        /// <param name="collection">PayrollViewModel object</param>
+        /// <param name="id">Payroll id</param>
+        /// <returns>view of payroll list</returns>
         [HttpPost]
         public ActionResult EditPayroll(PayrollViewModel collection, string id)
         {
@@ -699,6 +943,12 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Edits Student's Feechallan
+        /// </summary>
+        /// <param name="id">feechallan id</param>
+        /// <returns>view of edit feechallan</returns>
         public ActionResult EditFeechallan(string id)
         {
             List<string> name = new List<string>();
@@ -723,6 +973,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edits student's feechallan
+        /// </summary>
+        /// <param name="collection">FeechallanViewModel</param>
+        /// <param name="id">feechallan id</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult EditFeechallan(FeechallanViewModel collection, string id)
         {
@@ -762,13 +1019,18 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
-
+        ///Get
+        /// <summary>
+        /// Edits tiemtable
+        /// </summary>
+        /// <param name="id">Timetable id</param>
+        /// <returns>view of edit timetable</returns>
         public ActionResult EditTimetable(string id)
         {
 
-            List<string> classname = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> subjectname = new List<string>();
+            List<string> classname = new List<string>(); //list of class names
+            List<string> sectionname = new List<string>(); //list of section names
+            List<string> subjectname = new List<string>(); //list of subject names
 
 
             foreach (Class t in db.Classes)
@@ -811,6 +1073,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edits Timetable
+        /// </summary>
+        /// <param name="collection">TimetableViewModel</param>
+        /// <param name="id">Timetable id</param>
+        /// <returns>View of timetable list</returns>
         [HttpPost]
         public ActionResult EditTimetable(TimetableViewModel collection, string id)
         {
@@ -833,7 +1102,7 @@ namespace SchoolManagementSystem.Controllers
 
                 if (d.ClassID != 0 && d.SectionID != 0)
                 {
-                    db.Timetables.Add(d);
+                   // db.Timetables.Add(d);
 
                     db.SaveChanges();
 
@@ -877,12 +1146,18 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Edits datesheet
+        /// </summary>
+        /// <param name="id">datesheet id</param>
+        /// <returns>view of edit datesheet</returns>
         public ActionResult EditDatesheet(string id)
         {
 
-            List<string> classname = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> subjectname = new List<string>();
+            List<string> classname = new List<string>(); //ist of class names
+            List<string> sectionname = new List<string>(); //list of section names
+            List<string> subjectname = new List<string>(); //list of subject names
 
 
             foreach (Class t in db.Classes)
@@ -919,6 +1194,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Post
+        /// <summary>
+        /// Edit datesheet
+        /// </summary>
+        /// <param name="collection">DatesheetViewModel</param>
+        /// <param name="id">Datesheet id</param>
+        /// <returns>view of datesheet list</returns>
         [HttpPost]
         public ActionResult EditDatesheet(DatesheetViewModel collection, string id)
         {
@@ -935,7 +1217,7 @@ namespace SchoolManagementSystem.Controllers
 
                 if (d.ClassID != 0 && d.SectionID != 0)
                 {
-                    db.Datesheets.Add(d);
+                    //db.Datesheets.Add(d);
 
                     db.SaveChanges();
 
@@ -978,11 +1260,24 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Get
+        /// <summary>
+        /// Delete feechallan
+        /// </summary>
+        /// <param name="id">Feechallan id</param>
+        /// <returns>view of edit feechallan</returns>
         public ActionResult DeleteFeechallan(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Deletes feechallan
+        /// </summary>
+        /// <param name="id">feechallan id</param>
+        /// <param name="collection">FormCollection</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult DeleteFeechallan(string id, FormCollection collection)
         {
@@ -1001,11 +1296,24 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Delete Timetable
+        /// </summary>
+        /// <param name="id">Timeyable id</param>
+        /// <returns>View of timetable list</returns>
         public ActionResult DeleteTimetable(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Delete tiemtable
+        /// </summary>
+        /// <param name="id">timetable id</param>
+        /// <param name="collection">FormCollection</param>
+        /// <returns>view of timetable list</returns>
         [HttpPost]
         public ActionResult DeleteTimetable(string id, FormCollection collection)
         {
@@ -1024,11 +1332,24 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Delete datesheet
+        /// </summary>
+        /// <param name="id">datesheet id</param>
+        /// <returns>view of dalete datesheet</returns>
         public ActionResult DeleteDatesheet(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Delete datesheet
+        /// </summary>
+        /// <param name="id">datesheet id</param>
+        /// <param name="collection">FormCollection</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult DeleteDatesheet(string id, FormCollection collection)
         {
@@ -1048,20 +1369,31 @@ namespace SchoolManagementSystem.Controllers
         }
 
 
-
-
+        ///Get
+        /// <summary>
+        /// Deleates payroll
+        /// </summary>
+        /// <param name="id">payroll id</param>
+        /// <returns>view of delete payroll</returns>
         public ActionResult DeletePayroll(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Deletes Payroll
+        /// </summary>
+        /// <param name="id">payroll id</param>
+        /// <param name="collection">FormCollection</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult DeletePayroll(string id, FormCollection collection)
         {
             try
             {
                 var item = db.Payrolls.Where(x => x.Id.ToString() == id).SingleOrDefault();
-                
+
                 db.Payrolls.Remove(item);
                 db.SaveChanges();
 
@@ -1073,7 +1405,11 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
-
+        ///Get
+        /// <summary>
+        /// Adds student feechallan
+        /// </summary>
+        /// <returns>view of add feechallan</returns>
         public ActionResult AddFeechallan()
         {
             List<string> name = new List<string>();
@@ -1089,6 +1425,12 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Adds feechallan
+        /// </summary>
+        /// <param name="collection">FeechallanViewModel</param>
+        /// <returns>view feechallan list</returns>
         [HttpPost]
         public ActionResult AddFeechallan(FeechallanViewModel collection)
         {
@@ -1098,7 +1440,7 @@ namespace SchoolManagementSystem.Controllers
 
                 FeeChallan p = new FeeChallan();
 
-                p.IssueDate = collection.IssueDate;
+                p.DueDate = collection.IssueDate;
                 p.Fee = collection.Fee;
                 p.IssueDate = DateTime.Now;
 
@@ -1129,13 +1471,24 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
-
-
+        ///Get
+        /// <summary>
+        /// Deletes teacher
+        /// </summary>
+        /// <param name="id">teacher id</param>
+        /// <returns>view of teacher delete</returns>
         public ActionResult DeleteT(string id)
         {
             return View();
         }
-        
+
+        ///Post
+        /// <summary>
+        /// Deletes teacher
+        /// </summary>
+        /// <param name="id">teacher id</param>
+        /// <param name="collection">Form collection</param>
+        /// <returns>view of teacher list</returns>
         [HttpPost]
         public ActionResult DeleteT(string id, FormCollection collection)
         {
@@ -1156,11 +1509,24 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Deletes student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>view of delete student</returns>
         public ActionResult DeleteS(string id)
         {
             return View();
         }
 
+        ///Post
+        /// <summary>
+        /// Deletes student
+        /// </summary>
+        /// <param name="id">student id</param>
+        /// <param name="collection">FormCollection</param>
+        /// <returns>view of student list</returns>
         [HttpPost]
         public ActionResult DeleteS(string id, FormCollection collection)
         {
@@ -1181,6 +1547,12 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        ///Get
+        /// <summary>
+        /// Edits student
+        /// </summary>
+        /// <param name="id">student id</param>
+        /// <returns>View of edit student</returns>
         public ActionResult EditS(string id)
         {
             RegisterViewModel collection = new RegisterViewModel();
@@ -1194,11 +1566,18 @@ namespace SchoolManagementSystem.Controllers
             collection.RegistrationNo = p.RegistrationNo;
             collection.Guardian = p.Guardian;
             return View(collection);
-            
+
         }
 
+        ///Post
+        /// <summary>
+        /// Edits student
+        /// </summary>
+        /// <param name="collection">RegisterViewModel</param>
+        /// <param name="id">Student id</param>
+        /// <returns>view of student list</returns>
         [HttpPost]
-        public ActionResult EditS(RegisterViewModel collection,string id)
+        public ActionResult EditS(RegisterViewModel collection, string id)
         {
             try
             {
@@ -1223,7 +1602,12 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
-
+        ///Get
+        /// <summary>
+        /// Edits teacher
+        /// </summary>
+        /// <param name="id">teacher id</param>
+        /// <returns>view of Edit teacher</returns>
         public ActionResult EditT(string id)
         {
             RegisterViewModel collection = new RegisterViewModel();
@@ -1239,6 +1623,13 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        ///Get
+        /// <summary>
+        /// Edits teacher
+        /// </summary>
+        /// <param name="collection">RegisterViewModel</param>
+        /// <param name="id"Teacher id></param>
+        /// <returns>view of Teacher list</returns>
         [HttpPost]
         public ActionResult EditT(RegisterViewModel collection, string id)
         {
@@ -1246,7 +1637,7 @@ namespace SchoolManagementSystem.Controllers
             {
                 var p = db.Teachers.Where(x => x.TeacherID.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
                 var p1 = db.AspNetUsers.Where(x => x.Email == p.Email).First();
-                
+
                 p1.Email = collection.Email;
                 p1.UserName = collection.Email;
                 p.FirstName = collection.FirstName;
@@ -1254,7 +1645,7 @@ namespace SchoolManagementSystem.Controllers
                 p.Email = collection.Email;
                 p.Address = collection.Address;
                 p.Contact = collection.Contact;
-                
+
                 db.SaveChanges();
 
                 return RedirectToAction("Teacherlist", "Admin");
@@ -1262,10 +1653,15 @@ namespace SchoolManagementSystem.Controllers
             catch
             {
                 return View();
-             }
             }
+        }
 
 
+
+        /// <summary>
+        /// Takes attendance of students only if it is not already taken
+        /// </summary>
+        /// <returns>mark attendance page</returns>
         public ActionResult takeattendance()
         {
             bool flag = false;
@@ -1287,6 +1683,10 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        /// <summary>
+        /// Shows the list of attendance
+        /// </summary>
+        /// <returns>view of list of students</returns>
         public ActionResult makeAttendanceList()
         {
             AdminViewModel user = new AdminViewModel();
@@ -1297,6 +1697,11 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Marks attendance of students
+        /// </summary>
+        /// <param name="id">student id</param>
+        /// <returns>attendance list of students</returns>
         public ActionResult MarkAttendance1(string id)
         {
             bool j = true;
@@ -1325,6 +1730,11 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        /// <summary>
+        /// Marks attendance of students
+        /// </summary>
+        /// <param name="id">student id</param>
+        /// <returns>attendance list of students</returns>
         public ActionResult MarkAttendance2(string id)
         {
 
@@ -1354,7 +1764,11 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
-
+        /// <summary>
+        /// Marks attendance of students
+        /// </summary>
+        /// <param name="id">student id</param>
+        /// <returns>attendance list of students</returns>
         public ActionResult MarkAttendance3(string id)
         {
             bool j = true;
@@ -1383,6 +1797,11 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
+        /// <summary>
+        /// Marks attendance of students
+        /// </summary>
+        /// <param name="id">student id</param>
+        /// <returns>attendance list of students</returns>
         public ActionResult MarkAttendance4(string id)
         {
 
@@ -1410,11 +1829,17 @@ namespace SchoolManagementSystem.Controllers
             }
             return RedirectToAction("makeAttendanceList", "Admin");
         }
+
+        ///Get
+        /// <summary>
+        /// Creates datesheet of a particular class
+        /// </summary>
+        /// <returns>view of generate datesheet</returns>
         public ActionResult GenerateDatesheet()
         {
-            List<string> classname = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> subjectname = new List<string>();
+            List<string> classname = new List<string>(); //list of class names
+            List<string> sectionname = new List<string>(); //list of section names
+            List<string> subjectname = new List<string>(); //list of subject name
 
             foreach (Class t in db.Classes)
             {
@@ -1440,6 +1865,12 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+        ///Get
+        /// <summary>
+        /// Craetes datesheet of a partucular class
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns>view of admin index</returns>
         [HttpPost]
         public ActionResult GenerateDatesheet(DatesheetViewModel collection)
         {
@@ -1518,6 +1949,12 @@ namespace SchoolManagementSystem.Controllers
             }
 
         }
+
+        ///Get
+        /// <summary>
+        /// showa datesheet of a particular class
+        /// </summary>
+        /// <returns>view of datesheet list</returns>
         public ActionResult Datesheet()
         {
             AdminViewModel user = new AdminViewModel();
@@ -1528,8 +1965,8 @@ namespace SchoolManagementSystem.Controllers
 
             }
 
-            List<string> classname = new List<string>();
-            List<string> sectionname = new List<string>();
+            List<string> classname = new List<string>(); //list of class names
+            List<string> sectionname = new List<string>(); //list of section names
             foreach (Class t in db.Classes)
             {
                 classname.Add(t.ClassName);
@@ -1546,6 +1983,12 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        ///Post
+        /// <summary>
+        /// shows datesheet of particular class
+        /// </summary>
+        /// <param name="collection">AdminViewModel</param>
+        /// <returns>view of datesheet</returns>
         [HttpPost]
         public ActionResult Datesheet(AdminViewModel collection)
         {
@@ -1577,29 +2020,96 @@ namespace SchoolManagementSystem.Controllers
 
             ViewBag.classname = classname;
             ViewBag.sectionname = sectionname;
-
-
+            
             return View(user);
 
         }
 
+        
+        public ActionResult ExportDatesheet()
+        {
+            List<Datesheet> allCustomer = new List<Datesheet>();
+            allCustomer = db.Datesheets.ToList();
+
+
+            CrystalReport4 rd = new CrystalReport4();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport4"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Datesheet.pdf");
+        }
+
+
+        public ActionResult ExportTimetable()
+        {
+            List<Timetable> allCustomer = new List<Timetable>();
+            allCustomer = db.Timetables.ToList();
+
+
+            CrystalReport6 rd = new CrystalReport6();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport6"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Timetable.pdf");
+        }
+
+        public ActionResult ExportFeeChallan()
+        {
+            List<FeeChallan> allCustomer = new List<FeeChallan>();
+            allCustomer = db.FeeChallans.ToList();
+            
+            CrystalReport4 rd = new CrystalReport4();
+
+            rd.Load(Path.Combine(Server.MapPath("~/CrystalReport4"), "ReportCustomer.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Feechallan.pdf");
+        }
+
+        ///Get
+        /// <summary>
+        /// creates timetable of a particular class and section
+        /// </summary>
+        /// <returns>view of generate timetable</returns>
         public ActionResult GenerateTimetable()
         {
-            List<string> classname = new List<string>();
-            List<string> sectionname = new List<string>();
-            List<string> subjectname = new List<string>();
+            List<string> classname = new List<string>(); //list of class names
+            List<string> sectionname = new List<string>(); //list of section names
+            List<string> subjectname = new List<string>(); //list of subject names
 
 
             foreach (Class t in db.Classes)
             {
+                sectionname.Add(t.Section.SectionName);
                 classname.Add(t.ClassName);
             }
-            foreach (Section s in db.Sections)
-            {
-                sectionname.Add(s.SectionName);
 
-
-            }
             foreach (Subject su in db.Subjects)
             {
                 subjectname.Add(su.SubjectName);
@@ -1608,14 +2118,20 @@ namespace SchoolManagementSystem.Controllers
             }
 
 
-            ViewBag.classname = classname;
-            ViewBag.sectionname = sectionname;
+            ViewBag.classname = classname.Distinct();
+            ViewBag.sectionname = sectionname.Distinct();
             ViewBag.subjectname = subjectname;
 
 
             return View();
         }
 
+        //Post
+        /// <summary>
+        /// creates tiemtable of a particular class and section
+        /// </summary>
+        /// <param name="collection">TimetableViewModel</param>
+        /// <returns>view of index of admin</returns>
         [HttpPost]
         public ActionResult GenerateTimetable(TimetableViewModel collection)
         {
@@ -1698,6 +2214,12 @@ namespace SchoolManagementSystem.Controllers
             }
 
         }
+
+        ///Get
+        /// <summary>
+        /// filters timetable of a particular class and section
+        /// </summary>
+        /// <returns>view of timetable</returns>
         public ActionResult Timetable()
         {
             AdminViewModel user = new AdminViewModel();
@@ -1726,6 +2248,12 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
+        ///Post
+        /// <summary>
+        /// shows timetable of a particular class and section
+        /// </summary>
+        /// <param name="collection">AdminViewModel</param>
+        /// <returns>shows timetable</returns>
         [HttpPost]
         public ActionResult Timetable(AdminViewModel collection)
         {
@@ -1758,11 +2286,14 @@ namespace SchoolManagementSystem.Controllers
             ViewBag.classname = classname;
             ViewBag.sectionname = sectionname;
 
-
             return View(user);
 
         }
 
+        /// <summary>
+        /// Shows teacher attendance list
+        /// </summary>
+        /// <returns>view of teacher attendance list</returns>
         public ActionResult TeacherAttendancelist()
         {
             AdminViewModel user = new AdminViewModel();
@@ -1774,11 +2305,15 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
-
+        ///
+        /// <summary>
+        /// Shows student attendance list
+        /// </summary>
+        /// <returns>view of student attendance list</returns>
         public ActionResult StudentAttendancelist()
         {
             AdminViewModel user = new AdminViewModel();
-            
+
             List<string> classname = new List<string>();
             List<string> sectionname = new List<string>();
             foreach (Class t in db.Classes)
@@ -1796,12 +2331,19 @@ namespace SchoolManagementSystem.Controllers
 
             return View(user);
         }
+
+        ///Post
+        /// <summary>
+        /// Shows student attendance list
+        /// </summary>
+        /// <param name="collection">AdminViewModel</param>
+        /// <returns>view of student attendance</returns>
         [HttpPost]
         public ActionResult StudentAttendancelist(AdminViewModel collection)
         {
-          
+
             AdminViewModel user = new AdminViewModel();
- 
+
             foreach (StudentClass i in db.StudentClasses)
             {
                 if (i.Class.ClassName == collection.ClassName && i.Section.SectionName == collection.SectionName)
@@ -1834,35 +2376,8 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
         }
 
-        public ActionResult StudentlistPdf()
-        {
-            var customerList = db.Students.ToList();
-            return View(customerList);
-        }
 
-        public ActionResult ExportCustomers()
-        {
-            List<Student> allCustomer = new List<Student>();
-            allCustomer = db.Students.ToList();
-
-
-            ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Studentlist.rpt"));
-
-            rd.SetDataSource(allCustomer);
-
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
-
-
-            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "CustomerList.pdf");
-        }
     }
-
-
 }
 
 

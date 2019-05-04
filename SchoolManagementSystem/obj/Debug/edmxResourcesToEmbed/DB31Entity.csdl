@@ -307,6 +307,50 @@
     <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
     <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
   </EntityType>
+  <EntityType Name="vwclasswiseresult">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="RegistrationNo" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="ClassID" />
+      <PropertyRef Name="ClassName" />
+      <PropertyRef Name="SectionID" />
+      <PropertyRef Name="SectionName" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SectionID" Type="Int32" Nullable="false" />
+    <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TotalMark" Type="Int32" />
+    <Property Name="ObtainedMark" Type="Int32" />
+    <Property Name="Percentage" Type="Double" />
+  </EntityType>
+  <EntityType Name="vwFeeChallan">
+    <Key>
+      <PropertyRef Name="ClassName" />
+      <PropertyRef Name="IssueDate" />
+    </Key>
+    <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fee" Type="Int32" />
+    <Property Name="IssueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="vwlistofstudentsineachclass">
+    <Key>
+      <PropertyRef Name="ClassID" />
+      <PropertyRef Name="ClassName" />
+    </Key>
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="No_Of_Students" Type="Int32" />
+    <Property Name="No_of_Sections" Type="Int32" />
+    <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -729,6 +773,9 @@
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+    <EntitySet Name="vwclasswiseresults" EntityType="Self.vwclasswiseresult" />
+    <EntitySet Name="vwFeeChallans" EntityType="Self.vwFeeChallan" />
+    <EntitySet Name="vwlistofstudentsineachclasses" EntityType="Self.vwlistofstudentsineachclass" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

@@ -110,14 +110,14 @@ namespace SchoolManagementSystem.Controllers
         {
             int i = 0;
             bool flag = true;
-            foreach (Student s in db.Students)
+            foreach (Student s in db.Students) //condition to login to student accont
             {
                 if (s.Email == model.Email)
                 {
                     flag = false;
                 }
             }
-            foreach (Admin a in db.Admins)
+            foreach (Admin a in db.Admins) //condition to login to admin accont
             {
                 if (a.Email == model.Email)
                 {
@@ -132,7 +132,7 @@ namespace SchoolManagementSystem.Controllers
             {
                 return RedirectToAction("Index", "Studdent");
             }
-            else
+            else //condition to login to teacher accont
             {
 
                 return RedirectToAction("Index", "Admin");
@@ -226,9 +226,11 @@ namespace SchoolManagementSystem.Controllers
                 if (result.Succeeded)
                 {
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                       databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
+
+                       databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
-                    
+                        
+                        //inserting student in db.Student
                         string query = $"INSERT INTO Student(FirstName,LastName,Gender,Address,Guardian,Password,RegistrationNo,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Guardian}','{model.Password}','{model.RegistrationNo}','{model.Contact}','{model.Email}')";
                         int rows = databaseconnection.get_instance().Executequery(query);
                         con.Close();
@@ -268,9 +270,11 @@ namespace SchoolManagementSystem.Controllers
                 {
                    // await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                    
-                        databaseconnection.get_instance().connectionstring = "Data Source=DESKTOP-RB72FPN\\SQLEXPRESS;Initial Catalog=DB31;Integrated Security=True";
+                        databaseconnection.get_instance().connectionstring = "Data Source=HAIER-PC;Initial Catalog=DB31;Integrated Security=True";
                         var con = databaseconnection.get_instance().Getconnection();
-                        string query = $"INSERT INTO Teacher(FirstName,LastName,Gender,Address,Password,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Password}','{model.Contact}','{model.Email}')";
+
+                        //inserting student in db.Teacher
+                         string query = $"INSERT INTO Teacher(FirstName,LastName,Gender,Address,Password,Contact,Email) VALUES('{model.FirstName}','{model.LastName}','{model.Gender}','{model.Address}','{model.Password}','{model.Contact}','{model.Email}')";
                         int rows = databaseconnection.get_instance().Executequery(query);
                         con.Close();
 
