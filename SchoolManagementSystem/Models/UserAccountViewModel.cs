@@ -9,6 +9,7 @@ namespace SchoolManagementSystem.Models
     public class UserAccountViewModel 
     {
         public List<RegisterViewModel> listofusers = new List<RegisterViewModel>();
+        
 
     }
 }

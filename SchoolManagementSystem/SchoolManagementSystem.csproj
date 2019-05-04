@@ -265,6 +265,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PayrollViewModel.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Models\StudentClassViewModel.cs" />
     <Compile Include="Models\SubjectViewModel.cs" />
@@ -284,6 +285,12 @@
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Reports\Studentlist.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Studentlist.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Student.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
@@ -299,12 +306,6 @@
     <Compile Include="StudentHomework.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Studentlist.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Studentlist.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Subject.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
@@ -318,9 +319,6 @@
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Timetable.cs">
-      <DependentUpon>DB31Entity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vwListOfStudent.cs">
       <DependentUpon>DB31Entity.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -521,6 +519,12 @@
     <Content Include="Views\Admin\TeacherAttendancelist.cshtml" />
     <Content Include="Views\Admin\StudentlistPdf.cshtml" />
     <Content Include="Views\Admin\StudentAttendancelist.cshtml" />
+    <Content Include="Views\Teacher\ViewStudentList.cshtml" />
+    <Content Include="Views\Teacher\GenerateResult.cshtml" />
+    <Content Include="Views\Teacher\ViewResult.cshtml" />
+    <Content Include="Views\Teacher\EditResult.cshtml" />
+    <Content Include="Views\Teacher\DeleteResult.cshtml" />
+    <Content Include="Views\Studdent\StudentResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@
         <div class="AdminAccount-form">
 
             <h2 style="font-size: 30px; color: white" ;>My Details</h2>
-
+            <a href="~/Studdent/Index/" type="button" class="btn btn-primary btn-responsive"> Back</a>
             <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
             <div class="table-responsive">
                 <table class="table table-Simple">
@@ -33,36 +33,36 @@
                     <tbody>
                         @foreach (var item in Model.listofusers)
                         {
-                        <tr>
+                            <tr>
 
-                            <th scope="row">
-                                @Html.DisplayFor(modelItem => item.FirstName)
-                            </th>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.RegistrationNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Gender)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Guardian)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Contact)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Password)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                        </tr>
+                                <th scope="row">
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RegistrationNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Guardian)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Contact)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Password)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                            </tr>
                         }
 
                     </tbody>

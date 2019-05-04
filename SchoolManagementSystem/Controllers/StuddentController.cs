@@ -230,5 +230,43 @@ namespace SchoolManagementSystem.Controllers
             }
         }
 
+        public ActionResult StudentResult()
+        {
+           // try
+           // {
+                bool flag = false;
+                string id = User.Identity.GetUserId();
+                var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                string email = p.Email;
+                var p1 = db.Students.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+                //var p2 = db.Reports.Where(x2 => x2.StudentID == p1.StudentID).SingleOrDefault();
+                AdminViewModel user = new AdminViewModel();
+                foreach (Report t in db.Reports)
+                {
+                    if (t.StudentID == p1.StudentID)
+                    {
+                        user.total_marks += Convert.ToInt32(t.TotalMarks);
+                        user.total_obtained_marks += Convert.ToInt32(t.ObtainedMarks);
+                        user.listofreports.Add(t);
+                        flag = true;
+                    }
+
+                }
+                if (flag)
+                {
+                    return View(user);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Studdent");
+
+                }
+          //  }
+         //   catch
+         //   {
+         //       return RedirectToAction("Index", "Studdent");
+         //   }
+        }
+
     }
 }

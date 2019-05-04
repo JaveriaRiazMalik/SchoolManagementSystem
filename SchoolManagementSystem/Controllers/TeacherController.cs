@@ -10,6 +10,7 @@ namespace SchoolManagementSystem.Controllers
 {
     public class TeacherController : Controller
     {
+       
         DB31Entities db = new DB31Entities();
         AdminViewModel y = new AdminViewModel();
         // GET: Teacher
@@ -22,7 +23,7 @@ namespace SchoolManagementSystem.Controllers
 
             List<string> Sectionname = new List<string>();
             List<string> ClassName = new List<string>();
-            
+
             string id = User.Identity.GetUserId();
             var p = db.AspNetUsers.Where(x => x.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
             string email = p.Email;
@@ -63,14 +64,14 @@ namespace SchoolManagementSystem.Controllers
         }
         public ActionResult TakeAttendance()
         {
-            comboreload();            
+            comboreload();
             UserAccountViewModel userL = new UserAccountViewModel();
             return View(userL);
         }
         [HttpPost]
         public ActionResult TakeAttendance(ClassViewModel collection)
         {
-            
+
             string id = User.Identity.GetUserId();
             var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
             string email = p.Email;
@@ -80,7 +81,7 @@ namespace SchoolManagementSystem.Controllers
             y.SectionName = collection.SectionName;
             UserAccountViewModel userL = new UserAccountViewModel();
             var list = db.StudentClasses.ToList();
-            
+
             foreach (var i in list)
             {
                 if (i.Class.ClassName == collection.ClassName && i.Section.SectionName == collection.SectionName)
@@ -96,7 +97,7 @@ namespace SchoolManagementSystem.Controllers
             }
             comboreload();
             return View(userL);
-            
+
         }
 
 
@@ -219,7 +220,7 @@ namespace SchoolManagementSystem.Controllers
 
         }
 
-    
+
         public ActionResult TeacherPayroll()
         {
 
@@ -243,7 +244,7 @@ namespace SchoolManagementSystem.Controllers
                 }
             }
 
-          
+
 
             return View(user);
 
@@ -337,7 +338,7 @@ namespace SchoolManagementSystem.Controllers
         {
 
             AdminViewModel user = new AdminViewModel();
-            
+
             List<string> classname = new List<string>();
             List<string> sectionname = new List<string>();
             foreach (Class t in db.Classes)
@@ -345,7 +346,7 @@ namespace SchoolManagementSystem.Controllers
                 classname.Add(t.ClassName);
             }
             ViewBag.classname = classname;
-            
+
             return View(user);
         }
 
@@ -384,5 +385,274 @@ namespace SchoolManagementSystem.Controllers
             return View(user);
 
         }
+
+
+        public ActionResult ViewStudentList()
+        {
+            comboreload();
+            UserAccountViewModel userL = new UserAccountViewModel();
+            return View(userL);
+        }
+        [HttpPost]
+        public ActionResult ViewStudentList(ClassViewModel collection)
+        {
+
+            string id = User.Identity.GetUserId();
+            var p = db.AspNetUsers.Where(x1 => x1.Id.ToString() == id).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+            string email = p.Email;
+            var p1 = db.Teachers.Where(x1 => x1.Email == email).SingleOrDefault(); //Condition to check the Id of specific person to edit only his/her details
+
+            y.ClassName = collection.ClassName;
+            y.SectionName = collection.SectionName;
+            UserAccountViewModel userL = new UserAccountViewModel();
+            var list = db.StudentClasses.ToList();
+
+            foreach (var i in list)
+            {
+                if (i.Class.ClassName == collection.ClassName && i.Section.SectionName == collection.SectionName)
+                {
+                    RegisterViewModel v = new RegisterViewModel();
+                    v.Id = i.Student.StudentID;
+                    v.FirstName = i.Student.FirstName;
+                    v.LastName = i.Student.LastName;
+                    v.Gender = i.Student.Gender;
+                    v.RegistrationNo = i.Student.RegistrationNo;
+                    userL.listofusers.Add(v);
+                }
+            }
+            comboreload();
+            return View(userL);
+
+        }
+
+        public ActionResult GenerateResult(string id)
+        {
+
+            List<string> subjectname = new List<string>();
+
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+            ViewBag.subjectname = subjectname;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GenerateResult(ReportViewModel collection, string id)
+        {
+
+            try
+            {
+
+                Report c = new Report();
+                c.TotalMarks = collection.TotalMarks;
+                c.ObtainedMarks = collection.ObtainedMarks;
+
+                var p1 = db.Subjects.Where(x => x.SubjectName == collection.SubjectName).SingleOrDefault();
+                c.SubjectID = p1.SubjectID;
+                c.StudentID = Convert.ToInt32(id);
+
+
+                if (c.StudentID != 0 && c.ObtainedMarks != 0 && c.TotalMarks != 0 && c.ObtainedMarks < c.TotalMarks)
+                {
+                    db.Reports.Add(c);
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Teacher");
+                   // return GenerateResult(id);
+                }
+                else
+                {
+
+                    List<string> subjectname = new List<string>();
+
+
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+
+                    ViewBag.subjectname = subjectname;
+
+                    return View();
+
+                }
+            }
+
+
+            catch
+            {
+                return View();
+            }
+
+        }
+
+
+        public ActionResult ViewResult(string id)
+        {
+            AdminViewModel user = new AdminViewModel();
+            var p1 = db.Students.Where(x => x.StudentID.ToString() == id).SingleOrDefault();
+            // user.listofreports.Add(null);
+            bool flag = false;
+                foreach (Report r in db.Reports)
+                {
+                    if (p1.StudentID == r.StudentID)
+                    {
+                        user.total_marks += Convert.ToInt32(r.TotalMarks);
+                        user.total_obtained_marks += Convert.ToInt32(r.ObtainedMarks);
+                        user.listofreports.Add(r);
+                        flag = true;
+                    }
+
+                }
+            if (flag)
+            {
+            //    user.percentage = ((user.total_obtained_marks/ user.total_marks) * 100);
+            //        if (user.percentage < 35)
+            //        {
+            //            user.grade = "F";
+            //        }
+            //        if (user.percentage >= 35 && user.percentage < 69)
+            //        {
+            //            user.grade = "D";
+            //        }
+            //        if (user.percentage >= 69 && user.percentage < 79)
+            //        {
+            //            user.grade = "C";
+            //        }
+
+            //        if (user.percentage >= 79 && user.percentage < 89)
+            //        {
+            //            user.grade = "B";
+            //        }
+
+            //        if (user.percentage >= 89 && user.percentage <= 100)
+            //        {
+            //            user.grade = "A";
+            //        }
+
+                    return View(user);
+                
+               
+            }
+            else
+            {
+                return RedirectToAction("ViewStudentList", "Teacher");
+            }
+
+        }
+
+        public ActionResult EditResult(string id)
+        {
+            List<string> subjectname = new List<string>();
+
+            foreach (Subject su in db.Subjects)
+            {
+                subjectname.Add(su.SubjectName);
+
+
+            }
+
+            ViewBag.subjectname = subjectname;
+
+            
+
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public ActionResult EditResult(ReportViewModel collection, string id)
+        {
+            try
+            {
+                
+                var c = db.Reports.Where(x => x.ReportID.ToString() == id).SingleOrDefault();
+
+                c.TotalMarks = collection.TotalMarks;
+                c.ObtainedMarks = collection.ObtainedMarks;
+
+               var p1 = db.Subjects.Where(x => x.SubjectName == collection.SubjectName).SingleOrDefault();
+                c.SubjectID = p1.SubjectID;
+
+                foreach (Report r in db.Reports)
+                {
+                    if(r.ReportID.ToString() == id)
+                    {
+                        c.StudentID = r.SubjectID;
+
+                    }
+                }
+
+              
+
+
+                if (c.StudentID != 0 && c.ObtainedMarks != 0 && c.TotalMarks != 0 && c.ObtainedMarks < c.TotalMarks)
+                {
+                    db.Reports.Add(c);
+
+                    db.SaveChanges();
+                    return RedirectToAction("ViewStudentList", "Teacher");
+                    // return GenerateResult(id);
+                }
+                else
+                {
+
+                    List<string> subjectname = new List<string>();
+
+
+                    foreach (Subject su in db.Subjects)
+                    {
+                        subjectname.Add(su.SubjectName);
+
+
+                    }
+
+
+                    ViewBag.subjectname = subjectname;
+
+                    return View();
+
+                }
+            }
+
+
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteResult(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteResult(string id, FormCollection collection)
+        {
+            try
+            {
+                var item = db.Reports.Where(x => x.ReportID.ToString() == id).SingleOrDefault();
+                db.Reports.Remove(item);
+                db.SaveChanges();
+
+                return RedirectToAction("ViewStudentList");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

@@ -18,7 +18,12 @@ namespace SchoolManagementSystem.Models
         public List<Timetable> listoftimetable = new List<Timetable>();
         public List<TeacherAttendance> listofTattendance = new List<TeacherAttendance>();
         public List<StudentAttendance> listofSattendance = new List<StudentAttendance>();
+        public List<Report> listofreports = new List<Report>();
 
+        public string grade { get; set; }
+        public float percentage { get; set; }
+        public int total_marks { get; set; }
+        public int total_obtained_marks { get; set; }
         public string ClassName { get; set; }
         public string SectionName { get; set; }
     }

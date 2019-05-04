@@ -359,9 +359,9 @@ namespace SchoolManagementSystem.Controllers
 
             }
 
-            ViewBag.studentname = studentname;
-            ViewBag.sectionname = sectionname;
-            ViewBag.classname = classname;
+            ViewBag.studentname = studentname.Distinct();
+            ViewBag.sectionname = sectionname.Distinct();
+            ViewBag.classname = classname.Distinct();
 
             return View();
         }
@@ -439,9 +439,9 @@ namespace SchoolManagementSystem.Controllers
 
                         }
 
-                        ViewBag.studentname = studentname;
-                        ViewBag.sectionname = sectionname;
-                        ViewBag.classname = classname;
+                        ViewBag.studentname = studentname.Distinct();
+                        ViewBag.sectionname = sectionname.Distinct();
+                        ViewBag.classname = classname.Distinct();
 
                         return View();
                     }

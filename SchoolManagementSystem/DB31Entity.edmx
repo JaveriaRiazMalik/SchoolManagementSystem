@@ -260,32 +260,10 @@
           <Property Name="Lec8" Type="nvarchar" MaxLength="50" />
           <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="vwListOfStudents">
-          <Key>
-            <PropertyRef Name="StudentID" />
-            <PropertyRef Name="RegistrationNo" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="Address" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Gender" />
-            <PropertyRef Name="Guardian" />
-            <PropertyRef Name="Password" />
-          </Key>
-          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RegistrationNo" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Guardian" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Class_Timetable">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -297,7 +275,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ClassHomework_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -365,7 +345,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FeeChallan_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -377,7 +359,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payroll_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Payroll" Type="Self.Payroll" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -389,7 +373,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Report_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -408,12 +394,14 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
               <PropertyRef Name="SubjectID" />
             </Principal>
             <Dependent Role="Report">
-              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="SubjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Request" Type="Self.Request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -425,7 +413,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Request" Type="Self.Request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -461,7 +451,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAttendance_ClassAttendance">
-          <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1" />
+          <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="ClassAttendance">
@@ -473,7 +465,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAttendance_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -485,7 +479,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentChallan_FeeChallan">
-          <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="1" />
+          <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentChallan" Type="Self.StudentChallan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FeeChallan">
@@ -497,7 +493,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentChallan_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentChallan" Type="Self.StudentChallan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -509,7 +507,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentClass_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -533,7 +533,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentClass_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -545,7 +547,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentHomework_ClassHomework">
-          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="1" />
+          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentHomework" Type="Self.StudentHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassHomework">
@@ -557,7 +561,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentHomework_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentHomework" Type="Self.StudentHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -581,7 +587,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubmitHomework_ClassHomework">
-          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1" />
+          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassHomework">
@@ -593,7 +601,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubmitHomework_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -605,7 +615,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Teacher_Class">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Class" Type="Self.Class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -617,7 +629,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TeacherAttendance_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TeacherAttendance" Type="Self.TeacherAttendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -629,7 +643,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timetable_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Datesheet" Type="Self.Datesheet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -691,20 +707,6 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherAttendance" EntityType="Self.TeacherAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vwListOfStudents" EntityType="Self.vwListOfStudents" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwListOfStudents].[StudentID] AS [StudentID], 
-    [vwListOfStudents].[RegistrationNo] AS [RegistrationNo], 
-    [vwListOfStudents].[FirstName] AS [FirstName], 
-    [vwListOfStudents].[LastName] AS [LastName], 
-    [vwListOfStudents].[Address] AS [Address], 
-    [vwListOfStudents].[Contact] AS [Contact], 
-    [vwListOfStudents].[Email] AS [Email], 
-    [vwListOfStudents].[Gender] AS [Gender], 
-    [vwListOfStudents].[Guardian] AS [Guardian], 
-    [vwListOfStudents].[Password] AS [Password]
-    FROM [dbo].[vwListOfStudents] AS [vwListOfStudents]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Class_Timetable" Association="Self.FK_Class_Timetable">
             <End Role="Class" EntitySet="Class" />
             <End Role="Timetable" EntitySet="Timetable" />
@@ -1142,28 +1144,6 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
           <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
         </EntityType>
-        <EntityType Name="vwListOfStudent">
-          <Key>
-            <PropertyRef Name="StudentID" />
-            <PropertyRef Name="RegistrationNo" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="Address" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Gender" />
-            <PropertyRef Name="Guardian" />
-            <PropertyRef Name="Password" />
-          </Key>
-          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Guardian" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1193,7 +1173,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Class_Timetable">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -1205,7 +1187,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ClassHomework_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -1217,7 +1201,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FeeChallan_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -1241,7 +1227,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentClass_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -1265,7 +1253,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Teacher_Class">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Class" Type="Self.Class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -1277,7 +1267,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Timetable_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Datesheet" Type="Self.Datesheet" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -1289,7 +1281,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAttendance_ClassAttendance">
-          <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1" />
+          <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="ClassAttendance">
@@ -1301,7 +1295,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentHomework_ClassHomework">
-          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="1" />
+          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentHomework" Type="Self.StudentHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassHomework">
@@ -1313,7 +1309,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubmitHomework_ClassHomework">
-          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1" />
+          <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassHomework">
@@ -1349,7 +1347,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentChallan_FeeChallan">
-          <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="1" />
+          <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentChallan" Type="Self.StudentChallan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FeeChallan">
@@ -1361,7 +1361,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payroll_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Payroll" Type="Self.Payroll" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -1373,7 +1375,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Report_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1392,12 +1396,14 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
               <PropertyRef Name="SubjectID" />
             </Principal>
             <Dependent Role="Report">
-              <PropertyRef Name="StudentID" />
+              <PropertyRef Name="SubjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Request" Type="Self.Request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1409,7 +1415,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Request" Type="Self.Request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -1445,7 +1453,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAttendance_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1457,7 +1467,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentChallan_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentChallan" Type="Self.StudentChallan" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1469,7 +1481,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentClass_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1481,7 +1495,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentHomework_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StudentHomework" Type="Self.StudentHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1493,7 +1509,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubmitHomework_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
@@ -1505,7 +1523,9 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TeacherAttendance_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TeacherAttendance" Type="Self.TeacherAttendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
@@ -1546,7 +1566,6 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
           <EntitySet Name="Timetables" EntityType="Self.Timetable" />
-          <EntitySet Name="vwListOfStudents" EntityType="Self.vwListOfStudent" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1939,22 +1958,6 @@ warning 6002: The table/view 'DB31.dbo.vwListOfStudents' does not have a primary
                 <ScalarProperty Name="Lec7" ColumnName="Lec7" />
                 <ScalarProperty Name="Lec8" ColumnName="Lec8" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwListOfStudents">
-            <EntityTypeMapping TypeName="DB31Model.vwListOfStudent">
-              <MappingFragment StoreEntitySet="vwListOfStudents">
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Guardian" ColumnName="Guardian" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

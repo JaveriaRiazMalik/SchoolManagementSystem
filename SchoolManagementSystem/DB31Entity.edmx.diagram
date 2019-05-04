@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8406c09fe9c443229b6abdf9cbe9c383" Name="Diagram1">
+      <Diagram DiagramId="b53c08f765a84f12afa38dd9b96fc1df" Name="Diagram1">
         <EntityTypeShape EntityType="DB31Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Admin" Width="1.5" PointX="12.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.AspNetRole" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
@@ -30,7 +30,6 @@
         <EntityTypeShape EntityType="DB31Model.Teacher" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.TeacherAttendance" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB31Model.Timetable" Width="1.5" PointX="10.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB31Model.vwListOfStudent" Width="1.5" PointX="12.75" PointY="11" IsExpanded="true" />
         <AssociationConnector Association="DB31Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DB31Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DB31Model.FK_Class_Timetable" ManuallyRouted="false" />

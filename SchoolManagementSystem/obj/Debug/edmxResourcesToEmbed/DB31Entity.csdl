@@ -307,28 +307,6 @@
     <NavigationProperty Name="Class" Relationship="Self.FK_Class_Timetable" FromRole="Timetable" ToRole="Class" />
     <NavigationProperty Name="Section" Relationship="Self.FK_Section_Timetable" FromRole="Timetable" ToRole="Section" />
   </EntityType>
-  <EntityType Name="vwListOfStudent">
-    <Key>
-      <PropertyRef Name="StudentID" />
-      <PropertyRef Name="RegistrationNo" />
-      <PropertyRef Name="FirstName" />
-      <PropertyRef Name="Address" />
-      <PropertyRef Name="Email" />
-      <PropertyRef Name="Gender" />
-      <PropertyRef Name="Guardian" />
-      <PropertyRef Name="Password" />
-    </Key>
-    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RegistrationNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Guardian" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -358,7 +336,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Class_Timetable">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -370,7 +350,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ClassHomework_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -382,7 +364,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FeeChallan_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -406,7 +390,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentClass_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -430,7 +416,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Teacher_Class">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Class" Type="Self.Class" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Teacher">
@@ -442,7 +430,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Timetable_Class">
-    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Datesheet" Type="Self.Datesheet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
@@ -454,7 +444,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentAttendance_ClassAttendance">
-    <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1" />
+    <End Role="ClassAttendance" Type="Self.ClassAttendance" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="ClassAttendance">
@@ -466,7 +458,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentHomework_ClassHomework">
-    <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="1" />
+    <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentHomework" Type="Self.StudentHomework" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ClassHomework">
@@ -478,7 +472,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SubmitHomework_ClassHomework">
-    <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1" />
+    <End Role="ClassHomework" Type="Self.ClassHomework" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ClassHomework">
@@ -514,7 +510,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentChallan_FeeChallan">
-    <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="1" />
+    <End Role="FeeChallan" Type="Self.FeeChallan" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentChallan" Type="Self.StudentChallan" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="FeeChallan">
@@ -526,7 +524,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Payroll_Teacher">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Payroll" Type="Self.Payroll" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Teacher">
@@ -538,7 +538,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Report_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Report" Type="Self.Report" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -557,12 +559,14 @@
         <PropertyRef Name="SubjectID" />
       </Principal>
       <Dependent Role="Report">
-        <PropertyRef Name="StudentID" />
+        <PropertyRef Name="SubjectID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Request_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Request" Type="Self.Request" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -574,7 +578,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Request_Teacher">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Request" Type="Self.Request" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Teacher">
@@ -610,7 +616,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentAttendance_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -622,7 +630,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentChallan_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentChallan" Type="Self.StudentChallan" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -634,7 +644,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentClass_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentClass" Type="Self.StudentClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -646,7 +658,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StudentHomework_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StudentHomework" Type="Self.StudentHomework" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -658,7 +672,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SubmitHomework_Student">
-    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SubmitHomework" Type="Self.SubmitHomework" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
@@ -670,7 +686,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TeacherAttendance_Teacher">
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TeacherAttendance" Type="Self.TeacherAttendance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Teacher">
@@ -711,7 +729,6 @@
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
     <EntitySet Name="TeacherAttendances" EntityType="Self.TeacherAttendance" />
     <EntitySet Name="Timetables" EntityType="Self.Timetable" />
-    <EntitySet Name="vwListOfStudents" EntityType="Self.vwListOfStudent" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

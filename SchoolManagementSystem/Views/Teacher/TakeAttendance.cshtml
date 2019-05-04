@@ -11,6 +11,7 @@
             <div class="container">
                 <h1 class="Packages">Packages</h1>
                 <p class="listText">Take Attendance</p>
+                <a href="~/Teacher/Index/" type="button" class="btn btn-primary btn-responsive"> Back</a>
                 <div class="row">
                     <div class="col-xs-2">
 
@@ -60,35 +61,35 @@
 
 
                 </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">
-                                        @Html.DisplayNameFor(model => model.listofusers[0].Id)
-                                    </th>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.listofusers[0].Id)
+                                </th>
 
 
-                                    <th scope="col">
-                                        @Html.DisplayNameFor(model => model.listofusers[0].FirstName)
-                                    </th>
-                                    <th scope="col">
-                                        @Html.DisplayNameFor(model => model.listofusers[0].LastName)
-                                    </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.listofusers[0].FirstName)
+                                </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.listofusers[0].LastName)
+                                </th>
 
-                                    <th scope="col">
-                                        @Html.DisplayNameFor(model => model.listofusers[0].Gender)
-                                    </th>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.listofusers[0].Gender)
+                                </th>
 
-                                    <th scope="col">
-                                        @Html.DisplayNameFor(model => model.listofusers[0].RegistrationNo)
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                <th scope="col">
+                                    @Html.DisplayNameFor(model => model.listofusers[0].RegistrationNo)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                @foreach (var item in Model.listofusers)
-                                {
+                            @foreach (var item in Model.listofusers)
+                            {
                                 <tr>
 
                                     <td>
@@ -121,11 +122,11 @@
 
 
                                 </tr>
-                                }
-                            </tbody>
+                            }
+                        </tbody>
 
-                        </table>
-                    </div>
+                    </table>
+                </div>
 
 
 
